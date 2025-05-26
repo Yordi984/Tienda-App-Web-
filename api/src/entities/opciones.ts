@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { producto } from "./producto";
 
 @Entity()
 export class Opciones {
@@ -7,4 +8,8 @@ export class Opciones {
 
   @Column()
   titulo: string;
+
+  // Muchas opciones pertenecen a un producto
+  @ManyToOne(() => producto, (producto) => producto.opciones)
+  producto: producto;
 }
