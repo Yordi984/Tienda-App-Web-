@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { saludar } from "../controllers/user.controller";
+import { CrearComprador } from "../controllers/user.controller";
 
 const router = Router();
 
-router.get("/saludo", saludar);
+router.post("/comprador", CrearComprador);
 
 export default router;
