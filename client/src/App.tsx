@@ -1,14 +1,14 @@
 import Navbar from "./components/ui/Navbar";
-import HeaderComponent from "./components/ui/HeaderComponent";
-import ButtonComponent from "./components/ui/ButtonComponent";
-import SearchBar from "./components/ui/SearchBar";
-import InputComponent from "./components/ui/InputComponent";
-import ProductCard from "./components/ui/ProductCard";
+// import HeaderComponent from "./components/ui/HeaderComponent";
+// import ButtonComponent from "./components/ui/ButtonComponent";
+// import SearchBar from "./components/ui/SearchBar";
+// import InputComponent from "./components/ui/InputComponent";
+// import ProductCard from "./components/ui/ProductCard";
 
 function App() {
   return (
     <>
-      <HeaderComponent text="Hola ¿Qué compraras hoy?" />
+      {/* <HeaderComponent text="Hola ¿Qué compraras hoy?" />
       <ButtonComponent
         text="Comprar"
         color="green"
@@ -33,6 +33,8 @@ function App() {
         }
         onClick={() => console.log("Producto clickeado")}
       />
+      <Navbar /> */}
+
       <Navbar />
     </>
   );
