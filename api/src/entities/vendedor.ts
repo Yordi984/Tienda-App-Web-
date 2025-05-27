@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { producto } from "./producto";
 
 @Entity()
 export class vendedor {
@@ -16,4 +17,8 @@ export class vendedor {
 
   @Column()
   password: string;
+
+  // Un vendedor tiene muchos productos
+  @OneToMany(() => producto, (producto) => producto.vendedor)
+  productos: producto[];
 }
