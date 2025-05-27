@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../db";
+import jwt from "jsonwebtoken";
+import { vendedor } from "../entities/vendedor";
 
 export function CrearVendedor(req: Request, res: Response) {
   const repositorio = AppDataSource.getRepository("vendedor");
@@ -21,20 +23,43 @@ export function CrearVendedor(req: Request, res: Response) {
     });
 }
 
-export function iniciarSesionVendedor(req: Request, res: Response) {
+const JWT_SECRET = "mi_clave_secreta";
+
+export async function iniciarSesionVendedor(
+  req: Request,
+  res: Response
+): Promise<void> {
   const { correo, password } = req.body;
-  const repositorio = AppDataSource.getRepository("vendedor");
-  repositorio
-    .findOne({ where: { correo, password } })
-    .then((vendedor) => {
-      if (vendedor) {
-        res.status(200).json({ message: "Login successful", vendedor });
-      } else {
-        res.status(401).json({ message: "Invalid credentials" });
-      }
-    })
-    .catch((error) => {
-      console.error("Error during login:", error);
-      res.status(500).json({ message: "Error during login" });
+
+  if (!correo || !password) {
+    res.status(400).json({ message: "Correo y contraseña son requeridos" });
+    return;
+  }
+
+  const repositorio = AppDataSource.getRepository(vendedor); // Usa la entidad, no el string
+
+  try {
+    const usuario = await repositorio.findOne({ where: { correo, password } });
+
+    if (!usuario) {
+      res.status(401).json({ message: "Credenciales inválidas" });
+      return;
+    }
+
+    const payload = {
+      id: usuario.id,
+      nombre: usuario.nombre,
+    };
+
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "2h" });
+
+    res.status(200).json({
+      message: "Inicio de sesión exitoso",
+      token,
+      vendedor: payload,
     });
+  } catch (error) {
+    console.error("Error durante el login:", error);
+    res.status(500).json({ message: "Error del servidor" });
+  }
 }

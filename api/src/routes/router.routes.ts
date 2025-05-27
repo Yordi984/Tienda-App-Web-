@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { CrearComprador, iniciarSesion } from "../controllers/user.controller";
+// Make sure that 'iniciarSesion' is exported as a function with the signature (req: Request, res: Response) => void | Promise<void>
 
 import {
   CrearVendedor,
