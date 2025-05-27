@@ -1,0 +1,49 @@
+.inputContainer {
+  /* Contenedor principal para el input, útil para añadir margen o centrado */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 400px; /* Ancho máximo, ajusta si es necesario */
+  margin: 10px auto; /* Centra el input horizontalmente y da un margen vertical */
+  box-sizing: border-box; /* Incluye padding y border en el cálculo del tamaño */
+}
+
+.inputField {
+  /* Estilos para el campo de entrada real */
+  width: 100%; /* El input ocupa el 100% del ancho de su contenedor */
+  padding: 15px 20px; /* Espacio interno, el padding horizontal es importante */
+  background-color: rgba(
+    241,
+    243,
+    242,
+    1
+  ); /* El color de fondo gris claro solicitado */
+  border: none; /* Sin borde */
+  border-radius: 10px; /* Bordes redondeados */
+  font-size: 1.1em; /* Tamaño de fuente, similar al de "Nombre" */
+  color: #333; /* Color del texto que el usuario introduce */
+  outline: none; /* Elimina el contorno al hacer focus para un diseño más limpio */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra muy sutil para una ligera elevación */
+}
+
+/* Estilos para el texto de marcador de posición (placeholder) */
+.inputField::placeholder {
+  color: #888; /* Color gris más suave para el placeholder */
+}
+
+/* Opcional: Estilo al enfocar el input */
+.inputField:focus {
+  /* Puedes añadir un borde o sombra para indicar que el input está activo */
+  /* border: 1px solid rgba(25, 196, 100, 0.8); /* Un borde verde sutil, por ejemplo */
+  /* box-shadow: 0 0 0 3px rgba(25, 196, 100, 0.2); */
+}
+
+/* Opcional: Estilos para input deshabilitado */
+.inputField:disabled {
+  background-color: rgba(230, 230, 230, 1);
+  cursor: not-allowed;
+}
+
+/* Opcional: Estilos para input de solo lectura */
+.inputField:read-only {
+  background-color: rgba(248, 248, 248, 1);
+  cursor: default;
+}

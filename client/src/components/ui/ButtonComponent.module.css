@@ -1,0 +1,52 @@
+.button {
+  /* Estilos base para todos los botones */
+  padding: 10px 20px; /* Espacio interno del botón */
+  border: none; /* Sin borde por defecto */
+  border-radius: 8px; /* Bordes redondeados */
+  font-size: 1em; /* Tamaño de fuente */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para cambios de color */
+  white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+  margin: 0 5px; /* Espacio entre botones */
+}
+
+/* Colores de fondo de los botones */
+.green {
+  background-color: rgba(25, 196, 100, 1);
+  color: white; /* Texto blanco para el botón verde */
+}
+
+.lightGray {
+  background-color: rgba(241, 243, 242, 1);
+  color: #333; /* Texto oscuro para el botón gris claro */
+}
+
+.red {
+  background-color: rgba(255, 48, 2, 1);
+  color: white; /* Texto blanco para el botón rojo */
+}
+
+.yellow {
+  background-color: rgba(255, 237, 41, 1);
+  color: #333; /* Texto oscuro para el botón amarillo */
+}
+
+/* Estilo para el botón activo (ej. 'Todo' en la imagen) */
+.active {
+  /* Puedes añadir estilos adicionales para el estado activo si es diferente al color base */
+  /* Por ejemplo, un borde, una sombra, o un color de texto diferente si aplica */
+  /* Aquí lo dejamos como un ejemplo si quisieras más distinción visual */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+  /* font-weight: bold; */
+}
+
+/* Efectos al pasar el ratón por encima (hover) */
+.button:hover {
+  opacity: 0.9; /* Ligera opacidad para un efecto de hover */
+}
+
+/* Deshabilitar el cursor cuando el botón está deshabilitado */
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

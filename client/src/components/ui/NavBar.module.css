@@ -1,0 +1,33 @@
+.navBar {
+  background-color: #28a745; /* Color de fondo verde */
+  padding: 10px 0; /* Ajustar el padding según sea necesario */
+  position: fixed; /* Fija la barra de navegación en la parte inferior */
+  bottom: 0; /* Alinea en la parte inferior */
+  width: 100%; /* Ancho completo */
+  left: 0; /* Alinea a la izquierda */
+  box-sizing: border-box; /* Incluye el padding en el cálculo del ancho */
+}
+
+.navList {
+  list-style: none; /* Elimina los estilos de lista predeterminados */
+  display: flex; /* Utiliza Flexbox para la disposición de los elementos */
+  justify-content: center; /* Distribuye los elementos uniformemente */
+  align-items: center; /* Centra los elementos verticalmente */
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el padding predeterminado */
+  gap: 30px; /* Espacio entre los elementos de la lista */
+}
+
+.navLink {
+  display: flex; /* Utiliza Flexbox para centrar el icono */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  padding: 8px; /* Padding alrededor del icono */
+  text-decoration: none;
+}
+
+.navIcon {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1); /* Hace que el SVG sea blanco */
+}
