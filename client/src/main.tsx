@@ -2,7 +2,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 import App from "./App.tsx";
-import Prueba from "./pages/Prueba/prueba.tsx";
+import Login from "./pages/Login/Login.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
@@ -10,7 +10,7 @@ createRoot(document.getElementById("root")!).render(
       <Route path="/" element={<App />} />
     </Routes>
     <Routes>
-      <Route path="/prueba" element={<Prueba />} />
+      <Route path="/Login" element={<Login />} />
     </Routes>
   </BrowserRouter>
 );
