@@ -1,4 +1,4 @@
-import e, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { AppDataSource } from "../db";
 
 export function CrearProducto(req: Request, res: Response) {
