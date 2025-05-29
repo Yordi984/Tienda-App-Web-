@@ -1,18 +1,28 @@
 
+//recuerda tener instalado pnpm
+
+//abrir git bash
+//recuerda instalar las dependencias con: pnpm install
+//cd desktop
+//cd 'MARKETPLACE MAYO'
+//cd client
+
 // para meterme a mi rama es
 // git switch luis
 
+//escribir en el cmd: pnpm run dev
+
+//una ves terminado todo salir a la carpeta MARKETPLACE MAYO con: cd ..
 
 // cada vez que se haga una pagina poner estas 2 lineas en main.tsx
 
-    //    <Route path="/pro" element={<TortaDetalle/>} />
+//    <Route path="/pro" element={<TortaDetalle/>} />
 
 // import TortaDetalle from "./producto.tsx";
 
-// escribir en el navegador
-// http://localhost:5173/pro
+//para subir los cambios
 
-
+//primero guarda localmente con: control+s
 // abrir terminal git bash
 // para preparar para guardar usar: git add --all
 // luego usar: git commit
@@ -20,7 +30,8 @@
 // guardar y cerrar con: contro+s y luego: control+w
 // eso guarda mis cambios en mi rama local, no en la de github
 
-// para subirlo a git hub usar: git push
+// para subirlo a git hub usar: git push origin luis
+// (luis es el nombre de mi rama)
 
 
 

@@ -7,6 +7,10 @@ export default function Login() {
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
 
+  const handleChangeUserType = () => {
+    window.location.href = "/select-login";
+  };
+
   async function solicitud() {
     try {
       const response = await fetch("/api", {
@@ -60,6 +64,11 @@ export default function Login() {
         />
 
         <Boton text="Iniciar sesión" color="green" onClick={solicitud} />
+        <Boton 
+          text="Cambiar tipo de usuario" 
+          color="lightGray" 
+          onClick={handleChangeUserType}
+        />
       </div>
       <div className="links">
         <a href="#">Olvidé mi Contraseña</a>
