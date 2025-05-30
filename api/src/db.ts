@@ -13,7 +13,9 @@ export const AppDataSource = new DataSource({
   password: "base123",
   database: "Tienda",
   synchronize: true,
-  logging: true,
+  logging: process.env.DB_LOGGING !== undefined
+    ? process.env.DB_LOGGING === "true"
+    : true,
   entities: [comprador, vendedor, Compra, producto, Opciones],
   subscribers: [],
   migrations: [],
