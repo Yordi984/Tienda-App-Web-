@@ -4,10 +4,10 @@ import {
   Column,
   ManyToOne,
   OneToMany,
-} from "typeorm";
-import { Compra } from "./compra";
-import { vendedor } from "./vendedor";
-import { Opciones } from "./opciones";
+} from 'typeorm';
+import { Compra } from './compra';
+import { vendedor } from './vendedor';
+import { Opciones } from './opciones';
 
 @Entity()
 export class producto {

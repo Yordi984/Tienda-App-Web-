@@ -1,21 +1,22 @@
-import { DataSource } from "typeorm";
-import { vendedor } from "./entities/vendedor";
-import { comprador } from "./entities/comprador";
-import { Compra } from "./entities/compra";
-import { producto } from "./entities/producto";
-import { Opciones } from "./entities/opciones";
+import { DataSource } from 'typeorm';
+import { vendedor } from './entities/vendedor';
+import { comprador } from './entities/comprador';
+import { Compra } from './entities/compra';
+import { producto } from './entities/producto';
+import { Opciones } from './entities/opciones';
 
 export const AppDataSource = new DataSource({
-  type: "postgres",
-  host: "localhost",
+  type: 'postgres',
+  host: 'localhost',
   port: 5432,
-  username: "postgres",
-  password: "base123",
-  database: "Tienda",
+  username: 'postgres',
+  password: 'base123',
+  database: 'Tienda',
   synchronize: true,
-  logging: process.env.DB_LOGGING !== undefined
-    ? process.env.DB_LOGGING === "true"
-    : true,
+  logging:
+    process.env.DB_LOGGING !== undefined
+      ? process.env.DB_LOGGING === 'true'
+      : true,
   entities: [comprador, vendedor, Compra, producto, Opciones],
   subscribers: [],
   migrations: [],

@@ -4,9 +4,9 @@ import {
   ManyToOne,
   Column,
   CreateDateColumn,
-} from "typeorm";
-import { comprador } from "./comprador";
-import { producto } from "./producto";
+} from 'typeorm';
+import { comprador } from './comprador';
+import { producto } from './producto';
 
 @Entity()
 export class Compra {

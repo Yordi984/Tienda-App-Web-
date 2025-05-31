@@ -1,4 +1,4 @@
-import Navbar from "./components/ui/Navbar";
+import Navbar from './components/ui/Navbar';
 // import HeaderComponent from "./components/ui/HeaderComponent";
 // import ButtonComponent from "./components/ui/ButtonComponent";
 // import SearchBar from "./components/ui/SearchBar";

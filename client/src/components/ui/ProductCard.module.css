@@ -7,7 +7,9 @@
   overflow: hidden; /* Muy importante para que la imagen y la barra respeten los bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para darle profundidad a la tarjeta */
   cursor: pointer; /* Indica que la tarjeta es clicable (si se pasa onClick) */
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Transición suave al pasar el ratón */
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out; /* Transición suave al pasar el ratón */
   margin: 15px; /* Margen alrededor de cada tarjeta si se usa en una cuadrícula */
   display: flex; /* Utiliza flexbox para que la imagen y la barra se apilen */
   flex-direction: column; /* Apila los elementos verticalmente */
