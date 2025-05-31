@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { AppDataSource } from '../db';
-import { Comprador } from '../entities/comprador';
+import { Comprador } from '../entities/comprador.entity';
 
 export function crearComprador(req: Request, res: Response) {
   const { nombre, telefono, correo, password } = req.body;
