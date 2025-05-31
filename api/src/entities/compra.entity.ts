@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Comprador } from './comprador';
+import { Comprador } from './comprador.entity';
 import { Producto } from './producto.entity';
 
 @Entity()

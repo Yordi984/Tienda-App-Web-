@@ -18,7 +18,7 @@ export class Producto {
   nombre: string;
 
   @Column()
-  descripciom: string;
+  descripcion: string;
 
   @Column()
   disponibilidad: string;
