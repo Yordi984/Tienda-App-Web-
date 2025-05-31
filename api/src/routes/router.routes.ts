@@ -1,32 +1,32 @@
 import { Router } from 'express';
-import { CrearComprador, iniciarSesion } from '../controllers/user.controller';
+import { crearComprador, iniciarSesion } from '../controllers/user.controller';
 // Make sure that 'iniciarSesion' is exported as a function with the signature (req: Request, res: Response) => void | Promise<void>
 
 import {
-  CrearVendedor,
+  crearVendedor,
   iniciarSesionVendedor,
 } from '../controllers/vendedor.controller';
 
 import {
-  CrearProducto,
-  obtenerProductos,
+  crearProducto,
   editarProducto,
   eliminarProducto,
+  obtenerProductos,
 } from '../controllers/producto.controller';
 
 const router = Router();
 //comprador routes
-router.post('/comprador', CrearComprador);
+router.post('/comprador', crearComprador);
 router.post('/loginComprador', iniciarSesion);
 
 //vendedor routes
-router.post('/vendedor', CrearVendedor);
+router.post('/vendedor', crearVendedor);
 router.post('/loginVendedor', iniciarSesionVendedor);
 
 //producto routes
-router.post('/producto', CrearProducto);
+router.post('/productos', crearProducto);
 router.get('/productos', obtenerProductos);
-router.put('/producto/:id', editarProducto);
-router.delete('/producto/:id', eliminarProducto);
+router.put('/productos/:id', editarProducto);
+router.delete('/productos/:id', eliminarProducto);
 
 export default router;

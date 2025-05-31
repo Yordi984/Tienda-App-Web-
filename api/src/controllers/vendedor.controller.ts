@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { AppDataSource } from '../db';
 import jwt from 'jsonwebtoken';
-import { vendedor } from '../entities/vendedor';
+import { AppDataSource } from '../db';
+import { Vendedor } from '../entities/vendedor.entity';
 
-export function CrearVendedor(req: Request, res: Response) {
+export function crearVendedor(req: Request, res: Response) {
   const repositorio = AppDataSource.getRepository('vendedor');
   const { nombre, telefono, correo, password } = req.body;
   const nuevoVendedor = repositorio.create({
@@ -36,7 +36,7 @@ export async function iniciarSesionVendedor(
     return;
   }
 
-  const repositorio = AppDataSource.getRepository(vendedor); // Usa la entidad, no el string
+  const repositorio = AppDataSource.getRepository(Vendedor); // Usa la entidad, no el string
 
   try {
     const usuario = await repositorio.findOne({ where: { correo, password } });

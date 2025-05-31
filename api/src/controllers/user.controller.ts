@@ -1,9 +1,9 @@
-import { Request, response, Response } from 'express';
-import { AppDataSource } from '../db';
-import { comprador } from '../entities/comprador';
+import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import { AppDataSource } from '../db';
+import { Comprador } from '../entities/comprador';
 
-export function CrearComprador(req: Request, res: Response) {
+export function crearComprador(req: Request, res: Response) {
   const { nombre, telefono, correo, password } = req.body;
 
   const compradorRepository = AppDataSource.getRepository('comprador');
@@ -38,7 +38,7 @@ export async function iniciarSesion(
     return;
   }
 
-  const compradorRepository = AppDataSource.getRepository(comprador);
+  const compradorRepository = AppDataSource.getRepository(Comprador);
 
   try {
     const usuario = await compradorRepository.findOne({

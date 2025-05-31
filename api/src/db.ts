@@ -1,9 +1,9 @@
 import { DataSource } from 'typeorm';
-import { vendedor } from './entities/vendedor';
-import { comprador } from './entities/comprador';
-import { Compra } from './entities/compra';
-import { producto } from './entities/producto';
-import { Opciones } from './entities/opciones';
+import { Compra } from './entities/compra.entity';
+import { Comprador } from './entities/comprador';
+import { Opciones } from './entities/opciones.entity';
+import { Producto } from './entities/producto.entity';
+import { Vendedor } from './entities/vendedor.entity';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -17,7 +17,7 @@ export const AppDataSource = new DataSource({
     process.env.DB_LOGGING !== undefined
       ? process.env.DB_LOGGING === 'true'
       : true,
-  entities: [comprador, vendedor, Compra, producto, Opciones],
+  entities: [Comprador, Vendedor, Compra, Producto, Opciones],
   subscribers: [],
   migrations: [],
 });

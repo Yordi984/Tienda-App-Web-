@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../db';
 
-export function CrearProducto(req: Request, res: Response) {
+export function crearProducto(req: Request, res: Response) {
   const { nombre, descripcion, precio, vendedorId } = req.body;
   const productoRepository = AppDataSource.getRepository('producto');
   const newProducto = productoRepository.create({
