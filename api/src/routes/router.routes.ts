@@ -4,7 +4,7 @@ import { crearComprador, iniciarSesion } from "../controllers/user.controller";
 
 import {
   crearVendedor,
-  iniciarSesionVendedor,
+ 
 } from "../controllers/vendedor.controller";
 
 import {
@@ -24,13 +24,16 @@ import {
 
 
 const router = Router();
+//login para los 2 tipos de usuarios
+router.post("/login", iniciarSesion);
+
 //comprador routes
 router.post("/comprador", crearComprador);
-router.post("/loginComprador", iniciarSesion);
+
 
 //vendedor routes
 router.post("/vendedor", crearVendedor);
-router.post("/loginVendedor", iniciarSesionVendedor);
+
 
 //producto routes
 router.post("/producto", crearProducto);
