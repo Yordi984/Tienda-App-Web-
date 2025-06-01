@@ -5,7 +5,7 @@ import Navbar from './components/ui/Navbar';
 // import InputComponent from "./components/ui/InputComponent";
 // import ProductCard from "./components/ui/ProductCard";
 
-function App() {
+function App() {  
   return (
     <>
       {/* <HeaderComponent text="Hola ¿Qué compraras hoy?" />
@@ -36,6 +36,8 @@ function App() {
       <Navbar /> */}
 
       <Navbar />
+
+      
     </>
   );
 }
