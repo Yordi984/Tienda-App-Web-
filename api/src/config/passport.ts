@@ -2,8 +2,8 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcrypt";
 import { AppDataSource } from "../db";
-import { comprador } from "../entities/comprador";
-import { vendedor } from "../entities/vendedor";
+import { Comprador } from "../entities";
+import { Vendedor } from "../entities";
 
 // Login para comprador
 passport.use(
@@ -12,7 +12,7 @@ passport.use(
     { usernameField: "correo" },
     async (correo, password, done) => {
       try {
-        const repo = AppDataSource.getRepository(comprador);
+        const repo = AppDataSource.getRepository(Comprador);
         const user = await repo.findOneBy({ correo });
 
         if (!user)
@@ -37,7 +37,7 @@ passport.use(
     { usernameField: "correo" },
     async (correo, password, done) => {
       try {
-        const repo = AppDataSource.getRepository(vendedor);
+        const repo = AppDataSource.getRepository(Vendedor);
         const user = await repo.findOneBy({ correo });
 
         if (!user)
@@ -63,11 +63,11 @@ passport.serializeUser((user: any, done) => {
 passport.deserializeUser(async (data: any, done) => {
   try {
     if (data.tipo === "comprador") {
-      const repo = AppDataSource.getRepository(comprador);
+      const repo = AppDataSource.getRepository(Comprador);
       const user = await repo.findOneBy({ id: data.id });
       done(null, user);
     } else {
-      const repo = AppDataSource.getRepository(vendedor);
+      const repo = AppDataSource.getRepository(Vendedor);
       const user = await repo.findOneBy({ id: data.id });
       done(null, user);
     }
