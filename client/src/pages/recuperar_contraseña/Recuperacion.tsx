@@ -32,7 +32,7 @@ export default function Recuperacion() {
 
   return (
     <>
-      <Header text="Recuperación" />
+      <Header text="Recuperar contraseña" />
       <div className="logo-container">
         <img src="/logo.png" alt="logo" className="logo" />
       </div>
@@ -40,13 +40,14 @@ export default function Recuperacion() {
       <div className="formulario">
         <InputComponent
           type="text"
-          placeholder="Correo"
+          placeholder="Correo  electrónico"
           value={correo}
           onChange={(e) => setCorreo(e.target.value)}
         />
         <p>Se enviará un correo para poder recuperar tu cuenta</p>
         <div className="boton-container">
         <Boton text="Enviar" color="green" onClick={manejarEnvio} /> </div>
+        <p>Política de privacidad</p>
       </div>
     </>
   );

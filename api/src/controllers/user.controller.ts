@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import { AppDataSource } from '../db';
 import { Comprador, Vendedor } from '../entities';
 
+const JWT_SECRET = process.env.JWT_SECRET || 'your_default_secret'; // Replace with your actual secret or ensure env variable is set
+
 export function crearComprador(req: Request, res: Response) {
   const { nombre, telefono, correo, password } = req.body;
 
@@ -26,7 +28,7 @@ export function crearComprador(req: Request, res: Response) {
 
 
 
-const JWT_SECRET = 'mi_clave_secreta';
+import bcrypt from 'bcrypt'; // asegúrate de importar esto
 
 export async function iniciarSesion(req: Request, res: Response): Promise<void> {
   const { correo, password } = req.body;
@@ -37,11 +39,16 @@ export async function iniciarSesion(req: Request, res: Response): Promise<void> 
   }
 
   try {
-    // Buscar primero en compradores
     const compradorRepo = AppDataSource.getRepository(Comprador);
-    const comprador = await compradorRepo.findOne({ where: { correo, password } });
+    const comprador = await compradorRepo.findOne({ where: { correo } });
 
     if (comprador) {
+      const match = await bcrypt.compare(password, comprador.password);
+      if (!match) {
+        res.status(401).json({ message: 'Credenciales inválidas' });
+        return;
+      }
+
       const payload = {
         id: comprador.id,
         nombre: comprador.nombre,
@@ -58,11 +65,16 @@ export async function iniciarSesion(req: Request, res: Response): Promise<void> 
       return;
     }
 
-    // Si no está en compradores, buscar en vendedores
     const vendedorRepo = AppDataSource.getRepository(Vendedor);
-    const vendedor = await vendedorRepo.findOne({ where: { correo, password } });
+    const vendedor = await vendedorRepo.findOne({ where: { correo } });
 
     if (vendedor) {
+      const match = await bcrypt.compare(password, vendedor.password);
+      if (!match) {
+        res.status(401).json({ message: 'Credenciales inválidas' });
+        return;
+      }
+
       const payload = {
         id: vendedor.id,
         nombre: vendedor.nombre,
@@ -79,7 +91,6 @@ export async function iniciarSesion(req: Request, res: Response): Promise<void> 
       return;
     }
 
-    // Si no se encontró en ninguno
     res.status(401).json({ message: 'Credenciales inválidas' });
 
   } catch (error) {
