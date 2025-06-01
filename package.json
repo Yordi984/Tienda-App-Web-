@@ -1,0 +1,23 @@
+{
+  "name": "tienda_app_web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yordi984/Tienda-App-Web-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yordi984/Tienda-App-Web-/issues"
+  },
+  "homepage": "https://github.com/Yordi984/Tienda-App-Web-#readme",
+  "description": "",
+  "dependencies": {
+    "prettier": "^3.5.3"
+  }
+}

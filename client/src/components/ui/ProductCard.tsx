@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./ProductCard.module.css";
-import ProductInfoBar from "./ProductInfoBar"; // Importa el componente de la barra de información del producto
+import React from 'react';
+import styles from './ProductCard.module.css';
+import ProductInfoBar from './ProductInfoBar'; // Importa el componente de la barra de información del producto
 
 interface ProductCardProps {
   imageUrl: string; // URL de la imagen del producto
@@ -23,10 +23,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onClick,
 }) => {
   return (
-    <div className={styles.productCard} onClick={onClick}>
+    <div
+      className={styles.productCard}
+      onClick={onClick}
+    >
       {/* Contenedor de la imagen */}
       <div className={styles.imageContainer}>
-        <img src={imageUrl} alt={altText} className={styles.productImage} />
+        <img
+          src={imageUrl}
+          alt={altText}
+          className={styles.productImage}
+        />
       </div>
 
       {/* Componente ProductInfoBar reutilizado */}

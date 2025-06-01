@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./HeaderComponent.module.css";
+import React from 'react';
+import styles from './HeaderComponent.module.css';
 
 interface HeaderComponentProps {
   text: string; // La prop 'text' que recibirá el componente, de tipo string
