@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import Header from "../../components/ui/HeaderComponent";
+import "./RestablecerPassword.css"; // Asegúrate de importar el archivo CSS
 
 const RestablecerPassword = () => {
   const { token } = useParams();
@@ -24,9 +26,16 @@ const RestablecerPassword = () => {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Restablecer contraseña</h2>
-      <form onSubmit={handleSubmit}>
+    <div>
+        <Header text="Restablecer contraseña"></Header>
+      <div className="logo-container">
+        <div className="logo">
+            <img src="/logo.png" alt="logo" className="logo" />
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="formulario">
+        <h2></h2>
         <input
           type="password"
           placeholder="Nueva contraseña"
@@ -34,10 +43,12 @@ const RestablecerPassword = () => {
           onChange={(e) => setNuevaPassword(e.target.value)}
           required
         />
-        <br /><br />
-        <button type="submit">Guardar nueva contraseña</button>
+        <div className="boton-container">
+          <button type="submit">Guardar nueva contraseña</button>
+         
+        </div>
+        <p>{mensaje}</p>
       </form>
-      <p>{mensaje}</p>
     </div>
   );
 };
