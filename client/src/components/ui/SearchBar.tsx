@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "./SearchBar.module.css";
+import React, { useState } from 'react';
+import styles from './SearchBar.module.css';
 
 interface SearchBarProps {
   placeholder?: string; // Texto de marcador de posición (ej. "Buscar")
@@ -7,10 +7,10 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
-  placeholder = "Buscar",
+  placeholder = 'Buscar',
   onSearch,
 }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -21,7 +21,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       handleSearch(); // Permite buscar también al presionar Enter
     }
   };
@@ -29,18 +29,21 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <div className={styles.searchContainer}>
       <input
-        type="text"
+        type='text'
         className={styles.searchInput}
         placeholder={placeholder}
         value={searchTerm}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress} // Para buscar con Enter
       />
-      <button className={styles.searchButton} onClick={handleSearch}>
+      <button
+        className={styles.searchButton}
+        onClick={handleSearch}
+      >
         {/* Usamos un SVG para el icono de la lupa */}
         <img
-          src="/icons/search.svg" // Ajusta esta ruta si tu SVG se llama diferente o está en otra subcarpeta de public/icons
-          alt="Buscar"
+          src='/icons/search.svg' // Ajusta esta ruta si tu SVG se llama diferente o está en otra subcarpeta de public/icons
+          alt='Buscar'
           className={styles.searchIcon}
         />
       </button>

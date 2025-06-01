@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./InputComponent.module.css";
+import React from 'react';
+import styles from './InputComponent.module.css';
 
 interface InputComponentProps {
   placeholder?: string; // Prop para el texto de marcador de posición (ej. "Nombre")
@@ -13,8 +13,8 @@ interface InputComponentProps {
 }
 
 const InputComponent: React.FC<InputComponentProps> = ({
-  placeholder = "Introduce texto...", // Valor por defecto para el placeholder
-  type = "text", // Valor por defecto para el tipo de input
+  placeholder = 'Introduce texto...', // Valor por defecto para el placeholder
+  type = 'text', // Valor por defecto para el tipo de input
   value,
   onChange,
   name,
