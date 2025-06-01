@@ -7,7 +7,7 @@ import HeartIcon from "/icons/heart.svg";
 import SearchIcon from "/icons/search.svg";
 import HomeIcon from "/icons/house.svg";
 import UserRoundIcon from "/icons/user-round.svg";
-import { format, parse, isValid } from "date-fns";
+import { parse, isValid } from "date-fns";
 
 export default function Torta() {
     const [selectedMeat, setSelectedMeat] = useState<string>("Asada");
@@ -112,7 +112,9 @@ export default function Torta() {
                     <div className="price-contact">
                         <span className="price">$45</span>
                         <div className="button-wrapper">
-                            <Boton text="Contactar con el vendedor" />
+                            <Boton 
+                            color="green"
+                            text="Contactar con el vendedor" />
                         </div>
                     </div>
                 </div>
