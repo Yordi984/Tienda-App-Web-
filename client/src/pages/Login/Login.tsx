@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Header from '../../components/ui/HeaderComponent';
 import Boton from '../../components/ui/ButtonComponent';
-import '/icons/icon.svg'; 
+
 import './Login.css';
 
 export default function Login() {
@@ -42,7 +42,7 @@ export default function Login() {
       <Header text='Hola ¿Qué comprarás hoy?' />
       <div className='logo-container'>
         <img
-          src='/icons/icon.svg'
+          src='/logo.png'
           alt='logo'
           style={{ width: '100px' }}
           className='logo'
@@ -61,13 +61,14 @@ export default function Login() {
           value={contrasena}
           onChange={(e) => setContrasena(e.target.value)}
         />
-        <div className='boton-container'>
-          <Boton
+        
+          <Boton 
+            style={{  width: '25%', margin: '20px auto', padding: '1rem' }}
             text='Iniciar sesión'
             color='green'
             onClick={solicitud}
           />
-        </div>
+       
       </div>
       <div className='links'>
         <a href='#'>Olvidé mi Contraseña</a>
