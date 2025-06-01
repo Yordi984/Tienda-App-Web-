@@ -1,0 +1,7 @@
+{
+  "nombre": "Producto original",
+  "descripcion": "Esto es un producto de ejemplo",
+  "disponibilidad": "Disponible",
+  "precio": 0,
+  "vendedorId": 1
+}
