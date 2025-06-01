@@ -9,14 +9,14 @@ export default function Login() {
 
   async function solicitud() {
     try {
-      const response = await fetch('/api', {
+      const response = await fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           correo,
-          contrasena,
+          password: contrasena, // ✅ el backend espera "password"
         }),
       });
 
@@ -25,8 +25,10 @@ export default function Login() {
 
       if (response.ok) {
         alert('Inicio de sesión exitoso');
+        // Puedes guardar el token si quieres:
+        // localStorage.setItem('token', data.token);
       } else {
-        alert('Error: ' + data.mensaje || 'Credenciales incorrectas');
+        alert('Error: ' + (data.message || 'Credenciales incorrectas'));
       }
     } catch (error) {
       console.error('Error al enviar solicitud:', error);
@@ -40,7 +42,7 @@ export default function Login() {
       <div className='logo-container'>
         <img
           src='/icons/icon.svg'
-          alt=''
+          alt='logo'
           style={{ width: '100px' }}
           className='logo'
         />
@@ -48,7 +50,7 @@ export default function Login() {
       <div className='formulario'>
         <input
           type='text'
-          placeholder='Correo Electrónico'
+          placeholder='Correo'
           value={correo}
           onChange={(e) => setCorreo(e.target.value)}
         />
@@ -58,12 +60,13 @@ export default function Login() {
           value={contrasena}
           onChange={(e) => setContrasena(e.target.value)}
         />
-
-        <Boton
-          text='Iniciar sesión'
-          color='green'
-          onClick={solicitud}
-        />
+        <div className='boton-container'>
+          <Boton
+            text='Iniciar sesión'
+            color='green'
+            onClick={solicitud}
+          />
+        </div>
       </div>
       <div className='links'>
         <a href='#'>Olvidé mi Contraseña</a>
