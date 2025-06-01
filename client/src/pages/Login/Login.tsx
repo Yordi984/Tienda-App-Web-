@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from '../../components/ui/HeaderComponent';
 import Boton from '../../components/ui/ButtonComponent';
+import '/icons/icon.svg'; 
 import './Login.css';
 
 export default function Login() {

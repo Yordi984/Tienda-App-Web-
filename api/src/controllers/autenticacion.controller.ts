@@ -60,24 +60,36 @@ export const solicitarRecuperacion = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const { correo, tipo } = req.body;
-  const repo = AppDataSource.getRepository(
-    tipo === "comprador" ? Comprador : Vendedor
-  );
+  const { correo } = req.body;
 
-  const usuario = await repo.findOneBy({ correo });
-  if (!usuario) {
+  // Repositorios
+  const repoComprador = AppDataSource.getRepository(Comprador);
+  const repoVendedor = AppDataSource.getRepository(Vendedor);
+
+  let tipo = ""; // para saber si es comprador o vendedor
+  const comprador = await repoComprador.findOneBy({ correo });
+  const vendedor = comprador ? null : await repoVendedor.findOneBy({ correo });
+
+  if (comprador) {
+    tipo = "comprador";
+  } else if (vendedor) {
+    tipo = "vendedor";
+  }
+
+  if (!comprador && !vendedor) {
     res.status(404).json({ msg: "Correo no registrado" });
     return;
   }
 
+  // Si se encontró, generar token
   const token = jwt.sign({ correo, tipo }, JWT_SECRET, { expiresIn: "15m" });
 
-  const link = `http://localhost:3000/restablecer/${token}`;
-  await enviarCorreoRecuperacion(correo, `Haz clic aquí: ${link}`);
+  // Enviar correo
+  await enviarCorreoRecuperacion(correo, token);
 
   res.json({ msg: "Correo de recuperación enviado" });
 };
+
 
 export const restablecerPassword = async (
   req: Request,
