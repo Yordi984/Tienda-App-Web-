@@ -26,18 +26,6 @@ input {
   margin-bottom: 1.5rem;
 }
 
-button {
-  width: 40%;
-  padding: 1rem;
-  background-color: rgba(25, 196, 100, 1);
-  color: white;
-  border: none;
-  border-radius: 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  box-sizing: border-box;
-  margin-top: 1rem;
-}
 
 .links {
   display: flex;

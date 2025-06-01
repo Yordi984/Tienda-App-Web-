@@ -62,6 +62,7 @@ export default function Login() {
         <Boton
           text='Iniciar sesión'
           color='green'
+          
           onClick={solicitud}
         />
       </div>
