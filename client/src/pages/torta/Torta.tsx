@@ -113,6 +113,7 @@ export default function Torta() {
                         <span className="price">$45</span>
                         <div className="button-wrapper">
                             <Boton 
+                           
                             color="green"
                             text="Contactar con el vendedor" />
                         </div>

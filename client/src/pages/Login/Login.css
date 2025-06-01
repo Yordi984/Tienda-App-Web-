@@ -22,8 +22,17 @@ input {
   border-radius: 1rem; /* esquinas redondeadas */
   font-size: 1rem;
   box-sizing: border-box;
-
   margin-bottom: 1.5rem;
+  outline: none;
+}
+
+.boton-container {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  width: 40%;
 }
 
 

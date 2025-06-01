@@ -10,6 +10,7 @@ export type ButtonColor =
 
 interface ButtonComponentProps {
   text: string; // El texto que se mostrará en el botón
+   
   color: ButtonColor; // El color del botón, usando el tipo ButtonColor
   onClick?: () => void; // Función opcional que se ejecuta al hacer clic en el botón
   isActive?: boolean; // Prop opcional para indicar si el botón está activo (para el estilo 'Todo')
@@ -18,11 +19,12 @@ interface ButtonComponentProps {
 const ButtonComponent: React.FC<ButtonComponentProps> = ({
   text,
   color,
+  
   onClick,
   isActive,
 }) => {
   // Clases CSS dinámicas basadas en las props
-  const buttonClasses = `${styles.button} ${styles[color]} ${
+  const buttonClasses = `${styles.button} ${styles[color]}  ${
     isActive ? styles.active : ''
   }`;
 
