@@ -18,6 +18,8 @@ createRoot(document.getElementById('root')!).render(
       <Route
         path='/Torta'
         element={<Torta/>} />
+        
+      <Route path="/chat" element={<ChatPage />} />
     </Routes>
   </BrowserRouter>,
 );

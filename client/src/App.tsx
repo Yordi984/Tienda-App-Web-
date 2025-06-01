@@ -7,38 +7,11 @@ import Navbar from './components/ui/Navbar';
 
 function App() {  
   return (
-    <>
-      {/* <HeaderComponent text="Hola ¿Qué compraras hoy?" />
-      <ButtonComponent
-        text="Comprar"
-        color="green"
-        onClick={() => console.log("Comprar")}
-      />
-      <SearchBar
-        onSearch={(searchTerm) => console.log("Buscando:", searchTerm)}
-      />
-      <InputComponent
-        placeholder="Escribe algo..."
-        type="text"
-        onChange={(e) => console.log("Input cambiado:", e.target.value)}
-      />
-      <ProductCard
-        imageUrl="https://via.placeholder.com/150"
-        altText="Producto de ejemplo"
-        productName="Producto Ejemplo"
-        productPrice={29.99}
-        isFavoriteInitially={false}
-        onToggleFavorite={(name, isNowFavorite) =>
-          console.log(`Producto ${name} es ahora favorito: ${isNowFavorite}`)
-        }
-        onClick={() => console.log("Producto clickeado")}
-      />
-      <Navbar /> */}
-
+    <div>
       <Navbar />
-
       
-    </>
+    </div>
+
   );
 }
 
