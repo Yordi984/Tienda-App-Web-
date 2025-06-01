@@ -1,0 +1,105 @@
+.ratingCommentSectionContainer {
+  width: 100%;
+  max-width: 450px; /* Ancho máximo para el contenedor */
+  margin: 20px auto; /* Centra y da espacio */
+  padding: 0; /* Ya que CommentInput y la lista tienen su propio padding */
+  box-sizing: border-box;
+}
+
+.sectionTitle {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  margin-top: 25px; /* Espacio antes del título de la sección */
+}
+
+/* Estilos para el área de comentarios existentes */
+.existingCommentsArea {
+  margin-top: 30px;
+  border-top: 1px solid #eee; /* Separador visual */
+  padding-top: 20px;
+}
+
+.commentItem {
+  background-color: #f9f9f9;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra ligera */
+}
+
+.commentHeader {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px; /* Espacio entre los elementos del encabezado */
+}
+
+.commentUser {
+  font-weight: bold;
+  color: #555;
+  font-size: 0.95em;
+}
+
+.commentDate {
+  font-size: 0.85em;
+  color: #888;
+}
+
+.commentRating {
+  display: flex;
+  gap: 2px; /* Espacio entre las estrellas individuales */
+  margin-left: auto; /* Empuja las estrellas a la derecha si hay espacio */
+}
+
+.starDisplay {
+  font-size: 1.1em; /* Tamaño de las estrellas de visualización */
+}
+
+.starFilledDisplay {
+  color: #ffc107; /* Amarillo para estrellas rellenas */
+}
+
+.starEmptyDisplay {
+  color: #ccc; /* Gris para estrellas vacías */
+}
+
+.commentText {
+  font-size: 0.95em;
+  color: #444;
+  line-height: 1.5;
+  margin: 0; /* Elimina márgenes por defecto del párrafo */
+}
+
+.noCommentsMessage {
+  font-style: italic;
+  color: #777;
+  text-align: center;
+  padding: 10px;
+}
+
+/* --- Estilos para la Notificación (reutilizados) --- */
+.notification {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.notification.success {
+  background-color: rgba(25, 196, 100, 0.8);
+  color: white;
+}
+
+.notification.error {
+  background-color: rgba(255, 48, 2, 0.8);
+  color: white;
+}

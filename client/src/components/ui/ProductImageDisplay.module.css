@@ -1,0 +1,16 @@
+.imageContainer {
+  /* Contenedor para la imagen */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 400px; /* Ancho máximo, ajusta según tu diseño */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+  border-radius: 10px; /* Bordes redondeados */
+  overflow: hidden; /* Asegura que la imagen respete los bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.productImage {
+  /* Estilos para la imagen en sí */
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  display: block; /* Elimina el espacio extra debajo de la imagen */
+}

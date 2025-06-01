@@ -1,0 +1,98 @@
+.commentInputContainer {
+  /* Contenedor principal del input de comentario */
+  width: 100%;
+  max-width: 450px; /* Ancho máximo para alinearse con la descripción/imagen */
+  margin: 20px auto; /* Centra el contenedor y da espacio */
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  /* align-items: center;  <-- REMOVE THIS! Esto centraba horizontalmente */
+  align-items: flex-start; /* <-- AGREGADO: Alinea los elementos a la izquierda */
+}
+
+.ratingStarsPlaceholder {
+  /* Estilos para el placeholder de las estrellas */
+  margin-bottom: 15px;
+  font-size: 1.8em; /* Tamaño de las estrellas */
+  color: #ccc; /* Color por defecto de las estrellas vacías */
+  display: flex;
+  gap: 5px; /* Espacio entre estrellas */
+  /* No necesitamos alinear aquí, el padre .commentInputContainer ya lo hará */
+}
+
+.star {
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.starFilled {
+  color: #ffc107; /* Amarillo para estrellas rellenas */
+}
+
+.starEmpty {
+  color: #ccc; /* Gris para estrellas vacías */
+}
+
+.commentTextArea {
+  /* Estilos para el área de texto */
+  width: 100%; /* Ocupa todo el ancho de su contenedor */
+  padding: 15px 20px;
+  background-color: rgba(
+    241,
+    243,
+    242,
+    1
+  ); /* El mismo gris claro de InputComponent */
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  color: #333;
+  outline: none;
+  resize: vertical; /* Permite redimensionar verticalmente */
+  min-height: 80px; /* Altura mínima */
+  box-sizing: border-box; /* Incluye padding en el cálculo del tamaño */
+}
+
+.commentTextArea::placeholder {
+  color: #888;
+}
+
+.commentTextArea:focus {
+  /* border: 1px solid rgba(25, 196, 100, 0.8); */
+  /* box-shadow: 0 0 0 3px rgba(25, 196, 100, 0.2); */
+}
+
+.submitButton {
+  /* Estilos para el botón de enviar */
+  margin-top: 20px; /* Espacio arriba del botón */
+  width: 100%; /* <-- CAMBIADO: Ocupa el 100% del ancho de su padre (.commentInputContainer) */
+  /* max-width: 250px; <-- REMOVIDO: Ya no queremos un max-width fijo */
+  /* Asegúrate de que ButtonComponent.module.css no tenga un max-width que sobrescriba esto */
+}
+
+/* Para asegurar que el ButtonComponent interno ocupe el 100% del submitButton */
+.submitButton :global(.button) {
+  width: 100%; /* Asegura que la clase interna del botón ocupe el 100% del .submitButton */
+}
+
+/* --- Estilos para la Notificación --- */
+.notification {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.notification.success {
+  background-color: rgba(25, 196, 100, 0.8);
+  color: white;
+}
+
+.notification.error {
+  background-color: rgba(255, 48, 2, 0.8);
+  color: white;
+}
