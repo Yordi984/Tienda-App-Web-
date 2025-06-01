@@ -1,9 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Compra } from './entities/compra.entity';
-import { Comprador } from './entities/comprador';
-import { Opciones } from './entities/opciones.entity';
-import { Producto } from './entities/producto.entity';
-import { Vendedor } from './entities/vendedor.entity';
+import { Compra, Comprador, Opciones, Producto, Vendedor } from './entities';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',

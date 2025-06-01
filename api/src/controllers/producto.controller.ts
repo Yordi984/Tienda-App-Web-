@@ -2,14 +2,17 @@ import { Request, Response } from 'express';
 import { AppDataSource } from '../db';
 
 export function crearProducto(req: Request, res: Response) {
-  const { nombre, descripcion, precio, vendedorId } = req.body;
+  const { nombre, descripcion, disponibilidad, precio, vendedorId } = req.body;
+
   const productoRepository = AppDataSource.getRepository('producto');
   const newProducto = productoRepository.create({
     nombre,
     descripcion,
+    disponibilidad,
     precio,
     vendedor: { id: vendedorId }, // Assuming vendedorId is provided in the request body
   });
+
   productoRepository
     .save(newProducto)
     .then(() => {
@@ -23,8 +26,16 @@ export function crearProducto(req: Request, res: Response) {
 
 export function obtenerProductos(req: Request, res: Response) {
   const productoRepository = AppDataSource.getRepository('producto');
+
+  const searchQuery = req.query.search;
+
   productoRepository
-    .find({ relations: ['vendedor', 'opciones', 'compras'] })
+    .createQueryBuilder('producto')
+    .where(
+      'producto.nombre LIKE :search OR producto.descripcion LIKE :search',
+      { search: `%${searchQuery || ''}%` },
+    )
+    .getMany()
     .then((productos) => {
       res.status(200).json(productos);
     })
