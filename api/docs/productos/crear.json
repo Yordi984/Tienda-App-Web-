@@ -1,7 +1,8 @@
 {
-  "nombre": "Producto original",
+  "nombre": "Producto 1 vendedor 1",
   "descripcion": "Esto es un producto de ejemplo",
   "disponibilidad": "Disponible",
   "precio": 0,
+  "whatsapp": "",
   "vendedorId": 1
 }
