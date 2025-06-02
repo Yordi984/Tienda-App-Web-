@@ -16,7 +16,7 @@ import Favoritos from './pages/favoritos/Favoritos.tsx';
 import Crear_vendedor from './pages/crear_cuentas/crear_vendedor.tsx';
 import CrearComprador from './pages/crear_cuentas/crear_comprador.tsx';
 import ElegirCuenta from './pages/crear_cuentas/elegir_cuenta.tsx';
-import Productos from './pages/productos/Productos.tsx';
+import Productos from './pages/Productos/Productos.tsx';
 
 
 createRoot(document.getElementById('root')!).render(
