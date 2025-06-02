@@ -1,7 +1,12 @@
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
+<<<<<<< HEAD
+// import App from './App.tsx'; // Comentado porque Principal será la página principal
+import Principal from './pages/principal/Principal.tsx';
+=======
 import App from './App.tsx';
 import './index.css';
+>>>>>>> 70b735d105e82eff06d50c15c6c57499811dac92
 import Login from './pages/Login/Login.tsx';
 import Torta from './pages/torta/Torta.tsx';
 import Recuperacion from './pages/recuperar_contraseña/Recuperacion.tsx';
@@ -16,7 +21,7 @@ createRoot(document.getElementById('root')!).render(
     <Routes>
       <Route
         path='/'
-        element={<App />}
+        element={<Principal />}
       />
       <Route
         path='/Login'
