@@ -55,7 +55,7 @@ const NavBar: React.FC = () => {
         <li className={styles.navItem}>
           {/* Enlace que lleva a la página de perfil */}
           <a
-            href='/perfil'
+            href='/misproductos'
             className={styles.navLink}
           >
             {/* Imagen del icono de usuario. La ruta es relativa a la carpeta 'public'. */}

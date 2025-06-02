@@ -5,6 +5,7 @@ import multer from "multer";
 
 import {
   crearVendedor,
+  obtenerMisProductos
  
 } from "../controllers/vendedor.controller";
 
@@ -40,6 +41,8 @@ router.post("/comprador", crearComprador);
 
 //vendedor routes
 router.post("/vendedor", crearVendedor);
+router.get("/mis-productos", obtenerMisProductos);
+
 
 
 //producto routes

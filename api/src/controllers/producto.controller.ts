@@ -127,3 +127,28 @@ export function obtenerProductoPorId(req: Request, res: Response) {
       res.status(500).json({ message: 'Error fetching producto' });
     });
 }
+
+export function obtenerProductosPorVendedor(req: Request, res: Response) {
+  const vendedorId = parseInt(req.params.id, 10);
+
+  if (isNaN(vendedorId)) {
+    return res.status(400).json({ message: 'ID de vendedor inválido' });
+  }
+
+  const productoRepository = AppDataSource.getRepository('producto');
+
+  productoRepository
+    .find({ where: { vendedor: { id: vendedorId } } })
+    .then((productos) => {
+      const parsedProducts = productos.map((producto) => {
+        producto.imagen = `${process.env.API_URL}uploads/${producto.imagen.replace(/^\/+/, '')}`;
+        return producto;
+      });
+
+      res.status(200).json(parsedProducts);
+    })
+    .catch((error) => {
+      console.error('Error fetching productos by vendor:', error);
+      res.status(500).json({ message: 'Error fetching productos by vendor' });
+    });
+}

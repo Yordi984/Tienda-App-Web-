@@ -9,33 +9,37 @@ export default function Login() {
   const [contrasena, setContrasena] = useState('');
 
   async function solicitud() {
-    try {
-      const response = await fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          correo,
-          password: contrasena, // ✅ el backend espera "password"
-        }),
-      });
+  try {
+    const response = await fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ correo, password: contrasena }),
+    });
 
-      const data = await response.json();
-      console.log('Respuesta del servidor:', data);
+    const data = await response.json();
+    console.log('Respuesta del servidor:', data);
 
-      if (response.ok) {
-        alert('Inicio de sesión exitoso');
-        localStorage.setItem('token', data.token);
-         window.location.href = '/CrearProductos';
+    if (response.ok) {
+      alert('Inicio de sesión exitoso');
+      localStorage.setItem('token', data.token);
+
+      // Guardar vendedorId si existe en la respuesta
+      if (data.vendedorId) {
+        localStorage.setItem('vendedorId', data.vendedorId.toString());
       } else {
-        alert('Error: ' + (data.message || 'Credenciales incorrectas'));
+        console.warn('No se recibió vendedorId del servidor.');
       }
-    } catch (error) {
-      console.error('Error al enviar solicitud:', error);
-      alert('Error de red o servidor');
+
+      window.location.href = '/CrearProductos';
+    } else {
+      alert('Error: ' + (data.message || 'Credenciales incorrectas'));
     }
+  } catch (error) {
+    console.error('Error al enviar solicitud:', error);
+    alert('Error de red o servidor');
   }
+}
+
 
   return (
     <>
