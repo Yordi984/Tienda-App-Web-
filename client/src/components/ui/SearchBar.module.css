@@ -9,16 +9,18 @@
     1
   ); /* El color de fondo gris claro solicitado */
   border-radius: 10px; /* Bordes redondeados */
+  margin-bottom: 0;
   padding: 8px 15px; /* Espacio interno del contenedor */
-  width: 90%; /* Ancho de la barra de búsqueda, ajusta según necesidad */
-  max-width: 500px; /* Ancho máximo para pantallas grandes */
-  margin: 20px auto; /* Centra el componente horizontalmente y da margen vertical */
+  width: auto;
+  /* width: 90%; Ancho de la barra de búsqueda, ajusta según necesidad */
+  /* max-width: 500px; Ancho máximo para pantallas grandes */
+  /* margin: 20px auto; Centra el componente horizontalmente y da margen vertical */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
 }
 
 .searchInput {
   /* Estilos del campo de entrada de texto */
-  flex-grow: 1; /* Hace que el input ocupe el espacio disponible */
+  /* flex-grow: 1; Hace que el input ocupe el espacio disponible */
   border: none; /* Sin borde */
   background-color: transparent; /* Fondo transparente para que el color del contenedor se vea */
   outline: none; /* Elimina el contorno al hacer focus */
@@ -41,6 +43,8 @@
   display: flex; /* Para centrar el icono si es necesario */
   align-items: center; /* Centra el icono verticalmente */
   justify-content: center; /* Centra el icono horizontalmente */
+  height: auto;
+  width: auto;
 }
 
 .searchIcon {

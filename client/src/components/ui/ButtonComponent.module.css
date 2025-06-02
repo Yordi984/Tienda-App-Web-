@@ -1,6 +1,7 @@
 .button {
   /* Estilos base para todos los botones */
-  padding: 1rem 20px; /* Espacio interno del botón */
+  /* padding: 1rem 20px; Espacio interno del botón */
+  padding: 8px 16px; /* Espacio interno del botón */
   border: none; /* Sin borde por defecto */
   border-radius: 8px; /* Bordes redondeados */
   font-size: 1.3em; /* Tamaño de fuente */
@@ -11,7 +12,7 @@
   text-align: center; /* Centra el texto dentro del botón */
 
   /* --- CAMBIOS CRUCIALES PARA EL ANCHO --- */
-  width: 100%; /* Permite que el botón ocupe el 100% del ancho de su contenedor */
+  width: auto; /* Permite que el botón ocupe el 100% del ancho de su contenedor */
   white-space: normal; /* <-- CAMBIADO: Permite que el texto se envuelva si es necesario */
   /* Esto es clave para que el 'width: 100%' funcione correctamente */
   margin: 0; /* <-- CAMBIADO: Elimina los márgenes horizontales fijos del botón mismo.
