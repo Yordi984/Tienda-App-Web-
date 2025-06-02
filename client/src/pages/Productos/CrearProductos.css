@@ -1,1 +1,16 @@
 
+.disponibilidad-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  background-color: aqua;
+}
+
+button {
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  background-color: gray;
+
+}
