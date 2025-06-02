@@ -49,8 +49,12 @@ export function obtenerProductos(req: Request, res: Response) {
     .getMany()
     .then((productos) => {
       const parsedProducts = productos.map((producto) => {
-        producto.imagen = `${process.env.API_URL}/uploads/${producto.imagen}`;
+       producto.imagen = `${process.env.API_URL}uploads/${producto.imagen.replace(/^\/+/, '')}`;
+
+        return producto
       });
+
+  
 
       res.status(200).json(parsedProducts);
     })

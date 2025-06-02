@@ -37,7 +37,8 @@ export default function Productos() {
 
     fetchProducts()
       .then((data) => {
-        console.log(data[0].imagen);
+       console.log('Fetched products:', data);
+        
 
         setProducts(
           data.map((product: Product) => ({
