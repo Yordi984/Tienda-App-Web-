@@ -1,9 +1,10 @@
+// src/pages/Torta.tsx
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { isValid, parse } from 'date-fns';
 import Boton from '../../components/ui/ButtonComponent';
 import Header from '../../components/ui/HeaderComponent';
 import NavBar from '../../components/ui/Navbar';
-
 import './Torta.css';
 
 import HeartIcon from '/icons/heart.svg';
@@ -12,17 +13,19 @@ import SearchIcon from '/icons/search.svg';
 import UserRoundIcon from '/icons/user-round.svg';
 
 type Producto = {
+  id: number;
   nombre: string;
   descripcion: string;
   imagen: string;
   precio: number;
-  opcionesCarne: string[]; // campo dinámico para las opciones de carne
+  disponibilidad: string; // Ej: "M,L"
+  whatsapp: string;
 };
 
 export default function Torta() {
+  const { id } = useParams<{ id: string }>();
   const [producto, setProducto] = useState<Producto | null>(null);
-  const [selectedMeat, setSelectedMeat] = useState<string>('');
-  const [selectedDays, setSelectedDays] = useState<string[]>(['M']);
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [timeRange, setTimeRange] = useState('08:30 - 16:00');
   const [isLiked, setIsLiked] = useState(false);
 
@@ -37,22 +40,24 @@ export default function Torta() {
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        const res = await fetch('http://localhost:5173/productos');
-        const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
-          setProducto(data[0]);
-          // Inicializa selectedMeat con la primera opción si existe
-          if (data[0].opcionesCarne && data[0].opcionesCarne.length > 0) {
-            setSelectedMeat(data[0].opcionesCarne[0]);
-          }
+        const res = await fetch(`http://localhost:3000/producto/${id}`);
+        const data: Producto = await res.json();
+        setProducto(data);
+
+        // Convertir disponibilidad string en array ['M', 'L'] y setear selectedDays
+        if (data.disponibilidad) {
+          const dias = data.disponibilidad.split(',').map(d => d.trim());
+          setSelectedDays(dias);
+        } else {
+          setSelectedDays([]);
         }
       } catch (err) {
-        console.error('Error al cargar productos:', err);
+        console.error('Error al cargar producto:', err);
       }
     };
 
-    fetchProducto();
-  }, []);
+    if (id) fetchProducto();
+  }, [id]);
 
   const handleDayClick = (day: string) => {
     setSelectedDays((prev) =>
@@ -101,23 +106,8 @@ export default function Torta() {
             {producto?.descripcion || 'Esperando descripción del producto...'}
           </p>
 
-          <div className='tags'>
-            {producto?.opcionesCarne?.length ? (
-              producto.opcionesCarne.map((meat) => (
-                <span
-                  key={meat}
-                  className={`meat-tag ${
-                    selectedMeat === meat ? 'selected' : ''
-                  }`}
-                  onClick={() => setSelectedMeat(meat)}
-                >
-                  {meat}
-                </span>
-              ))
-            ) : (
-              <p className="no-options">Sin opciones disponibles</p>
-            )}
-          </div>
+          {/* Aquí ya no mostramos opcionesCarne porque no viene del backend */}
+          {/* Si quieres agregarlo, tendrías que modificar backend y frontend */}
 
           <div className='availability-box'>
             <span className='availability-title'>Horario de disponibilidad</span>
@@ -148,7 +138,14 @@ export default function Torta() {
           <div className='price-contact'>
             <span className='price'>${producto?.precio ?? '...'}</span>
             <div className='button-wrapper'>
-              <Boton color='green' text='Contactar con el vendedor' />
+              <Boton
+                color='green'
+                text='Contactar con el vendedor'
+                onClick={() =>
+                  producto?.whatsapp &&
+                  window.open(`https://wa.me/52${producto.whatsapp}`, '_blank')
+                }
+              />
             </div>
           </div>
         </div>

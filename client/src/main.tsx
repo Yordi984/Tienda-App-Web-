@@ -30,9 +30,7 @@ createRoot(document.getElementById('root')!).render(
         path='/Login'
         element={<Login />}
       />
-      <Route
-        path='/Torta'
-        element={<Torta/>} />
+        <Route path="/producto/:id" element={<Torta />} />
 
         <Route
           path='/Recuperacion'

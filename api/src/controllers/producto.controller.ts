@@ -114,6 +114,12 @@ export function obtenerProductoPorId(req: Request, res: Response) {
       if (!producto) {
         return res.status(404).json({ message: 'Producto not found' });
       }
+
+      // Ajustar la URL completa de la imagen usando la variable de entorno API_URL
+      if (producto.imagen) {
+        producto.imagen = `${process.env.API_URL}uploads/${producto.imagen.replace(/^\/+/, '')}`;
+      }
+
       res.status(200).json(producto);
     })
     .catch((error) => {
