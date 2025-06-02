@@ -1,12 +1,12 @@
 import React from 'react';
 import './Favoritos.css'; // CSS xd
+import NavBar from '../../components/ui/Navbar';
+import HeaderComponent from '../../components/ui/HeaderComponent';
 
 function Favoritos() {
   return (
     <div className="favorites-page">
-      <header className="favorites-header">
-        <h1>Favoritos</h1>
-      </header>
+      <HeaderComponent text='Favoritos' />
 
       <main className="favorites-content">
         {/* Aquí iría la lista de productos favoritos */}
@@ -23,14 +23,7 @@ function Favoritos() {
         {/* Puedes repetir el bloque .favorite-item para cada producto favorito */}
       </main>
 
-      <footer className="navigation-bar">
-        {/* Iconos de navegación: Casa, Buscar, Favoritos, Perfil */}
-        {/* Necesitarás componentes de icono reales aquí */}
-        <div className="nav-icon"><img src="/icons/house.svg" alt="Home" style={{ width: '24px', height: '24px' }} /></div>
-        <div className="nav-icon"><img src="/icons/search.svg" alt="Search" style={{ width: '24px', height: '24px' }} /></div>
-        <div className="nav-icon"><img src="/icons/heart.svg" alt="Favorites" style={{ width: '24px', height: '24px' }} /></div>
-        <div className="nav-icon"><img src="/icons/user-round.svg" alt="Profile" style={{ width: '24px', height: '24px' }} /></div>
-      </footer>
+      <NavBar />
     </div>
   );
 }
