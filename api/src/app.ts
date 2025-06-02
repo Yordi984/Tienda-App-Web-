@@ -1,10 +1,11 @@
-
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import session from "express-session";
 import passport from "./config/passport";
 import Router from "./routes/router.routes";
+import path from 'path';
+import { Request, Response } from "express";
 
 const app = express();
 
@@ -19,10 +20,13 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use('/uploads', express.static('uploads'));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(Router);
+
+
 
 export default app;

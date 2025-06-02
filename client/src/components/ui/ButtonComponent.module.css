@@ -42,9 +42,9 @@
 }
 
 /* Estilo para el botón activo (ej. 'Todo' en la imagen) */
-.active {
-  /* Puedes añadir estilos adicionales para el estado activo si es diferente al color base */
-}
+/* .active {
+
+} */
 
 /* Efectos al pasar el ratón por encima (hover) */
 .button:hover {

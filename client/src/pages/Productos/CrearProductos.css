@@ -1,0 +1,107 @@
+/* Contenedor general */
+.crear-productos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Contenedor de columnas */
+.ordenar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Cada columna */
+.form-box,
+.div-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+}
+
+/* Disponibilidad */
+.dias-disponibles {
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f1f1;
+  padding: 1rem;
+  border-radius: 12px;
+  align-items: center;
+}
+
+.titulo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Botones de días */
+.dias {
+  display: flex;
+  gap: 0.5rem;
+
+}
+
+.dia {
+  border-radius: 50%;
+  width: 2.4rem;
+  height: 2.4rem;
+  background-color: gray;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dia.activo {
+  background-color: rgba(25, 196, 100, 1);
+}
+
+/* Input del horario */
+.horario-input {
+  margin-top: 1rem;
+  padding: 0.6rem;
+  width: 50%;
+  margin-left: 30%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Estilo para campos tipo file */
+.div-2 input[type="file"] {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.inputs{
+    margin-top: rem;
+    gap: 1rem;
+    
+}
+
+.imagen{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
