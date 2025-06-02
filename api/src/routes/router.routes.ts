@@ -1,6 +1,7 @@
 
 import { Router } from "express";
 import { crearComprador, iniciarSesion } from "../controllers/user.controller";
+import multer from "multer";
 
 import {
   crearVendedor,
@@ -22,9 +23,11 @@ import {
 } from "../controllers/autenticacion.controller";
 
 
+const upload = multer({ dest: 'uploads/' }); // Ajusta la configuración según tus necesidades
 
 const router = Router();
 //login para los 2 tipos de usuarios
+router.post("/login", iniciarSesion);
 router.post("/login", iniciarSesion);
 
 //comprador routes
@@ -36,7 +39,7 @@ router.post("/vendedor", crearVendedor);
 
 
 //producto routes
-router.post("/producto", crearProducto);
+router.post("/producto", upload.single('imagen'), crearProducto);
 router.get("/productos", obtenerProductos);
 router.put("/producto/:id", editarProducto);
 router.delete("/producto/:id", eliminarProducto);

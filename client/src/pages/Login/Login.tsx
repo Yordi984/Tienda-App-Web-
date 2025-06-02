@@ -26,8 +26,8 @@ export default function Login() {
 
       if (response.ok) {
         alert('Inicio de sesión exitoso');
-        // Puedes guardar el token si quieres:
-        // localStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.token);
+         window.location.href = '/CrearProductos';
       } else {
         alert('Error: ' + (data.message || 'Credenciales incorrectas'));
       }
