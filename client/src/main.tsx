@@ -17,6 +17,7 @@ import Crear_vendedor from './pages/crear_cuentas/crear_vendedor.tsx';
 import CrearComprador from './pages/crear_cuentas/crear_comprador.tsx';
 import ElegirCuenta from './pages/crear_cuentas/elegir_cuenta.tsx';
 import Productos from './pages/Productos/Productos.tsx';
+import ProductosVendedor from './pages/Productos/ProductosVendedor.tsx';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -62,6 +63,9 @@ createRoot(document.getElementById('root')!).render(
         element={<ProfileForm />}
       />
 
+      <Route
+        path='/misproductos'
+        element={<ProductosVendedor />} />
     </Routes>
   </BrowserRouter>,
 );
