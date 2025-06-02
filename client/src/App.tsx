@@ -5,12 +5,17 @@ import Navbar from './components/ui/Navbar';
 // import InputComponent from "./components/ui/InputComponent";
 // import ProductCard from "./components/ui/ProductCard";
 
+
+
+
 function App() {  
   return (
     <div>
       <Navbar />
-      
     </div>
+      
+      
+
 
   );
 }
