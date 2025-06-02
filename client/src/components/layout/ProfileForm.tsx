@@ -68,11 +68,11 @@ const ProfileForm: React.FC = () => {
   // Función para cerrar sesión
   const handleLogout = () => {
     console.log("Cerrar sesión");
-    // Aquí integrarías la lógica real para cerrar la sesión del usuario
+    //  integrar la lógica real para cerrar la sesión del usuario
     // Por ejemplo, limpiar tokens de autenticación, redirigir a la página de login
     showNotification("¡Sesión cerrada correctamente!", "success");
     // En una aplicación real, aquí harías una redirección:
-    // window.location.href = '/login';
+    window.location.href = '/login';
   };
 
   return (

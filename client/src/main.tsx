@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 
 // import App from './App.tsx'; // Comentado porque Principal será la página principal
 import Home from './pages/principal/Principal.tsx';
-
+import ProfileForm from './pages/perfil/perfil.tsx'; // Importado para usar en la página de perfil
 // import App from './App.tsx';
 import './index.css';
 
@@ -56,6 +56,12 @@ createRoot(document.getElementById('root')!).render(
       <Route
         path='/productos'
         element={<Productos />} />
+
+      <Route
+        path='/perfil'
+        element={<ProfileForm />}
+      />
+
     </Routes>
   </BrowserRouter>,
 );
