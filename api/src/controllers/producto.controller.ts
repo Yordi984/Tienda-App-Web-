@@ -1,28 +1,33 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../db';
+import { Producto } from '../entities/producto.entity';
 
-export function crearProducto(req: Request, res: Response) {
-  const { nombre, descripcion, disponibilidad, precio, vendedorId } = req.body;
+export async function crearProducto(req: Request, res: Response) {
+  try {
+    const { nombre, descripcion, disponibilidad, precio, vendedorId, whatsapp } = req.body;
 
-  const productoRepository = AppDataSource.getRepository('producto');
-  const newProducto = productoRepository.create({
-    nombre,
-    descripcion,
-    disponibilidad,
-    precio,
-    vendedor: { id: vendedorId }, // Assuming vendedorId is provided in the request body
-  });
+    const imagen = req.file?.filename; // nombre del archivo guardado
 
-  productoRepository
-    .save(newProducto)
-    .then(() => {
-      res.status(201).json({ message: 'Producto created successfully' });
-    })
-    .catch((error) => {
-      console.error('Error creating producto:', error);
-      res.status(500).json({ message: 'Error creating producto' });
+    const productoRepository = AppDataSource.getRepository(Producto);
+    const newProducto = productoRepository.create({
+      nombre,
+      descripcion,
+      disponibilidad,
+      precio: Number(precio),
+      whatsapp,
+      imagen,
+      vendedor: { id: vendedorId },
     });
+
+    await productoRepository.save(newProducto);
+
+    res.status(201).json({ message: 'Producto creado exitosamente' });
+  } catch (error) {
+    console.error('Error creando producto:', error);
+    res.status(500).json({ message: 'Error al crear producto' });
+  }
 }
+
 
 export function obtenerProductos(req: Request, res: Response) {
   const productoRepository = AppDataSource.getRepository('producto');

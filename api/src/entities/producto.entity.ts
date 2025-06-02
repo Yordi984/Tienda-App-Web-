@@ -27,7 +27,7 @@ export class Producto {
   precio: number;
 
   @Column()
-  whatsapp: number;
+  whatsapp: string;
 
   @Column()
   imagen?: string;
