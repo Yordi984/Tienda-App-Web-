@@ -11,7 +11,9 @@ import Login from './pages/Login/Login.tsx';
 import Torta from './pages/torta/Torta.tsx';
 import Recuperacion from './pages/recuperar_contraseña/Recuperacion.tsx';
 import ResetPassword from './pages/recuperar_contraseña/RestablecerPassword.tsx';
+
 import CraerProductos from './pages/Productos/CrearProductos.tsx';
+import Favoritos from './pages/favoritos/Favoritos.tsx';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -29,8 +31,6 @@ createRoot(document.getElementById('root')!).render(
         path='/Torta'
         element={<Torta/>} />
 
-      {/* <Route path="/chat" element={<ChatPage />} /> */}
-
         <Route
           path='/Recuperacion'
         element={<Recuperacion/>} />
@@ -42,6 +42,7 @@ createRoot(document.getElementById('root')!).render(
 
 
 
+       <Route path="/favoritos" element={<Favoritos />} />
        
     </Routes>
   </BrowserRouter>,
