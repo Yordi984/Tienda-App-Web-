@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import styles from "./ProductInfoBar.module.css";
+import React, { useState } from 'react';
+import styles from './ProductInfoBar.module.css';
 
 // Asegúrate de que estas rutas sean correctas para tus SVGs.
 // Por ejemplo: 'public/icons/heart-empty.svg' si están directamente en public/icons
-import HeartEmptyIcon from "/icons/heart.svg"; // Asume que este es el corazón vacío (gris/contorno)
-import HeartFilledIcon from "/icons/heart-filled.svg"; // Asume que este es el corazón lleno (rojo)
+import HeartEmptyIcon from '/icons/heart.svg'; // Asume que este es el corazón vacío (gris/contorno)
+import HeartFilledIcon from '/icons/heart-filled.svg'; // Asume que este es el corazón lleno (rojo)
 
 interface ProductInfoBarProps {
   name: string; // Nombre del producto a mostrar
@@ -28,7 +28,7 @@ const ProductInfoBar: React.FC<ProductInfoBarProps> = ({
     const newState = !isFavorite;
     setIsFavorite(newState); // Actualiza el estado local
     console.log(
-      `Producto "${name}" marcado como ${newState ? "favorito" : "no favorito"}`
+      `Producto "${name}" marcado como ${newState ? 'favorito' : 'no favorito'}`,
     );
 
     // Si se proporciona la prop onToggleFavorite, la llamamos
@@ -45,18 +45,21 @@ const ProductInfoBar: React.FC<ProductInfoBarProps> = ({
       {/* Contenedor para el botón de favorito y el precio */}
       <div className={styles.actions}>
         {/* Botón para alternar el estado de favorito */}
-        <button className={styles.favoriteButton} onClick={toggleFavorite}>
+        <button
+          className={styles.favoriteButton}
+          onClick={toggleFavorite}
+        >
           {/* Muestra el icono de corazón lleno si es favorito, vacío si no */}
           {isFavorite ? (
             <img
               src={HeartFilledIcon}
-              alt="Favorito"
+              alt='Favorito'
               className={styles.heartIcon}
             />
           ) : (
             <img
               src={HeartEmptyIcon}
-              alt="No favorito"
+              alt='No favorito'
               className={styles.heartIcon}
             />
           )}

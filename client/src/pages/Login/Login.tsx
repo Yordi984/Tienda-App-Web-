@@ -1,78 +1,78 @@
-import { useState } from "react";
-import Header from "../../components/ui/HeaderComponent";
-import Boton from "../../components/ui/ButtonComponent";
-import "./Login.css";
+import { useState } from 'react';
+import Header from '../../components/ui/HeaderComponent';
+import Boton from '../../components/ui/ButtonComponent';
+
+import './Login.css';
 
 export default function Login() {
-  const [correo, setCorreo] = useState("");
-  const [contrasena, setContrasena] = useState("");
-
-  const handleChangeUserType = () => {
-    window.location.href = "/select-login";
-  };
+  const [correo, setCorreo] = useState('');
+  const [contrasena, setContrasena] = useState('');
 
   async function solicitud() {
     try {
-      const response = await fetch("/api", {
-        method: "POST",
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           correo,
-          contrasena,
+          password: contrasena, // ✅ el backend espera "password"
         }),
       });
 
       const data = await response.json();
-      console.log("Respuesta del servidor:", data);
+      console.log('Respuesta del servidor:', data);
 
       if (response.ok) {
-        alert("Inicio de sesión exitoso");
+        alert('Inicio de sesión exitoso');
+        // Puedes guardar el token si quieres:
+        // localStorage.setItem('token', data.token);
       } else {
-        alert("Error: " + data.mensaje || "Credenciales incorrectas");
+        alert('Error: ' + (data.message || 'Credenciales incorrectas'));
       }
     } catch (error) {
-      console.error("Error al enviar solicitud:", error);
-      alert("Error de red o servidor");
+      console.error('Error al enviar solicitud:', error);
+      alert('Error de red o servidor');
     }
   }
 
   return (
     <>
-      <Header text="Hola ¿Qué comprarás hoy?" />
-      <div className="logo-container">
+      <Header text='Hola ¿Qué comprarás hoy?' />
+      <div className='logo-container'>
         <img
-          src="/icons/icon.svg"
-          alt=""
-          style={{ width: "100px" }}
-          className="logo"
+          src='/logo.png'
+          alt='logo'
+          style={{ width: '100px' }}
+          className='logo'
         />
       </div>
-      <div className="formulario">
+      <div className='formulario'>
         <input
-          type="text"
-          placeholder="Correo Electrónico"
+          type='text'
+          placeholder='Correo'
           value={correo}
           onChange={(e) => setCorreo(e.target.value)}
         />
         <input
-          type="password"
-          placeholder="Contraseña"
+          type='password'
+          placeholder='Contraseña'
           value={contrasena}
           onChange={(e) => setContrasena(e.target.value)}
         />
-
-        <Boton text="Iniciar sesión" color="green" onClick={solicitud} />
-        <Boton 
-          text="Cambiar tipo de usuario" 
-          color="lightGray" 
-          onClick={handleChangeUserType}
-        />
+        
+          <Boton 
+            style={{  width: '25%', margin: '20px auto', padding: '1rem' }}
+            text='Iniciar sesión'
+            color='green'
+            onClick={solicitud}
+          />
+       
       </div>
-      <div className="links">
-        <a href="#">Olvidé mi Contraseña</a>
-        <a href="#">Política de privacidad</a>
+      <div className='links'>
+        <a href='#'>Olvidé mi Contraseña</a>
+        <a href='#'>Política de privacidad</a>
       </div>
     </>
   );

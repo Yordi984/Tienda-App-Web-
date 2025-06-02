@@ -1,0 +1,27 @@
+.descriptionContainer {
+  /* Contenedor principal para el título y la descripción */
+  padding: 0px 0px 20px 0px; /* Padding interior: arriba, derecha, abajo, izquierda. Ajusta según necesites */
+  text-align: left; /* Alineación del texto a la izquierda como en la imagen */
+  width: 100%; /* Ocupa el 100% del ancho de su padre */
+  max-width: 450px; /* Ancho máximo para que el texto no se extienda demasiado, ajusta si es necesario */
+  /* Si se usa junto a la imagen en un layout flex, este ancho se ajustará con flex-grow */
+  margin: 0 auto; /* Centra el contenedor si su padre es más ancho que el max-width */
+  box-sizing: border-box; /* Asegura que el padding se incluya en el ancho/alto total */
+}
+
+.productTitle {
+  /* Estilos para el título del producto */
+  font-size: 2em; /* Tamaño de fuente para el título (ej. "Torta") */
+  font-weight: bold; /* Negrita */
+  color: #333; /* Color de texto oscuro */
+  margin-bottom: 10px; /* Espacio debajo del título */
+  line-height: 1.2; /* Altura de línea para el título */
+}
+
+.productDescription {
+  /* Estilos para la descripción del producto */
+  font-size: 1em; /* Tamaño de fuente para la descripción */
+  color: #555; /* Color de texto más suave */
+  line-height: 1.5; /* Altura de línea para mejor legibilidad */
+  margin-bottom: 20px; /* Espacio debajo de la descripción */
+}

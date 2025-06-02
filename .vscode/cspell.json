@@ -1,0 +1,19 @@
+{
+  "version": "0.2",
+  "ignorePaths": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "build",
+    "public",
+    "out",
+    ".next",
+    ".nuxt",
+    ".cache",
+    ".vscode-test",
+    ".vscode-server",
+    ".vscode-remote",
+    "docker-compose.yaml",
+    "docker-compose.yml"
+  ]
+}

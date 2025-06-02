@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  background-color: rgba(25, 196, 100, 1);
+  background-color: rgb(25, 196, 100, 1);/* Color de fondo verde */
   padding: 30px 0;
   display: flex;
   justify-content: center;

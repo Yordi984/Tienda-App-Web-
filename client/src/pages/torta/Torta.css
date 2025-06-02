@@ -1,0 +1,269 @@
+/* Torta.css */
+
+.torta-container {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.header-bar {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 10px 20px;
+    color: white;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.header-bar-overlap {
+    position: absolute;
+    top: 8px;
+    /* Ajusta según el padding del HeaderComponent */
+    right: 30px;
+    /* Espaciado desde el borde derecho */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+}
+
+
+.header-bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #28a745;
+    height: 100%;
+    width: 60%;
+    border-bottom-right-radius: 20px;
+    z-index: -1;
+}
+
+.header-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    /* ✅ ya está bien */
+}
+
+
+.sell-button {
+    background-color: #19c464;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 1px 1px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    margin-right: 5px;
+    color: black;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    flex: 1;
+    gap: 30px;
+    justify-content: center;
+    /* Centra el contenido dentro del contenedor */
+    max-width: 1000px;
+    /* Opcional: limita el ancho total del contenido */
+    margin: 0 auto;
+    /* Centra el contenedor dentro de la pantalla */
+}
+
+
+.product-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-header h2 {
+    margin: 0;
+}
+
+.heart-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    filter: invert(0%);
+    transition: filter 0.3s;
+}
+
+.heart-icon.liked {
+    filter: brightness(0);
+}
+
+.product-description {
+    margin: 10px 0;
+}
+
+.tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tags span {
+    background-color: #e0e0e0;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.availability-box {
+    background-color: #e7f9ee;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.availability-title {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.availability-days {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.day-button {
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    background-color: #d0d0d0;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.day-button.active {
+    background-color: #24c065;
+}
+
+.availability-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dots {
+    display: flex;
+    gap: 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: gray;
+}
+
+.dot.green {
+    background-color: #24c065;
+}
+
+.price-contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #e0e0e0;
+    /* gris claro */
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.button-wrapper {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #24c065;
+    padding: 12px 0;
+}
+
+.bottom-nav img {
+    width: 26px;
+    height: 26px;
+    filter: invert(100%);
+}
+
+.meat-tag {
+    padding: 8px 12px;
+    border-radius: 9999px;
+    background-color: white;
+    border: 1px solid #19c464;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.meat-tag.selected {
+    background-color: #19c464;
+    color: white;
+}
+
+.time-input {
+    background-color: #19c464;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+}

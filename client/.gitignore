@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+// Lo que me sugirio la IA
+node_modules/
+dist/
+.env
+pnpm-lock.yaml

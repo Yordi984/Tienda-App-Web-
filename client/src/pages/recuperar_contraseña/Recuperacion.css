@@ -1,0 +1,32 @@
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10rem;
+}
+
+.logo{
+    width: 100px;
+    height: 100px;
+    background-color: #f2f4f3; /* fondo gris claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+    
+}
+
+.boton-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  width: 20%;
+}
