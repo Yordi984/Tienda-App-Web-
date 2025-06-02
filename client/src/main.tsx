@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
 // import App from './App.tsx'; // Comentado porque Principal será la página principal
-import Principal from './pages/principal/Principal.tsx';
+import Home from './pages/principal/Principal.tsx';
 
 // import App from './App.tsx';
 import './index.css';
@@ -14,6 +14,9 @@ import ResetPassword from './pages/recuperar_contraseña/RestablecerPassword.tsx
 import CraerProductos from './pages/Productos/CrearProductos.tsx';
 import Favoritos from './pages/favoritos/Favoritos.tsx';
 import Crear_vendedor from './pages/crear_cuentas/crear_vendedor.tsx';
+import CrearComprador from './pages/crear_cuentas/crear_comprador.tsx';
+import ElegirCuenta from './pages/crear_cuentas/elegir_cuenta.tsx';
+import Productos from './pages/productos/Productos.tsx';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -21,7 +24,7 @@ createRoot(document.getElementById('root')!).render(
     <Routes>
       <Route
         path='/'
-        element={<Principal />}
+        element={<Home />}
       />
       <Route
         path='/Login'
@@ -45,10 +48,16 @@ createRoot(document.getElementById('root')!).render(
       <Route
         path='/crear_vendedor'
         element={<Crear_vendedor/>} />
-     
-     
-      
-       
+      <Route
+        path='/crear_comprador'
+        element={<CrearComprador/>} />
+      <Route
+        path='/elegir_cuenta'
+        element={<ElegirCuenta/>} />
+
+      <Route
+        path='/productos'
+        element={<Productos />} />
     </Routes>
   </BrowserRouter>,
 );

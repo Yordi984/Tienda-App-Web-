@@ -72,7 +72,7 @@ export default function Login() {
       </div>
       <div className='links'>
         <a href='/Recuperacion'>Olvidé mi Contraseña</a>
-        <a href='#'>Política de privacidad</a>
+        <a href='/elegir_cuenta'>Crear cuenta</a>
       </div>
     </>
   );
