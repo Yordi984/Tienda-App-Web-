@@ -71,7 +71,7 @@ export default function Login() {
        
       </div>
       <div className='links'>
-        <a href='#'>Olvidé mi Contraseña</a>
+        <a href='/Recuperacion'>Olvidé mi Contraseña</a>
         <a href='#'>Política de privacidad</a>
       </div>
     </>

@@ -6,7 +6,8 @@ import Login from './pages/Login/Login.tsx';
 import Torta from "./pages/torta/Torta.tsx"
 import Recuperacion from './pages/recuperar_contraseña/Recuperacion.tsx';
 import ResetPassword from './pages/recuperar_contraseña/RestablecerPassword.tsx';
-import ChatPage from './pages/ChatPage.tsx';
+import CrearProductos from './pages/Productos/CrearProductos.tsx';
+// import ChatPage from './pages/ChatPage.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -23,13 +24,17 @@ createRoot(document.getElementById('root')!).render(
         path='/Torta'
         element={<Torta/>} />
 
-      <Route path="/chat" element={<ChatPage />} />
+      {/* <Route path="/chat" element={<ChatPage />} /> */}
 
         <Route
           path='/Recuperacion'
         element={<Recuperacion/>} />
 
        <Route path="/restablecer/:token" element={<ResetPassword />} />
+
+      <Route
+        path='/CrearProducto'
+        element={<CrearProductos />}/>
 
        
     </Routes>
