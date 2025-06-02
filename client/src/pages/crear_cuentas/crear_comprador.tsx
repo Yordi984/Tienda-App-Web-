@@ -18,7 +18,7 @@ export default function Crear_vendedor() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/registrar/vendedor", {
+      const res = await fetch("http://localhost:3000/registrar/comprador", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -39,7 +39,7 @@ export default function Crear_vendedor() {
 
   return (
     <div>
-      <Header text= "Crear cuenta de Vendedor"/>
+      <Header text= "Crear cuenta de Comprador"/>
       <CreateAccountForm
         nombre={formData.nombre}
         correo={formData.correo}
