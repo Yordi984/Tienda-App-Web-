@@ -1,4 +1,6 @@
+// src/pages/Productos.tsx
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import placeholderImage from '../../assets/images/placeholder.jpg';
 import HeaderWithSearchbar from '../../components/HeaderWithSearchbar';
 import { HeartIcon } from '../../components/icons';
@@ -10,10 +12,9 @@ interface Product {
   nombre: string;
   descripcion: string;
   disponibilidad: string;
-  precio: number;
+  precio: string; // cambia a string porque lo formateamos
   whatsapp: number;
   imagen?: string;
-  // vendedor: Vendedor;
 }
 
 export default function Productos() {
@@ -37,15 +38,14 @@ export default function Productos() {
 
     fetchProducts()
       .then((data) => {
-       console.log('Fetched products:', data);
-        
+        console.log('Fetched products:', data);
 
         setProducts(
           data.map((product: Product) => ({
             ...product,
-            precio: formatPrice(product.precio),
+            precio: formatPrice(Number(product.precio)),
             imagen: product.imagen,
-          })),
+          }))
         );
       })
       .catch((error) => {
@@ -59,7 +59,8 @@ export default function Productos() {
 
       <div className={styles.productGrid}>
         {products.map((product) => (
-          <div
+          <Link
+            to={`/producto/${product.id}`}
             key={product.id}
             className={styles.productCard}
           >
@@ -67,7 +68,7 @@ export default function Productos() {
               className={styles.productImage}
               src={product.imagen || placeholderImage}
               onError={(e) => {
-                e.currentTarget.src = placeholderImage; // Fallback to placeholder image
+                e.currentTarget.src = placeholderImage;
               }}
               alt={product.nombre}
             />
@@ -78,7 +79,7 @@ export default function Productos() {
                 <span className={styles.price}>{product.precio}</span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
