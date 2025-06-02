@@ -27,6 +27,9 @@
   font-size: 1.1em; /* Tamaño de la fuente del texto */
   color: #333; /* Color del texto */
   padding: 5px 0; /* Pequeño padding vertical */
+  margin: 0;
+  width: auto;
+  max-width: 100%;
 }
 
 .searchInput::placeholder {
