@@ -26,6 +26,12 @@ export class Producto {
   @Column()
   precio: number;
 
+  @Column()
+  whatsapp: number;
+
+  @Column()
+  imagen?: string;
+
   @ManyToOne(() => Vendedor, (vendedor) => vendedor.productos)
   vendedor: Vendedor;
 
