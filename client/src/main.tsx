@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
-import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import App from './App.tsx';
+import './index.css';
 import Login from './pages/Login/Login.tsx';
 import Torta from './pages/torta/Torta.tsx';
 import Recuperacion from './pages/recuperar_contraseña/Recuperacion.tsx';
@@ -24,14 +24,19 @@ createRoot(document.getElementById('root')!).render(
       />
       <Route
         path='/Torta'
-        element={<Torta/>} />
+        element={<Torta />}
+      />
 
-        <Route
-          path='/Recuperacion'
-        element={<Recuperacion/>} />
-
-       <Route path="/restablecer/:token" element={<ResetPassword />} />
-
+      <Route
+        path='/Recuperacion'
+        element={<Recuperacion />}
+      />
+      
+      <Route
+        path='/restablecer/:token'
+        element={<ResetPassword />}
+      />
+      
        <Route path="/favoritos" element={<Favoritos />} />
 
     </Routes>
