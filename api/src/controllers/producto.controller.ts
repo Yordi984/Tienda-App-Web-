@@ -89,3 +89,21 @@ export function editarProducto(req: Request, res: Response) {
       res.status(500).json({ message: 'Error updating producto' });
     });
 }
+
+export function obtenerProductoPorId(req: Request, res: Response) {
+  const { id } = req.params;
+  const productoRepository = AppDataSource.getRepository('producto');
+
+  productoRepository
+    .findOneBy({ id: parseInt(id) })
+    .then((producto) => {
+      if (!producto) {
+        return res.status(404).json({ message: 'Producto not found' });
+      }
+      res.status(200).json(producto);
+    })
+    .catch((error) => {
+      console.error('Error fetching producto:', error);
+      res.status(500).json({ message: 'Error fetching producto' });
+    });
+}

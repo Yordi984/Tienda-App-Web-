@@ -1,16 +1,27 @@
+import { useEffect, useState } from 'react';
 import { isValid, parse } from 'date-fns';
-import { useState } from 'react';
 import Boton from '../../components/ui/ButtonComponent';
 import Header from '../../components/ui/HeaderComponent';
 import NavBar from '../../components/ui/Navbar';
+
 import './Torta.css';
+
 import HeartIcon from '/icons/heart.svg';
 import HomeIcon from '/icons/house.svg';
 import SearchIcon from '/icons/search.svg';
 import UserRoundIcon from '/icons/user-round.svg';
 
+type Producto = {
+  nombre: string;
+  descripcion: string;
+  imagen: string;
+  precio: number;
+  opcionesCarne: string[]; // campo dinámico para las opciones de carne
+};
+
 export default function Torta() {
-  const [selectedMeat, setSelectedMeat] = useState<string>('Asada');
+  const [producto, setProducto] = useState<Producto | null>(null);
+  const [selectedMeat, setSelectedMeat] = useState<string>('');
   const [selectedDays, setSelectedDays] = useState<string[]>(['M']);
   const [timeRange, setTimeRange] = useState('08:30 - 16:00');
   const [isLiked, setIsLiked] = useState(false);
@@ -23,9 +34,29 @@ export default function Torta() {
     { label: 'V', value: 'V' },
   ];
 
+  useEffect(() => {
+    const fetchProducto = async () => {
+      try {
+        const res = await fetch('http://localhost:5173/productos');
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setProducto(data[0]);
+          // Inicializa selectedMeat con la primera opción si existe
+          if (data[0].opcionesCarne && data[0].opcionesCarne.length > 0) {
+            setSelectedMeat(data[0].opcionesCarne[0]);
+          }
+        }
+      } catch (err) {
+        console.error('Error al cargar productos:', err);
+      }
+    };
+
+    fetchProducto();
+  }, []);
+
   const handleDayClick = (day: string) => {
     setSelectedDays((prev) =>
-      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day],
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
     );
   };
 
@@ -38,19 +69,13 @@ export default function Torta() {
 
   return (
     <div className='torta-container'>
-      <Header text='Hola ¿Qué compraras hoy?' />
+      <Header text='Hola ¿Qué comprarás hoy?' />
       <div className='header-bar-overlap'>
         <div className='header-actions'>
           <button className='sell-button'>Vender</button>
           <div className='search-box'>
-            <input
-              type='text'
-              placeholder='Buscar'
-            />
-            <img
-              src={SearchIcon}
-              alt='Search'
-            />
+            <input type='text' placeholder='Buscar' />
+            <img src={SearchIcon} alt='Search' />
           </div>
         </div>
       </div>
@@ -58,12 +83,12 @@ export default function Torta() {
       <div className='main-content'>
         <img
           className='product-image'
-          src='https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg'
-          alt='Torta'
+          src={producto?.imagen || 'https://via.placeholder.com/300'}
+          alt={producto?.nombre || 'Producto'}
         />
         <div className='product-info'>
           <div className='product-header'>
-            <h2>Torta</h2>
+            <h2>{producto?.nombre || 'Cargando...'}</h2>
             <img
               src={HeartIcon}
               alt='Heart'
@@ -73,27 +98,29 @@ export default function Torta() {
           </div>
 
           <p className='product-description'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-            ultrices, lorem ut dictum faucibus, tortor neque cursus arcu, at
-            scelerisque libero justo ut urna.
+            {producto?.descripcion || 'Esperando descripción del producto...'}
           </p>
 
           <div className='tags'>
-            {['Jamón', 'Asada', 'Chorizo'].map((meat) => (
-              <span
-                key={meat}
-                className={`meat-tag ${selectedMeat === meat ? 'selected' : ''}`}
-                onClick={() => setSelectedMeat(meat)}
-              >
-                {meat}
-              </span>
-            ))}
+            {producto?.opcionesCarne?.length ? (
+              producto.opcionesCarne.map((meat) => (
+                <span
+                  key={meat}
+                  className={`meat-tag ${
+                    selectedMeat === meat ? 'selected' : ''
+                  }`}
+                  onClick={() => setSelectedMeat(meat)}
+                >
+                  {meat}
+                </span>
+              ))
+            ) : (
+              <p className="no-options">Sin opciones disponibles</p>
+            )}
           </div>
 
           <div className='availability-box'>
-            <span className='availability-title'>
-              Horario de disponibilidad
-            </span>
+            <span className='availability-title'>Horario de disponibilidad</span>
             <div className='availability-days'>
               {days.map((day) => (
                 <button
@@ -118,30 +145,19 @@ export default function Torta() {
             </div>
           </div>
 
-                    <div className="price-contact">
-                        <span className="price">$45</span>
-                        <div className="button-wrapper">
-                            <Boton 
-                            color="green"
-                            text="Contactar con el vendedor" />
-                        </div>
-                    </div>
-                </div>
+          <div className='price-contact'>
+            <span className='price'>${producto?.precio ?? '...'}</span>
+            <div className='button-wrapper'>
+              <Boton color='green' text='Contactar con el vendedor' />
             </div>
+          </div>
+        </div>
+      </div>
 
       <div className='footer-icons'>
-        <img
-          src={HomeIcon}
-          alt='Home'
-        />
-        <img
-          src={HeartIcon}
-          alt='Favorites'
-        />
-        <img
-          src={UserRoundIcon}
-          alt='User'
-        />
+        <img src={HomeIcon} alt='Home' />
+        <img src={HeartIcon} alt='Favorites' />
+        <img src={UserRoundIcon} alt='User' />
       </div>
 
       <NavBar />
