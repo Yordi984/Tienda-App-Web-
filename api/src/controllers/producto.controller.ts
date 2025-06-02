@@ -4,7 +4,14 @@ import { Producto } from '../entities/producto.entity';
 
 export async function crearProducto(req: Request, res: Response) {
   try {
-    const { nombre, descripcion, disponibilidad, precio, vendedorId, whatsapp } = req.body;
+    const {
+      nombre,
+      descripcion,
+      disponibilidad,
+      precio,
+      vendedorId,
+      whatsapp,
+    } = req.body;
 
     const imagen = req.file?.filename; // nombre del archivo guardado
 
@@ -28,7 +35,6 @@ export async function crearProducto(req: Request, res: Response) {
   }
 }
 
-
 export function obtenerProductos(req: Request, res: Response) {
   const productoRepository = AppDataSource.getRepository('producto');
 
@@ -42,7 +48,11 @@ export function obtenerProductos(req: Request, res: Response) {
     )
     .getMany()
     .then((productos) => {
-      res.status(200).json(productos);
+      const parsedProducts = productos.map((producto) => {
+        producto.imagen = `${process.env.API_URL}/uploads/${producto.imagen}`;
+      });
+
+      res.status(200).json(parsedProducts);
     })
     .catch((error) => {
       console.error('Error fetching productos:', error);
