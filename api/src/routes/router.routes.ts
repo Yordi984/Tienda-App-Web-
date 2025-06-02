@@ -13,6 +13,7 @@ import {
   obtenerProductos,
   editarProducto,
   eliminarProducto,
+ obtenerProductoPorId
 } from "../controllers/producto.controller";
 
 import {
@@ -22,8 +23,11 @@ import {
   restablecerPassword,
 } from "../controllers/autenticacion.controller";
 
+import { upload } from '../middlewares/upload'; // ruta según tu estructura
 
-const upload = multer({ dest: 'uploads/' }); // Ajusta la configuración según tus necesidades
+
+
+
 
 const router = Router();
 //login para los 2 tipos de usuarios
@@ -40,7 +44,9 @@ router.post("/vendedor", crearVendedor);
 
 //producto routes
 router.post("/producto", upload.single('imagen'), crearProducto);
+
 router.get("/productos", obtenerProductos);
+router.get("/producto/:id", obtenerProductoPorId);
 router.put("/producto/:id", editarProducto);
 router.delete("/producto/:id", eliminarProducto);
 
