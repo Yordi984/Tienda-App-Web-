@@ -16,7 +16,7 @@ const NavBar: React.FC = () => {
             {/* Imagen del icono de casa. La ruta es relativa a la carpeta 'public'. */}
             <img
               src='/icons/house.svg'
-              alt='Home'
+              alt='Inicio'
               className={styles.navIcon}
             />
           </a>
@@ -25,13 +25,13 @@ const NavBar: React.FC = () => {
         <li className={styles.navItem}>
           {/* Enlace que lleva a la página de búsqueda */}
           <a
-            href='/search'
+            href='/busqueda'
             className={styles.navLink}
           >
             {/* Imagen del icono de búsqueda. La ruta es relativa a la carpeta 'public'. */}
             <img
               src='/icons/search.svg'
-              alt='Search'
+              alt='Búsqueda'
               className={styles.navIcon}
             />
           </a>
@@ -40,13 +40,13 @@ const NavBar: React.FC = () => {
         <li className={styles.navItem}>
           {/* Enlace que lleva a la página de favoritos */}
           <a
-            href='/favorites'
+            href='/favoritos'
             className={styles.navLink}
           >
             {/* Imagen del icono de corazón. La ruta es relativa a la carpeta 'public'. */}
             <img
               src='/icons/heart.svg'
-              alt='Favorites'
+              alt='Favoritos'
               className={styles.navIcon}
             />
           </a>
@@ -55,13 +55,13 @@ const NavBar: React.FC = () => {
         <li className={styles.navItem}>
           {/* Enlace que lleva a la página de perfil */}
           <a
-            href='/profile'
+            href='/perfil'
             className={styles.navLink}
           >
             {/* Imagen del icono de usuario. La ruta es relativa a la carpeta 'public'. */}
             <img
               src='/icons/user-round.svg'
-              alt='Profile'
+              alt='Perfil'
               className={styles.navIcon}
             />
           </a>

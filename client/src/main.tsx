@@ -16,6 +16,7 @@ import Favoritos from './pages/favoritos/Favoritos.tsx';
 import Crear_vendedor from './pages/crear_cuentas/crear_vendedor.tsx';
 import CrearComprador from './pages/crear_cuentas/crear_comprador.tsx';
 import ElegirCuenta from './pages/crear_cuentas/elegir_cuenta.tsx';
+import Productos from './pages/productos/Productos.tsx';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -54,10 +55,9 @@ createRoot(document.getElementById('root')!).render(
         path='/elegir_cuenta'
         element={<ElegirCuenta/>} />
 
-     
-     
-      
-       
+      <Route
+        path='/productos'
+        element={<Productos />} />
     </Routes>
   </BrowserRouter>,
 );

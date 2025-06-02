@@ -1,0 +1,44 @@
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.productCard {
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.productImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.productInfo {
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4caf50;
+  color: white;
+  height: 40px;
+}
+
+.productName {
+  font-weight: bold;
+}
+
+.priceLike {
+  display: flex;
+  align-items: center;
+}
+
+.price {
+  color: white;
+  margin-left: 5px;
+  font-weight: bold;
+}
