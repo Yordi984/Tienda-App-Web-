@@ -1,12 +1,11 @@
 import { createRoot } from 'react-dom/client';
-import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import App from './App.tsx';
+import './index.css';
 import Login from './pages/Login/Login.tsx';
-import Torta from "./pages/torta/Torta.tsx"
 import Recuperacion from './pages/recuperar_contraseña/Recuperacion.tsx';
 import ResetPassword from './pages/recuperar_contraseña/RestablecerPassword.tsx';
-import ChatPage from './pages/ChatPage.tsx';
+import Torta from './pages/torta/Torta.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -21,17 +20,18 @@ createRoot(document.getElementById('root')!).render(
       />
       <Route
         path='/Torta'
-        element={<Torta/>} />
+        element={<Torta />}
+      />
 
-      <Route path="/chat" element={<ChatPage />} />
+      <Route
+        path='/Recuperacion'
+        element={<Recuperacion />}
+      />
 
-        <Route
-          path='/Recuperacion'
-        element={<Recuperacion/>} />
-
-       <Route path="/restablecer/:token" element={<ResetPassword />} />
-
-       
+      <Route
+        path='/restablecer/:token'
+        element={<ResetPassword />}
+      />
     </Routes>
   </BrowserRouter>,
 );
