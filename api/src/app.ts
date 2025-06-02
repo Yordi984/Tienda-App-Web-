@@ -1,32 +1,29 @@
-import express from "express";
-import morgan from "morgan";
-import cors from "cors";
-import session from "express-session";
-import passport from "./config/passport";
-import Router from "./routes/router.routes";
+import cors from 'cors';
+import express from 'express';
+import session from 'express-session';
+import morgan from 'morgan';
 import path from 'path';
-import { Request, Response } from "express";
+import passport from './config/passport';
+import Router from './routes/router.routes';
 
 const app = express();
 
 app.use(cors());
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 app.use(express.json());
 
 app.use(
   session({
-    secret: "secreto123",
+    secret: 'secreto123',
     resave: false,
     saveUninitialized: false,
-  })
+  }),
 );
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(Router);
-
-
 
 export default app;
