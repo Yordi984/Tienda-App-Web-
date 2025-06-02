@@ -5,6 +5,9 @@ import Navbar from './components/ui/Navbar';
 // import InputComponent from "./components/ui/InputComponent";
 // import ProductCard from "./components/ui/ProductCard";
 
+
+
+
 function App() {  
   return (
     <>
@@ -34,7 +37,12 @@ function App() {
         onClick={() => console.log("Producto clickeado")}
       />
       <Navbar /> */}
-
+      
+      {/* Aquí puedes agregar más componentes según sea necesario */}
+      {/* Por ejemplo, si tienes un componente de productos o una lista de productos */}
+      {/* <ProductList /> */}
+       
+      
       <Navbar />
 
       
