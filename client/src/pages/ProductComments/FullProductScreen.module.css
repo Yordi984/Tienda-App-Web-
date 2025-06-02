@@ -1,0 +1,21 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column; /* Apila los elementos (header, main, footer) verticalmente */
+  min-height: 100vh; /* Asegura que la página ocupe al menos el 100% de la altura del viewport */
+  background-color: #333; /* El fondo gris oscuro de la imagen (fuera de la barra verde y el contenido blanco) */
+  box-sizing: border-box;
+}
+
+.mainContent {
+  flex-grow: 1; /* Permite que el contenido principal (ProductDetailPage) ocupe todo el espacio vertical restante */
+  background-color: white; /* El fondo blanco para el área de contenido */
+  /* El padding y el maxWidth del contenido interno (imagen, descripción, comentarios)
+     ya están definidos en ProductDetailPage.tsx mediante estilos inline, o en sus propios módulos CSS.
+     Si necesitas un padding o max-width general para este fondo blanco, puedes añadirlo aquí: */
+  /* padding: 20px; */
+  /* max-width: 900px; */
+  /* margin: 0 auto; */
+}
+
+/* No necesitas estilos específicos para el HeaderProductDetail o Navbar aquí,
+   ya que sus propios archivos .module.css y sus componentes los manejan. */
