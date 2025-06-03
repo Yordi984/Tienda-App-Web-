@@ -18,7 +18,7 @@ import {
 } from "../controllers/producto.controller";
 
 import {
-  registrarComprador,
+ 
   registrarVendedor,
   solicitarRecuperacion,
   restablecerPassword,
@@ -55,7 +55,7 @@ router.delete("/producto/:id", eliminarProducto);
 
 //passpot local
 
-router.post("/registrar/comprador", registrarComprador);
+
 router.post("/registrar/vendedor", registrarVendedor);
 router.post("/recuperar", solicitarRecuperacion);
 router.post("/restablecer/:token", restablecerPassword);

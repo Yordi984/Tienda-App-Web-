@@ -15,22 +15,28 @@ export class Producto {
   id: number;
 
   @Column()
-  nombre: string;
+  nombre!: string;
 
   @Column()
-  descripcion: string;
+  descripcion!: string;
 
   @Column()
-  disponibilidad: string;
+  disponibilidad!: string;
 
   @Column()
-  precio: number;
+  precio!: number;
 
   @Column({nullable: true})
   whatsapp:string;
 
   @Column()
   imagen?: string;
+
+  // @Column!({ nullable: true })
+  // categoria: {comida: string, bebida: string, ropa: string, tecnologia: string, hogar: string, otros: string};
+
+  @Column({ nullable: true })
+  favoritos?: boolean;
 
   @ManyToOne(() => Vendedor, (vendedor) => vendedor.productos)
   vendedor: Vendedor;
