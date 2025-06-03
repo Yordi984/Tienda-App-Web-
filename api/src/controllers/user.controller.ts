@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { AppDataSource } from '../db';
-import { Comprador, Vendedor } from '../entities';
+import {Vendedor } from '../entities';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_default_secret'; // Replace with your actual secret or ensure env variable is set
 
@@ -39,32 +39,6 @@ export async function iniciarSesion(req: Request, res: Response): Promise<void> 
   }
 
   try {
-    const compradorRepo = AppDataSource.getRepository(Comprador);
-    const comprador = await compradorRepo.findOne({ where: { correo } });
-
-    if (comprador) {
-      const match = await bcrypt.compare(password, comprador.password);
-      if (!match) {
-        res.status(401).json({ message: 'Credenciales inválidas' });
-        return;
-      }
-
-      const payload = {
-        id: comprador.id,
-        nombre: comprador.nombre,
-        tipo: 'comprador',
-      };
-
-      const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '2h' });
-
-      res.status(200).json({
-        message: 'Inicio de sesión exitoso',
-        token,
-        usuario: payload,
-      });
-      return;
-    }
-
     const vendedorRepo = AppDataSource.getRepository(Vendedor);
     const vendedor = await vendedorRepo.findOne({ where: { correo } });
 
@@ -98,3 +72,4 @@ export async function iniciarSesion(req: Request, res: Response): Promise<void> 
     res.status(500).json({ message: 'Error del servidor' });
   }
 }
+

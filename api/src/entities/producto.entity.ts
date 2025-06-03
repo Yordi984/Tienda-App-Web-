@@ -9,28 +9,43 @@ import { Compra } from './compra.entity';
 import { Opciones } from './opciones.entity';
 import { Vendedor } from './vendedor.entity';
 
+enum categoria {
+  comida = 'comida',
+  ropa = 'ropa',
+  tecnologia = 'tecnologia',
+  accesorios = 'accesorios',
+  otros = 'otros',
+}
+
 @Entity()
 export class Producto {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  nombre: string;
+  nombre!: string;
 
   @Column()
-  descripcion: string;
+  descripcion!: string;
 
   @Column()
-  disponibilidad: string;
+  disponibilidad!: string;
 
   @Column()
-  precio: number;
+  precio!: number;
 
   @Column({nullable: true})
   whatsapp:string;
 
   @Column()
   imagen?: string;
+
+  @Column({
+    type: 'enum',
+    enum: categoria, 
+    default: categoria.otros,})
+  categoria: categoria;
+  
 
   @ManyToOne(() => Vendedor, (vendedor) => vendedor.productos)
   vendedor: Vendedor;

@@ -1,23 +1,23 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Compra } from './compra.entity';
+// import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+// import { Compra } from './compra.entity';
 
-@Entity()
-export class Comprador {
-  @PrimaryGeneratedColumn()
-  id: number;
+// @Entity()
+// export class Comprador {
+//   @PrimaryGeneratedColumn()
+//   id: number;
 
-  @Column()
-  nombre: string;
+//   @Column()
+//   nombre: string;
 
-  @Column()
-  telefono: string;
+//   @Column()
+//   telefono: string;
 
-  @Column()
-  correo: string;
+//   @Column()
+//   correo: string;
 
-  @Column()
-  password: string;
+//   @Column()
+//   password: string;
 
-  @OneToMany(() => Compra, (compra) => compra.comprador)
-  compras: Compra[];
-}
+//   @OneToMany(() => Compra, (compra) => compra.comprador)
+//   compras: Compra[];
+// }
