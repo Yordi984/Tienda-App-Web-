@@ -143,7 +143,8 @@ export default function Torta() {
                 text='Contactar con el vendedor'
                 onClick={() =>
                   producto?.whatsapp &&
-                  window.open(`https://wa.me/52${producto.whatsapp}`, '_blank')
+                  window.open(`https://wa.me/529981893144`, '_blank')
+                  // ${producto.whatsapp}
                 }
               />
             </div>

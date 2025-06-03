@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
         <li className={styles.navItem}>
           {/* Enlace que lleva a la página de búsqueda */}
           <a
-            href='/busqueda'
+            href='/productos'
             className={styles.navLink}
           >
             {/* Imagen del icono de búsqueda. La ruta es relativa a la carpeta 'public'. */}
@@ -55,7 +55,7 @@ const NavBar: React.FC = () => {
         <li className={styles.navItem}>
           {/* Enlace que lleva a la página de perfil */}
           <a
-            href='/misproductos'
+            href='/perfil'
             className={styles.navLink}
           >
             {/* Imagen del icono de usuario. La ruta es relativa a la carpeta 'public'. */}

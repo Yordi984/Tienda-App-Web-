@@ -37,6 +37,9 @@ export default function HeaderWithSearchbar({
         </div>
 
         <ButtonComponent
+          onClick={()=> {
+            window.location.href = '/CrearProductos';
+          }}
           text='Vender'
           color='green'
         />
