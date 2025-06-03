@@ -4,10 +4,12 @@ import SearchBar from './ui/SearchBar';
 
 interface HeaderWithSearchbarProps {
   title: string;
+  onSearch?: (searchTerm: string) => void;
 }
 
 export default function HeaderWithSearchbar({
   title,
+  onSearch,
 }: HeaderWithSearchbarProps) {
   return (
     <header className={styles.header}>
@@ -41,7 +43,7 @@ export default function HeaderWithSearchbar({
 
         <SearchBar
           placeholder='Buscar'
-          onSearch={() => {}}
+          onSearch={(searchTerm) => onSearch?.(searchTerm)}
         />
       </div>
     </header>

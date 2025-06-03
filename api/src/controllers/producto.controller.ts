@@ -38,23 +38,21 @@ export async function crearProducto(req: Request, res: Response) {
 export function obtenerProductos(req: Request, res: Response) {
   const productoRepository = AppDataSource.getRepository('producto');
 
-  const searchQuery = req.query.search;
+  const searchQuery = req.query.q;
 
   productoRepository
     .createQueryBuilder('producto')
     .where(
-      'producto.nombre LIKE :search OR producto.descripcion LIKE :search',
+      'LOWER(producto.nombre) LIKE LOWER(:search) OR LOWER(producto.descripcion) LIKE LOWER(:search)',
       { search: `%${searchQuery || ''}%` },
     )
     .getMany()
     .then((productos) => {
       const parsedProducts = productos.map((producto) => {
-       producto.imagen = `${process.env.API_URL}uploads/${producto.imagen.replace(/^\/+/, '')}`;
+        producto.imagen = `${process.env.API_URL}uploads/${producto.imagen.replace(/^\/+/, '')}`;
 
-        return producto
+        return producto;
       });
-
-  
 
       res.status(200).json(parsedProducts);
     })
