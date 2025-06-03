@@ -29,8 +29,7 @@ export default function Login() {
       } else {
         console.warn('No se recibió vendedorId del servidor.');
       }
-
-      window.location.href = '/CrearProductos';
+        window.location.href = '/productos';
     } else {
       alert('Error: ' + (data.message || 'Credenciales incorrectas'));
     }
