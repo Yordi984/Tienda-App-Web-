@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Producto } from './producto.entity';
 
 @Entity()
@@ -18,7 +25,11 @@ export class Vendedor {
   @Column()
   password: string;
 
-  // Un vendedor tiene muchos productos
   @OneToMany(() => Producto, (producto) => producto.vendedor)
   productos: Producto[];
+
+  // 🧡 Relación muchos a muchos con productos favoritos
+  @ManyToMany(() => Producto)
+  @JoinTable()
+  favoritos: Producto[];
 }

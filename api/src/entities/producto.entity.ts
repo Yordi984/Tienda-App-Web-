@@ -9,6 +9,14 @@ import { Compra } from './compra.entity';
 import { Opciones } from './opciones.entity';
 import { Vendedor } from './vendedor.entity';
 
+enum categoria {
+  comida = 'comida',
+  ropa = 'ropa',
+  tecnologia = 'tecnologia',
+  accesorios = 'accesorios',
+  otros = 'otros',
+}
+
 @Entity()
 export class Producto {
   @PrimaryGeneratedColumn()
@@ -32,11 +40,12 @@ export class Producto {
   @Column()
   imagen?: string;
 
-  // @Column!({ nullable: true })
-  // categoria: {comida: string, bebida: string, ropa: string, tecnologia: string, hogar: string, otros: string};
-
-  @Column({ nullable: true })
-  favoritos?: boolean;
+  @Column({
+    type: 'enum',
+    enum: categoria, 
+    default: categoria.otros,})
+  categoria: categoria;
+  
 
   @ManyToOne(() => Vendedor, (vendedor) => vendedor.productos)
   vendedor: Vendedor;
