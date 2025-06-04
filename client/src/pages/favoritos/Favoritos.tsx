@@ -1,38 +1,49 @@
-'use client';
-
 import { useEffect, useState } from 'react';
+import HeaderWithSearchbar from '../../components/HeaderWithSearchbar';
 import ProductCard from '../../components/ProductCard';
-import HeaderComponent from '../../components/ui/HeaderComponent';
-import Navar from '../../components/ui/Navbar';
-import { changeFavorite } from '../../services/api/products';
+import NavBar from '../../components/ui/Navbar';
+import { changeFavorite, getProducts } from '../../services/api/products';
 import type { Product } from '../../types';
+import styles from './Favoritos.module.css';
 
-export default function MisProductos() {
-  const [productos, setProductos] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+export default function Productos() {
+  const [searchTerm, setSearchTerm] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
 
   const vendedorId = localStorage.getItem('vendedorId');
 
-  useEffect(() => {
-    if (!vendedorId) {
-      setError('No se encontró el ID del vendedor.');
-      setLoading(false);
-      return;
-    }
+  const categories = [
+    { label: 'Comida', value: 'comida' },
+    { label: 'Ropa', value: 'ropa' },
+    { label: 'Tecnología', value: 'tecnologia' },
+    { label: 'Accesorios', value: 'accesorios' },
+    { label: 'Otros', value: 'otros' },
+  ];
 
-    fetch(`http://localhost:3000/mis-favoritos/${vendedorId}`)
-      .then((res) => {
-        if (!res.ok) throw new Error('Error al obtener productos');
-        return res.json();
+  useEffect(() => {
+    getProducts({
+      searchTerm: searchTerm ?? undefined,
+      category: selectedCategory ?? undefined,
+    })
+      .then((data) => {
+        setProducts(data);
       })
-      .then((data) => setProductos(data.favoritos ?? data))
-      .catch((err) => {
-        console.error(err);
-        setError('Error al cargar productos.');
-      })
-      .finally(() => setLoading(false));
-  }, [vendedorId]);
+      .catch((error) => {
+        console.error('Error fetching products:', error);
+        setProducts([]);
+      });
+  }, [searchTerm, selectedCategory]);
+
+  const handleSearch = (searchTerm: string) => {
+    setSearchTerm(searchTerm);
+    console.log(`Search term updated: ${searchTerm}`);
+  };
+
+  const handleFilter = (category: string) => {
+    setSelectedCategory(category);
+    console.log(`Category selected: ${category}`);
+  };
 
   const handleFavorite = (product: Product) => {
     changeFavorite(product, () => {
@@ -41,37 +52,37 @@ export default function MisProductos() {
   };
 
   return (
-    <div className='p-4'>
-      <HeaderComponent text='Mis Favoritos' />
+    <div>
+      <HeaderWithSearchbar
+        title='Hola, ¿qué comprarás hoy?'
+        categories={categories}
+        onSearch={handleSearch}
+        onFilter={handleFilter}
+      />
 
-      {loading && <p>Cargando productos...</p>}
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-        {!loading && !error && productos.length === 0 && (
-          <p style={{ display: 'flex', justifyItems: 'center' }}>
-            No tienes productos favoritos
-          </p>
-        )}
-        {productos.map((producto) => (
+      <div className={styles.productGrid}>
+        {products.map((product) => (
           <ProductCard
-            key={producto.id}
-            product={producto}
+            key={product.id}
+            product={product}
           >
             <ProductCard.Image
-              product={producto}
-              src={producto.imagen}
-              alt={producto.nombre}
+              product={product}
+              src={product.imagen}
+              alt={product.nombre}
             />
             <ProductCard.InfoWithLikeIcon
-              product={producto}
-              isFavorite
-              onFavorite={() => handleFavorite(producto)}
+              product={product}
+              isFavorite={product.vendedoresFavoritos.some(
+                (vendedor) => vendedor.id === parseInt(vendedorId || '', 10),
+              )}
+              onFavorite={() => handleFavorite(product)}
             />
           </ProductCard>
         ))}
       </div>
-      <Navar />
+
+      <NavBar />
     </div>
   );
 }
