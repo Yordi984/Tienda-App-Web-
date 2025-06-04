@@ -51,7 +51,6 @@ export function obtenerMisFavoritosVendedor(req: Request, res: Response) {
     .findOne({
       where: { id: vendedorId },
       relations: {
-        vendedor: { id: vendedorId },
         favoritos: true,
       },
     })
