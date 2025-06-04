@@ -18,17 +18,16 @@ export default function ChipGroup({ chips, onClick }: ChipGroupProps) {
   };
 
   return (
-    <ul className={styles.headerCategories__categoriesList}>
+    <div className={styles.headerCategories__categoriesList}>
       {chips.map((chip) => (
-        <li key={chip.value}>
-          <Chip
-            active={selectedChip === chip.value}
-            onClick={() => handleChipClick(chip.value)}
-          >
-            {chip.label}
-          </Chip>
-        </li>
+        <Chip
+          key={chip.value}
+          active={selectedChip === chip.value}
+          onClick={() => handleChipClick(chip.value)}
+        >
+          {chip.label}
+        </Chip>
       ))}
-    </ul>
+    </div>
   );
 }
