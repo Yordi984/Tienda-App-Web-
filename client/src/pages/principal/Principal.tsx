@@ -18,7 +18,7 @@ export default function Home() {
           <div className='home-buttons'>
             <button
               className='home-btn'
-              onClick={() => navigate('/elegir_cuenta')}
+              onClick={() => navigate('/crear_vendedor')}
             >
               Comenzar ahora
             </button>

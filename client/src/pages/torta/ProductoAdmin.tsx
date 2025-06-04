@@ -89,7 +89,7 @@ export default function Torta() {
 
       if (res.ok) {
         alert('Producto eliminado correctamente');
-        window.location.href = '/misproductos'; // Redirigir a la lista de productos
+        window.location.href = '/mis_productos'; 
       } else {
         alert('Hubo un error al eliminar el producto');
       }

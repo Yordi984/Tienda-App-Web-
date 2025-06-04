@@ -130,7 +130,7 @@ export default function EditarProducto() {
       }
 
       alert("✅ Producto actualizado correctamente.")
-      navigate("/mis-productos")
+      navigate("/mis_productos")
     } catch (error) {
       console.error(error)
       alert("❌ Error al actualizar el producto.")

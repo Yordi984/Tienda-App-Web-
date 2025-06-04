@@ -5,6 +5,7 @@ import Boton from "../../components/ui/ButtonComponent";
 import NavBar from "../../components/ui/Navbar";
 import "./CrearProductos.css";
 
+
 const categorias = [
   "comida",
   "ropa",
@@ -105,7 +106,7 @@ export default function CrearProductos() {
 
       if (res.ok) {
         alert("✅ Producto creado correctamente");
-        // Opcional: limpiar formulario o redirigir
+        window.location.href = "/mis_productos"
       } else {
         alert("❌ Error: " + (responseBody.message || "No se pudo crear el producto"));
       }
