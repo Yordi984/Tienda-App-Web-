@@ -1,10 +1,10 @@
 import {
   Column,
   Entity,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
 } from 'typeorm';
 import { Producto } from './producto.entity';
 
@@ -29,7 +29,7 @@ export class Vendedor {
   productos: Producto[];
 
   // 🧡 Relación muchos a muchos con productos favoritos
-  @ManyToMany(() => Producto)
+  @ManyToMany(() => Producto, (producto) => producto.vendedoresFavoritos)
   @JoinTable()
   favoritos: Producto[];
 }

@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -34,21 +35,21 @@ export class Producto {
   @Column()
   precio!: number;
 
-  @Column({nullable: true})
-  whatsapp:string;
+  @Column({ nullable: true })
+  whatsapp: string;
 
   @Column()
   imagen?: string;
 
   @Column({
     type: 'enum',
-    enum: categoria, 
-    default: categoria.otros,})
+    enum: categoria,
+    default: categoria.otros,
+  })
   categoria: categoria;
 
-  @Column({nullable: true, default:false})
-  favoritos?:boolean;
-  
+  // @Column({nullable: true, default:false})
+  // favoritos?:boolean;
 
   @ManyToOne(() => Vendedor, (vendedor) => vendedor.productos)
   vendedor: Vendedor;
@@ -58,4 +59,8 @@ export class Producto {
 
   @OneToMany(() => Compra, (compra) => compra.producto)
   compras: Compra[];
+
+  // 🧡 Relación muchos a muchos con productos favoritos
+  @ManyToMany(() => Vendedor, (vendedor) => vendedor.favoritos)
+  vendedoresFavoritos: Vendedor[];
 }
