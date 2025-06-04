@@ -8,6 +8,6 @@ export interface Product {
   precio: number;
   whatsapp: number;
   imagen?: string;
-  favoritos: Vendedor[];
+  vendedoresFavoritos: Vendedor[];
   vendedor: Vendedor;
 }

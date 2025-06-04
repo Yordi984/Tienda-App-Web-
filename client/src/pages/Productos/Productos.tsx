@@ -12,6 +12,8 @@ export default function Productos() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
 
+  const vendedorId = localStorage.getItem('vendedorId');
+
   const categories = [
     { label: 'Comida', value: 'comida' },
     { label: 'Ropa', value: 'ropa' },
@@ -90,7 +92,9 @@ export default function Productos() {
             />
             <ProductCard.InfoWithLikeIcon
               product={product}
-              isFavorite={product.id === 3}
+              isFavorite={product.vendedoresFavoritos.some(
+                (vendedor) => vendedor.id === parseInt(vendedorId || '', 10),
+              )}
               onFavorite={() => handleFavorite(product)}
             />
           </ProductCard>
