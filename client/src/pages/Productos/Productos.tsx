@@ -74,19 +74,24 @@ export default function Productos() {
 
       <div className={styles.productGrid}>
         {products.map((product) => (
-          <Link
-            to={`/producto/${product.id}`}
+          <div
+            className={styles.productCardContainer}
             key={product.id}
-            className={styles.productCard}
           >
-            <img
-              className={styles.productImage}
-              src={product.imagen || placeholderImage}
-              onError={(e) => {
-                e.currentTarget.src = placeholderImage;
-              }}
-              alt={product.nombre}
-            />
+            <Link
+              to={`/producto/${product.id}`}
+              className={styles.productCard}
+            >
+              <img
+                className={styles.productImage}
+                src={product.imagen || placeholderImage}
+                onError={(e) => {
+                  e.currentTarget.src = placeholderImage;
+                }}
+                alt={product.nombre}
+              />
+            </Link>
+
             <div className={styles.productInfo}>
               <span className={styles.productName}>{product.nombre}</span>
               <div className={styles.priceLike}>
@@ -94,7 +99,7 @@ export default function Productos() {
                 <span className={styles.price}>{product.precio}</span>
               </div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
 
