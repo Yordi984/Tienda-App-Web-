@@ -28,6 +28,7 @@ export default function Crear_vendedor() {
 
       if (res.ok) {
         alert("✅ Cuenta creada con éxito");
+    window.location.href = "/productos";
       } else {
         alert("❌ " + (data.message || "Error al crear cuenta"));
       }

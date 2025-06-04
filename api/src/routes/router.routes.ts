@@ -1,10 +1,11 @@
 
 import { Router } from "express";
-import { crearComprador, iniciarSesion } from "../controllers/user.controller";
+import { crearComprador, iniciarSesion, editarUsuario, eliminarUsuario,obtenerInfoDeUsuario } from "../controllers/user.controller";
 import multer from "multer";
 
 import {
   crearVendedor,
+
 
  
 } from "../controllers/vendedor.controller";
@@ -68,4 +69,10 @@ router.post("/restablecer/:token", restablecerPassword);
 
 router.post("/favorito/:productoId", Favorito);
 router.get("/mis-favoritos/:vendedorId", obtenerMisFavoritos);
+
+
+//crud usuario
+router.get("/perfil", obtenerInfoDeUsuario)
+router.put("/perfiledit", editarUsuario)
+router.delete("/perfil/:id", eliminarUsuario)
 export default router;

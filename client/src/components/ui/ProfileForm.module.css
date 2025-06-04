@@ -1,0 +1,45 @@
+.formContainer {
+  /* Contenedor principal del formulario */
+  width: 100%;
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  position: relative; /* Importante para posicionar la notificación si quisieras que fuera flotante */
+}
+
+.buttonGroup {
+  /* Contenedor para los botones de acción */
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.buttonGroup :global(.button) {
+  flex: 1;
+  max-width: 200px;
+}
+
+/* --- Estilos para la Notificación --- */
+.notification {
+  /* Estilos base de la notificación */
+  padding: 12px 20px;
+  margin-bottom: 20px; /* Margen debajo de la notificación */
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.5s ease-out; /* Transición suave para el desvanecimiento */
+}
+
+.notification.success {
+  /* Estilo para notificaciones de éxito (verde) */
+  background-color: rgba(25, 196, 100, 0.8); /* Verde con opacidad */
+  color: white;
+}
+
+.notification.error {
+  /* Estilo para notificaciones de error (rojo) */
+  background-color: rgba(255, 48, 2, 0.8); /* Rojo con opacidad */
+  color: white;
+}

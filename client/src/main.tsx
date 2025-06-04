@@ -20,7 +20,7 @@ import Productos from './pages/Productos/Productos.tsx';
 import ProductoAdmin from './pages/torta/ProductoAdmin.tsx'; 
 import EditarProducto from './pages/Productos/EditarProducto.tsx'; 
 import Mis_productos from './pages/mis_productos/mis_productos.tsx';
-
+import PerfilY from "./pages/perfilY/Perfil.tsx"
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -77,6 +77,14 @@ createRoot(document.getElementById('root')!).render(
         path='/editar-producto/:id'
         element={<EditarProducto />}
       />
+
+    <Route
+        path='/PerfilY'
+        element={<PerfilY />}
+      />
+
+
+    
 
     </Routes>
   </BrowserRouter>,
