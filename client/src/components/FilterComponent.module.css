@@ -1,0 +1,12 @@
+.headerCategories {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 1400px) {
+  .headerCategories {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
