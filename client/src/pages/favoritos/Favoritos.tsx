@@ -1,68 +1,74 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
-import HeaderComponent from "../../components/ui/HeaderComponent";
-import CardUser from "../../components/ui/CardUser"; 
-import Navar from "../../components/ui/Navbar"
-
-
-interface Producto {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  precio: number;
-  imagen: string;
-}
+import { useEffect, useState } from 'react';
+import ProductCard from '../../components/ProductCard';
+import HeaderComponent from '../../components/ui/HeaderComponent';
+import Navar from '../../components/ui/Navbar';
+import { changeFavorite } from '../../services/api/products';
+import type { Product } from '../../types';
 
 export default function MisProductos() {
-  const [productos, setProductos] = useState<Producto[]>([]);
+  const [productos, setProductos] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
+
+  const vendedorId = localStorage.getItem('vendedorId');
 
   useEffect(() => {
-    const vendedorId = localStorage.getItem("vendedorId");
-
     if (!vendedorId) {
-      setError("No se encontró el ID del vendedor.");
+      setError('No se encontró el ID del vendedor.');
       setLoading(false);
       return;
     }
 
     fetch(`http://localhost:3000/mis-favoritos/${vendedorId}`)
       .then((res) => {
-        if (!res.ok) throw new Error("Error al obtener productos");
+        if (!res.ok) throw new Error('Error al obtener productos');
         return res.json();
       })
-      .then((data) => setProductos(data.favoritos ?? data)) 
+      .then((data) => setProductos(data.favoritos ?? data))
       .catch((err) => {
         console.error(err);
-        setError("Error al cargar productos.");
+        setError('Error al cargar productos.');
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [vendedorId]);
+
+  const handleFavorite = (product: Product) => {
+    changeFavorite(product, () => {
+      window.location.reload();
+    });
+  };
 
   return (
-    <div className="p-4">
-      <HeaderComponent text="Mis Favoritos" />
+    <div className='p-4'>
+      <HeaderComponent text='Mis Favoritos' />
 
       {loading && <p>Cargando productos...</p>}
-      {error && <p style={{ color: "red" }}>Error: {error}</p>}
+      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
         {!loading && !error && productos.length === 0 && (
-          <p style={{display:"flex", justifyItems:"center" }} >No tienes productos favoritos</p>
+          <p style={{ display: 'flex', justifyItems: 'center' }}>
+            No tienes productos favoritos
+          </p>
         )}
         {productos.map((producto) => (
-          <CardUser
+          <ProductCard
             key={producto.id}
-            imageUrl={producto.imagen}
-            altText={producto.nombre}
-            productName={producto.nombre}
-            productPrice={producto.precio}
-            onClick={() => navigate(`/producto-admin/${producto.id}`)}
-          />
+            product={producto}
+          >
+            <ProductCard.Image
+              product={producto}
+              src={producto.imagen}
+              alt={producto.nombre}
+            />
+            <ProductCard.InfoWithLikeIcon
+              product={producto}
+              isFavorite
+              onFavorite={() => handleFavorite(producto)}
+            />
+          </ProductCard>
         ))}
       </div>
       <Navar />
