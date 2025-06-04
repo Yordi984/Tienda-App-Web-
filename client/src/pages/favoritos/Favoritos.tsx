@@ -1,31 +1,71 @@
-import React from 'react';
-import './Favoritos.css'; // CSS xd
-import NavBar from '../../components/ui/Navbar';
-import HeaderComponent from '../../components/ui/HeaderComponent';
+"use client";
 
-function Favoritos() {
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate
+import HeaderComponent from "../../components/ui/HeaderComponent";
+import CardUser from "../../components/ui/CardUser"; 
+import Navar from "../../components/ui/Navbar"
+
+
+interface Producto {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  precio: number;
+  imagen: string;
+}
+
+export default function MisProductos() {
+  const [productos, setProductos] = useState<Producto[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const vendedorId = localStorage.getItem("vendedorId");
+
+    if (!vendedorId) {
+      setError("No se encontró el ID del vendedor.");
+      setLoading(false);
+      return;
+    }
+
+    fetch(`http://localhost:3000/mis-favoritos/${vendedorId}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al obtener productos");
+        return res.json();
+      })
+      .then((data) => setProductos(data.favoritos ?? data)) 
+      .catch((err) => {
+        console.error(err);
+        setError("Error al cargar productos.");
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
-    <div className="favorites-page">
-      <HeaderComponent text='Favoritos' />
+    <div className="p-4">
+      <HeaderComponent text="Mis Favoritos" />
 
-      <main className="favorites-content">
-        {/* Aquí iría la lista de productos favoritos */}
-        <div className="favorite-item">
-          <img src="/torta.jpeg" alt="Torta" className="item-image" />
-          <div className="item-details">
-            <h2>Torta</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies, lorem ut dictum faucibus, tortor neque cursus arcu, at scelerisque libero justo ut urna.</p>
-            <span className="item-price">$45</span>
-            <button className="remove-button">Eliminar de favoritos</button>
-          </div>
-        </div>
+      {loading && <p>Cargando productos...</p>}
+      {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
-        {/* Puedes repetir el bloque .favorite-item para cada producto favorito */}
-      </main>
-
-      <NavBar />
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+        {!loading && !error && productos.length === 0 && (
+          <p style={{display:"flex", justifyItems:"center" }} >No tienes productos favoritos</p>
+        )}
+        {productos.map((producto) => (
+          <CardUser
+            key={producto.id}
+            imageUrl={producto.imagen}
+            altText={producto.nombre}
+            productName={producto.nombre}
+            productPrice={producto.precio}
+            onClick={() => navigate(`/producto-admin/${producto.id}`)}
+          />
+        ))}
+      </div>
+      <Navar />
     </div>
   );
 }
-
-export default Favoritos; 
