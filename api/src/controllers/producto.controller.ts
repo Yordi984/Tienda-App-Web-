@@ -72,6 +72,7 @@ export function obtenerProductos(req: Request, res: Response) {
           ? (category as string)
           : null,
     })
+    .orderBy('producto.id', 'ASC')
     .getMany()
     .then((productos) => {
       const parsedProducts = productos.map((producto) => {
