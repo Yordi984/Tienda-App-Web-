@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import HeaderWithSearchbar from '../../components/HeaderWithSearchbar';
 import ProductCard from '../../components/ProductCard';
 import NavBar from '../../components/ui/Navbar';
-import { changeFavorite, getProducts } from '../../services/api/products';
+import {
+  changeFavorite,
+  getFavoriteProducts,
+} from '../../services/api/products';
 import type { Product } from '../../types';
 import styles from './Favoritos.module.css';
 
@@ -22,18 +25,20 @@ export default function Productos() {
   ];
 
   useEffect(() => {
-    getProducts({
-      searchTerm: searchTerm ?? undefined,
-      category: selectedCategory ?? undefined,
-    })
-      .then((data) => {
-        setProducts(data);
+    if (vendedorId) {
+      getFavoriteProducts(parseInt(vendedorId, 10), {
+        searchTerm: searchTerm ?? undefined,
+        category: selectedCategory ?? undefined,
       })
-      .catch((error) => {
-        console.error('Error fetching products:', error);
-        setProducts([]);
-      });
-  }, [searchTerm, selectedCategory]);
+        .then((data) => {
+          setProducts(data);
+        })
+        .catch((error) => {
+          console.error('Error fetching products:', error);
+          setProducts([]);
+        });
+    }
+  }, [vendedorId, searchTerm, selectedCategory]);
 
   const handleSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
@@ -73,9 +78,7 @@ export default function Productos() {
             />
             <ProductCard.InfoWithLikeIcon
               product={product}
-              isFavorite={product.vendedoresFavoritos.some(
-                (vendedor) => vendedor.id === parseInt(vendedorId || '', 10),
-              )}
+              isFavorite
               onFavorite={() => handleFavorite(product)}
             />
           </ProductCard>
