@@ -50,7 +50,10 @@ export function obtenerMisFavoritosVendedor(req: Request, res: Response) {
   vendorRepository
     .findOne({
       where: { id: vendedorId },
-      relations: { favoritos: true },
+      relations: {
+        vendedor: { id: vendedorId },
+        favoritos: true,
+      },
     })
     .then((vendedor) => {
       if (!vendedor) {
