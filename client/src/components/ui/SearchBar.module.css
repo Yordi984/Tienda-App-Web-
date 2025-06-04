@@ -2,6 +2,7 @@
   /* Contenedor principal de la barra de búsqueda */
   display: flex; /* Para alinear el input y el botón/icono */
   align-items: center; /* Centra verticalmente los elementos */
+  justify-content: space-between;
   background-color: rgba(
     241,
     243,
