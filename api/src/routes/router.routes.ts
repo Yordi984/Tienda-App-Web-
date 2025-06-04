@@ -25,6 +25,8 @@ import {
   restablecerPassword,
 } from "../controllers/autenticacion.controller";
 
+import { Favorito } from "../controllers/favoritos.controller";
+
 import { upload } from '../middlewares/upload'; // ruta según tu estructura
 
 
@@ -62,4 +64,7 @@ router.post("/registrar/vendedor", registrarVendedor);
 router.post("/recuperar", solicitarRecuperacion);
 router.post("/restablecer/:token", restablecerPassword);
 
+//Favoritos 
+
+router.post("/favorito/:productoId", Favorito);
 export default router;
