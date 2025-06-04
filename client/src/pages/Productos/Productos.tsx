@@ -20,6 +20,50 @@ interface Product {
 export default function Productos() {
   const [products, setProducts] = useState<Product[]>([]);
 
+  const categories = [
+    { label: 'Comida', value: 'comida' },
+    { label: 'Ropa', value: 'ropa' },
+    { label: 'Tecnología', value: 'tecnologia' },
+    { label: 'Accesorios', value: 'accesorios' },
+    { label: 'Otros', value: 'otros' },
+  ];
+
+  // const fetchProducts = async (searchTerm?: string, category?: string) => {
+  //   const queryParams = new URLSearchParams();
+
+  //   if (searchTerm) {
+  //     queryParams.append('q', searchTerm);
+  //   }
+
+  //   if (category) {
+  //     queryParams.append('filter', category);
+  //   }
+
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:3000/productos?${queryParams.toString()}`,
+  //       {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           Accept: 'application/json',
+  //         },
+  //       },
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+
+  //     const data = await response.json();
+  //     console.log('Fetched products:', data);
+  //     return data;
+  //   } catch (error) {
+  //     console.error('Error fetching products:', error);
+  //     return [];
+  //   }
+  // };
+
   function formatPrice(price: number): string {
     return `$${price.toFixed(2)}`;
   }
@@ -56,6 +100,8 @@ export default function Productos() {
       });
   }
 
+  const handleFilter = () => {};
+
   useEffect(() => {
     const fetchProducts = async () => {
       const result = await fetch('http://localhost:3000/productos', {
@@ -90,7 +136,9 @@ export default function Productos() {
     <div>
       <HeaderWithSearchbar
         title='Hola, ¿qué comprarás hoy?'
+        categories={categories}
         onSearch={handleSearch}
+        onFilter={handleFilter}
       />
 
       <div className={styles.productGrid}>
