@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import HeaderComponent from "../../components/ui/HeaderComponent";
-import CardUser from "../../components/ui/CardUser"; // Asegúrate de que la ruta sea correcta
+import CardUser from "../../components/ui/CardUser"; 
+import Navar from "../../components/ui/Navbar"
 
 interface Producto {
   id: number;
@@ -65,6 +66,7 @@ export default function MisProductos() {
           />
         ))}
       </div>
+      <Navar></Navar>
     </div>
   );
 }
