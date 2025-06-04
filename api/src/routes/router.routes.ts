@@ -51,7 +51,7 @@ router.post("/producto", upload.single('imagen'), crearProducto);
 
 router.get("/productos", obtenerProductos);
 router.get("/producto/:id", obtenerProductoPorId);
-router.put("/producto/:id", editarProducto);
+router.put("/producto/:id",upload.single('imagen'), editarProducto);
 router.delete("/producto/:id", eliminarProducto);
 router.get("/mis-productos/:vendedorId", obtenerMisProductos);
 

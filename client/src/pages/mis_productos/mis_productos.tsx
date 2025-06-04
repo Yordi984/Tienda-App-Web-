@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import HeaderComponent from "../../components/ui/HeaderComponent";
-import ProductCard from "../../components/ui/ProductCard";
+import CardUser from "../../components/ui/CardUser"; // Asegúrate de que la ruta sea correcta
 
 interface Producto {
   id: number;
@@ -50,14 +50,18 @@ export default function MisProductos() {
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
         {productos.map((producto) => (
-          <ProductCard
+          <CardUser
             key={producto.id}
             imageUrl={producto.imagen}
             altText={producto.nombre}
             productName={producto.nombre}
             productPrice={producto.precio}
             
-            onClick={() => navigate(`/producto/${producto.id}`)} // Aquí navegas a la ruta con el id
+           
+            
+            
+            
+            onClick={() => navigate(`/producto-admin/${producto.id}`)} // Aquí navegas a la ruta con el id
           />
         ))}
       </div>

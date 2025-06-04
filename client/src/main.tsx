@@ -17,7 +17,8 @@ import Crear_vendedor from './pages/crear_cuentas/crear_vendedor.tsx';
 import CrearComprador from './pages/crear_cuentas/crear_comprador.tsx';
 import ElegirCuenta from './pages/crear_cuentas/elegir_cuenta.tsx';
 import Productos from './pages/Productos/Productos.tsx';
-
+import ProductoAdmin from './pages/torta/ProductoAdmin.tsx'; 
+import EditarProducto from './pages/Productos/EditarProducto.tsx'; 
 import Mis_productos from './pages/mis_productos/mis_productos.tsx';
 
 
@@ -67,6 +68,15 @@ createRoot(document.getElementById('root')!).render(
       <Route
         path='/mis_productos'
         element={<Mis_productos />} />
+
+      <Route
+        path='/producto-admin/:id'
+        element={<ProductoAdmin />}
+      />
+      <Route
+        path='/editar-producto/:id'
+        element={<EditarProducto />}
+      />
 
     </Routes>
   </BrowserRouter>,
