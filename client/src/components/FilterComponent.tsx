@@ -18,7 +18,7 @@ export default function FilterComponent({
 
   return (
     <div className={styles.headerCategories}>
-      <span className={styles.headerCategories__categoriesTitle}>{label}</span>
+      <span className={styles.headerCategories__title}>{label}</span>
 
       <ChipGroup
         chips={categories}
