@@ -5,7 +5,7 @@ import { AppDataSource } from "../db";
 
 import { Vendedor } from "../entities";
 
-// Login para comprador
+
 
 
 // Login para vendedor
@@ -25,13 +25,16 @@ passport.use(
         if (!match)
           return done(null, false, { message: "Contraseña incorrecta" });
 
-        return done(null, { ...user, tipo: "vendedor" });
+        return done(null, user); // Solo retornamos el user directamente
       } catch (err) {
         return done(err);
       }
     }
   )
 );
+
+
+
 
 // Serialización
 passport.serializeUser((user: any, done) => {
