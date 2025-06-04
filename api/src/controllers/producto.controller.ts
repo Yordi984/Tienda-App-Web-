@@ -38,14 +38,37 @@ export async function crearProducto(req: Request, res: Response) {
 export function obtenerProductos(req: Request, res: Response) {
   const productoRepository = AppDataSource.getRepository('producto');
 
-  const searchQuery = req.query.q;
+  const search = req.query.q;
+  const category = req.query.filter;
+  const vendedorId = req.query.vendedorId;
+
+  console.log('-'.repeat(50), 'Query Parameters', '-'.repeat(50));
+  console.log('Search:', search);
+  console.log('Filter:', category);
+  console.log('Vendedor ID:', vendedorId);
+  console.log('-'.repeat(50), ' End Query Parameters', '-'.repeat(50));
+
+  const validCategories = [
+    'comida',
+    'ropa',
+    'tecnologia',
+    'accesorios',
+    'otros',
+  ];
 
   productoRepository
     .createQueryBuilder('producto')
     .where(
-      'LOWER(producto.nombre) LIKE LOWER(:search) OR LOWER(producto.descripcion) LIKE LOWER(:search)',
-      { search: `%${searchQuery || ''}%` },
+      '(producto.nombre ILIKE :search OR producto.descripcion ILIKE :search) AND (producto.vendedorId = :vendedorId OR :vendedorId IS NULL) AND (producto.categoria = :category OR :category IS NULL)',
     )
+    .setParameters({
+      search: `%${search || ''}%`,
+      vendedorId: vendedorId ? parseInt(vendedorId as string, 10) : null,
+      category:
+        category && validCategories.includes(category as string)
+          ? (category as string)
+          : null,
+    })
     .getMany()
     .then((productos) => {
       const parsedProducts = productos.map((producto) => {

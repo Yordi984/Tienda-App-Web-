@@ -5,92 +5,71 @@ import placeholderImage from '../../assets/images/placeholder.jpg';
 import HeaderWithSearchbar from '../../components/HeaderWithSearchbar';
 import { HeartIcon } from '../../components/icons';
 import NavBar from '../../components/ui/Navbar';
+import { getProducts, type Product } from '../../services/api/products';
+import { formatPrice } from '../../utils/product';
 import styles from './Productos.module.css';
 
-interface Product {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  disponibilidad: string;
+type FormattedProduct = Omit<Product, 'precio'> & {
   precio: string;
-  whatsapp: number;
-  imagen?: string;
-}
+};
 
 export default function Productos() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [products, setProducts] = useState<FormattedProduct[]>([]);
 
-  function formatPrice(price: number): string {
-    return `$${price.toFixed(2)}`;
-  }
-
-  function handleSearch(searchTerm: string) {
-    fetch(
-      `http://localhost:3000/productos?q=${encodeURIComponent(searchTerm)}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      },
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Search results:', data);
-        setProducts(
-          data.map((product: { precio: number; imagen: string }) => ({
-            ...product,
-            precio: formatPrice(product.precio),
-            imagen: product.imagen,
-          })),
-        );
-      })
-      .catch((error) => {
-        console.error('Error fetching search results:', error);
-      });
-  }
+  const categories = [
+    { label: 'Comida', value: 'comida' },
+    { label: 'Ropa', value: 'ropa' },
+    { label: 'Tecnología', value: 'tecnologia' },
+    { label: 'Accesorios', value: 'accesorios' },
+    { label: 'Otros', value: 'otros' },
+  ];
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const result = await fetch('http://localhost:3000/productos', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
+    console.log('Fetching products with:', {
+      searchTerm: searchTerm ?? 'none',
+      selectedCategory: selectedCategory ?? 'none',
+    });
 
-      return await result.json();
-    };
-
-    fetchProducts()
+    getProducts({
+      searchTerm: searchTerm ?? undefined,
+      category: selectedCategory ?? undefined,
+    })
       .then((data) => {
-        console.log('Fetched products:', data);
+        console.log('Products fetched:', data);
 
-        setProducts(
-          data.map((product: Product) => ({
-            ...product,
-            precio: formatPrice(Number(product.precio)),
-            imagen: product.imagen,
-          })),
-        );
+        const formattedData = data.map((product: Product) => ({
+          ...product,
+          precio: formatPrice(product.precio),
+        }));
+        console.log('Formatted products:', formattedData);
+
+        setProducts(formattedData);
       })
       .catch((error) => {
         console.error('Error fetching products:', error);
+        setProducts([]);
       });
-  }, []);
+  }, [searchTerm, selectedCategory]);
+
+  const handleSearch = (searchTerm: string) => {
+    setSearchTerm(searchTerm);
+    console.log(`Search term updated: ${searchTerm}`);
+  };
+
+  const handleFilter = (category: string) => {
+    setSelectedCategory(category);
+    console.log(`Category selected: ${category}`);
+  };
 
   return (
     <div>
       <HeaderWithSearchbar
         title='Hola, ¿qué comprarás hoy?'
+        categories={categories}
         onSearch={handleSearch}
+        onFilter={handleFilter}
       />
 
       <div className={styles.productGrid}>
