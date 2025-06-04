@@ -1,3 +1,5 @@
+//Este componente es un botón reutilizable que acepta diferentes props para personalizar su apariencia y comportamiento.
+
 import React from 'react';
 import styles from './ButtonComponent.module.css';
 

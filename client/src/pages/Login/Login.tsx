@@ -66,21 +66,24 @@ export default function Login() {
           value={contrasena}
           onChange={(e) => setContrasena(e.target.value)}
         />
-        
+        <div className='boton-container'>
           <Boton 
-            style={{  width: '25%', margin: '20px auto', padding: '1rem' }}
+            // style={{  width: '25%', margin: '20px auto', padding: '1rem' }}
             text='Iniciar sesión'
             color='green'
             onClick={solicitud}
           />
 
-          <Boton 
-            style={{  width: '25%', margin: '20px auto', padding: '1rem' }}
+          <Boton
+            // style={{  width: '25%', margin: '20px auto', padding: '1rem'  }}
             text='¿No tienes cuenta? Regístrate'
             color='lightGray'
             hasGreenBorder={true}
             onClick={() => navigate("/crear_vendedor")}
           />
+        </div>
+        
+          
           
        
       </div>

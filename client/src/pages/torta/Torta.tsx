@@ -1,16 +1,18 @@
 // src/pages/Torta.tsx
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { isValid, parse } from 'date-fns';
+// Eliminamos isValid y parse de date-fns ya que el campo de hora será solo de visualización.
 import Boton from '../../components/ui/ButtonComponent';
-import Header from '../../components/ui/HeaderComponent';
+// import Header from '../../components/ui/HeaderComponent';
 import NavBar from '../../components/ui/Navbar';
 import './Torta.css';
 
 import HeartIcon from '/icons/heart.svg';
 import HomeIcon from '/icons/house.svg';
-import SearchIcon from '/icons/search.svg';
+// import SearchIcon from '/icons/search.svg';
 import UserRoundIcon from '/icons/user-round.svg';
+// import ButtonComponent from '../../components/ui/ButtonComponent';
+import HeaderProductDetail from '../../components/ui/HeaderProductDetail';
 
 type Producto = {
   id: number;
@@ -18,7 +20,8 @@ type Producto = {
   descripcion: string;
   imagen: string;
   precio: number;
-  disponibilidad: string; // Ej: "M,L"
+  disponibilidad: string; // Ej: "L,M,V" (días)
+  horario: string; // Nuevo campo para el horario, ej: "08:30 - 16:00"
   whatsapp: string;
 };
 
@@ -26,15 +29,18 @@ export default function Torta() {
   const { id } = useParams<{ id: string }>();
   const [producto, setProducto] = useState<Producto | null>(null);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [timeRange, setTimeRange] = useState('08:30 - 16:00');
+  const [timeRange, setTimeRange] = useState('08:30 - 16:00'); // Valor por defecto, se sobrescribirá con el backend
   const [isLiked, setIsLiked] = useState(false);
 
-  const days = [
+  // Los días siguen siendo para referencia de la visualización, no para selección del usuario.
+  const allDays = [
     { label: 'L', value: 'L' },
     { label: 'M', value: 'M' },
     { label: 'X', value: 'X' },
     { label: 'J', value: 'J' },
     { label: 'V', value: 'V' },
+    { label: 'S', value: 'S' }, // Añadido Sábado
+    { label: 'D', value: 'D' }, // Añadido Domingo
   ];
 
   useEffect(() => {
@@ -51,6 +57,11 @@ export default function Torta() {
         } else {
           setSelectedDays([]);
         }
+
+        // Establecer el horario desde el backend si está disponible
+        if (data.horario) {
+          setTimeRange(data.horario);
+        }
       } catch (err) {
         console.error('Error al cargar producto:', err);
       }
@@ -59,29 +70,32 @@ export default function Torta() {
     if (id) fetchProducto();
   }, [id]);
 
-  const handleDayClick = (day: string) => {
-    setSelectedDays((prev) =>
-      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
-    );
-  };
+  // Eliminamos handleDayClick y handleTimeChange porque el usuario ya no puede editar
+  // const handleDayClick = (day: string) => {
+  //   setSelectedDays((prev) =>
+  //     prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+  //   );
+  // };
 
-  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const [startTime, endTime] = e.target.value.split(' - ');
-    const isStartValid = isValid(parse(startTime, 'HH:mm', new Date()));
-    const isEndValid = isValid(parse(endTime, 'HH:mm', new Date()));
-    if (isStartValid && isEndValid) setTimeRange(e.target.value);
-  };
+  // const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const [startTime, endTime] = e.target.value.split(' - ');
+  //   const isStartValid = isValid(parse(startTime, 'HH:mm', new Date()));
+  //   const isEndValid = isValid(parse(endTime, 'HH:mm', new Date()));
+  //   if (isStartValid && isEndValid) setTimeRange(e.target.value);
+  // };
 
   return (
     <div className='torta-container'>
-      <Header text='Hola ¿Qué comprarás hoy?' />
+      {/* <Header text='Hola ¿Qué comprarás hoy?' /> */}
+     <HeaderProductDetail />
       <div className='header-bar-overlap'>
         <div className='header-actions'>
-          <button className='sell-button'>Vender</button>
-          <div className='search-box'>
+          {/* <button className='sell-button'>Vender</button> */}
+         
+          {/* <div className='search-box'>
             <input type='text' placeholder='Buscar' />
             <img src={SearchIcon} alt='Search' />
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -106,32 +120,25 @@ export default function Torta() {
             {producto?.descripcion || 'Esperando descripción del producto...'}
           </p>
 
-          {/* Aquí ya no mostramos opcionesCarne porque no viene del backend */}
-          {/* Si quieres agregarlo, tendrías que modificar backend y frontend */}
-
           <div className='availability-box'>
             <span className='availability-title'>Horario de disponibilidad</span>
             <div className='availability-days'>
-              {days.map((day) => (
+              {allDays.map((day) => (
                 <button
                   key={day.value}
                   className={`day-button ${
                     selectedDays.includes(day.value) ? 'active' : ''
-                  }`}
-                  onClick={() => handleDayClick(day.value)}
+                  } read-only`}
+                  disabled // Deshabilitamos el botón para evitar clics
                 >
                   {day.label}
                 </button>
               ))}
             </div>
             <div className='availability-info'>
-              <input
-                type='text'
-                value={timeRange}
-                onChange={handleTimeChange}
-                placeholder='HH:mm - HH:mm'
-                className='time-input'
-              />
+              <span className='time-display'>
+                {timeRange} {/* Ahora es un span, no un input */}
+              </span>
             </div>
           </div>
 

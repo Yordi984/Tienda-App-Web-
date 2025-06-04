@@ -71,4 +71,41 @@ input {
   .links a {
     font-size: 1rem;
   }
+
+  .formulario button {
+    width: 100%; /* El botón tomará el 50% del ancho de .formulario */
+   
+  }
+
 }
+
+
+.boton-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Estilo base para todos los botones dentro de .boton-container */
+.boton-container button {
+  width: 27%;        /* Pantallas grandes */
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+  .boton-container button {
+    width: 90%;
+  }
+}
+
+
+
+
+
+
+
+
+

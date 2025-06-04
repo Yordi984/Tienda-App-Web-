@@ -46,17 +46,7 @@
 /* ¡NUEVA CLASE para el borde verde! */
 .greenBorder {
   border: 2px solid rgba(25, 196, 100, 1);
-  /* Si el botón ya tiene un color de fondo, el borde se superpondrá.
-     Si quieres un fondo transparente con solo el borde, tendrías que ajustar el background-color
-     de la clase específica del color cuando `hasGreenBorder` es true,
-     o definir un nuevo `color` tipo para esto.
-     Por ejemplo, si `hasGreenBorder` se usa con un botón gris claro, el fondo seguirá siendo gris claro.
-     Si se usa con un botón verde, se verá un borde verde un poco más oscuro o resaltado dependiendo del diseño final deseado.
-     Considerando tu imagen, el botón "Vender" parece tener un fondo verde con un borde de un verde diferente (más oscuro o simplemente la sombra/borde del propio botón).
-     Si quieres que el botón "Vender" de la imagen tenga este borde, la clase `.greenBorder` es adecuada.
-     Si quieres que el botón "Vender" tenga un fondo blanco y un borde verde, tendrías que hacer el `background-color: white;`
-     o crear un nuevo tipo de color para `ButtonColor` como `outlinedGreen`
-  */
+ 
 }
 
 
@@ -69,4 +59,10 @@
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .button {
+    width: 100%; /* O el ancho que necesites, como 200px si no quieres que sea todo el ancho */
+  }
 }

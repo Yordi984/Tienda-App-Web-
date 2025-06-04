@@ -31,3 +31,59 @@
   height: 30px;
   filter: brightness(0) invert(1); /* Hace que el SVG sea blanco */
 }
+
+
+/* --- Media Queries para Responsividad --- */
+
+/* Para pantallas medianas (tabletas en vertical, algunos laptops pequeños) */
+@media (max-width: 768px) {
+  .navList {
+    gap: 20px; /* Reduce el espacio entre elementos */
+    padding: 0 8px; /* Ajusta el padding horizontal */
+  }
+
+  .navIcon {
+    width: 28px; /* Ligeramente más pequeños los íconos */
+    height: 28px;
+  }
+
+  .navBar {
+    padding: 8px 0; /* Ajusta el padding vertical de la barra */
+  }
+}
+
+/* Para pantallas pequeñas (teléfonos móviles) */
+@media (max-width: 480px) {
+  .navList {
+    gap: 15px; /* Reduce aún más el espacio entre elementos */
+    /* Para pantallas muy pequeñas, podrías considerar 'space-around'
+       si quieres que los íconos se distribuyan más a los bordes.
+       justify-content: space-around;
+    */
+    padding: 0 5px; /* Más padding horizontal reducido */
+  }
+
+  .navIcon {
+    width: 25px; /* Tamaño ideal para íconos en móvil */
+    height: 25px;
+  }
+
+  .navLink {
+    padding: 6px; /* Reduce el padding alrededor del icono */
+  }
+
+  .navBar {
+    padding: 6px 0; /* Padding vertical de la barra más pequeño */
+  }
+}
+
+/* Opcional: Si los íconos se amontonan mucho en teléfonos muy pequeños */
+@media (max-width: 320px) {
+  .navList {
+    gap: 10px;
+  }
+  .navIcon {
+    width: 22px;
+    height: 22px;
+  }
+}

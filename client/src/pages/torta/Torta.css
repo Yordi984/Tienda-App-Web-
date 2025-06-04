@@ -1,269 +1,321 @@
-/* Torta.css */
+/* Torta.css - Estilos base (para pantallas grandes) */
 
 .torta-container {
-    font-family: sans-serif;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Por defecto, apila en columnas (ej. Header arriba, contenido abajo) */
+  min-height: 100vh; /* Ocupa al menos toda la altura de la ventana */
+  padding-bottom: 70px; /* Espacio para el NavBar fijo en la parte inferior */
+  box-sizing: border-box;
+  overflow-x: hidden; /* Previene el scroll horizontal no deseado */
 }
 
-.header-bar {
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    padding: 10px 20px;
-    color: white;
-    background-color: transparent;
-    overflow: hidden;
-}
+/* El HeaderComponent ya debe ser responsivo. Su altura y diseño deben manejar el espacio superior. */
+/* Las clases 'header-bar', 'header-bar-overlap', 'sell-button', 'search-box' no son parte del diseño
+    de la imagen del producto "Torta" y han sido comentadas/eliminadas del JSX. */
 
-.header-bar-overlap {
-    position: absolute;
-    top: 8px;
-    /* Ajusta según el padding del HeaderComponent */
-    right: 30px;
-    /* Espaciado desde el borde derecho */
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 10;
-}
-
-
-.header-bar::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #28a745;
-    height: 100%;
-    width: 60%;
-    border-bottom-right-radius: 20px;
-    z-index: -1;
-}
-
-.header-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: auto;
-    /* ✅ ya está bien */
-}
-
-
-.sell-button {
-    background-color: #19c464;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-box {
-    display: flex;
-    align-items: center;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    padding: 1px 1px;
-}
-
-.search-box input {
-    border: none;
-    background: transparent;
-    outline: none;
-    margin-right: 5px;
-    color: black;
-}
 
 .main-content {
-    display: flex;
-    flex-direction: row;
-    padding: 30px;
-    flex: 1;
-    gap: 30px;
-    justify-content: center;
-    /* Centra el contenido dentro del contenedor */
-    max-width: 1000px;
-    /* Opcional: limita el ancho total del contenido */
-    margin: 0 auto;
-    /* Centra el contenedor dentro de la pantalla */
+  display: flex;
+  flex-direction: row; /* En desktop: imagen y info lado a lado */
+  padding: 30px;
+  flex: 1;
+  gap: 30px; /* Espacio entre la imagen y la info */
+  justify-content: center;
+  max-width: 1200px; /* Límite de ancho para el contenido principal en desktop */
+  margin: 20px auto 0 auto; /* Centra el contenido y da un margen superior */
 }
 
 
 .product-image {
-    width: 250px;
-    height: 250px;
-    border-radius: 10px;
-    object-fit: cover;
+  width: 400px; /* Ancho fijo para la imagen en desktop */
+  height: 400px; /* Alto fijo para la imagen en desktop */
+  border-radius: 10px; /* Bordes redondeados en desktop */
+  object-fit: cover;
 }
 
 .product-info {
-    flex: 1;
+  flex: 1; /* Ocupa el espacio restante en el flex-row */
+  padding: 0; /* Sin padding interno en desktop, el gap lo maneja */
 }
 
 .product-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Título a la izquierda, corazón a la derecha */
+  margin-bottom: 10px;
 }
 
 .product-header h2 {
-    margin: 0;
+  margin: 0;
+  font-size: 2.5em; /* Tamaño de fuente grande para desktop */
+  color: #333;
 }
 
 .heart-icon {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    filter: invert(0%);
-    transition: filter 0.3s;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  filter: invert(0%); /* Negro por defecto */
+  transition: filter 0.3s;
 }
 
 .heart-icon.liked {
-    filter: brightness(0);
+  filter: invert(18%) sepia(85%) saturate(7186%) hue-rotate(352deg) brightness(97%) contrast(116%); /* Rojo */
 }
 
 .product-description {
-    margin: 10px 0;
+  margin: 10px 0;
+  line-height: 1.5;
+  color: #555;
+  font-size: 1em;
 }
 
-.tags {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.tags span {
-    background-color: #e0e0e0;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 14px;
-}
-
+/* availability-box se mantiene como estaba, es bastante adaptable */
 .availability-box {
-    background-color: #e7f9ee;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+  background-color: #e7f9ee;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .availability-title {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  color: #24c065; /* Color verde */
 }
 
 .availability-days {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 10px;
+  display: flex;
+  gap: 10px; /* Espacio entre los botones de día en desktop */
+  margin-bottom: 10px;
 }
 
 .day-button {
-    border: none;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    background-color: #d0d0d0;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  border: none;
+  border-radius: 50%;
+  width: 40px; /* Botones más grandes en desktop */
+  height: 40px;
+  background-color: #d0d0d0;
+  color: white;
+  font-weight: bold;
+  /* cursor: pointer; */ /* Eliminamos el cursor pointer */
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
 }
 
 .day-button.active {
-    background-color: #24c065;
+  background-color: #24c065;
 }
+
+/* Nuevo estilo para los botones de días cuando son de solo lectura */
+.day-button.read-only {
+  cursor: default; /* Cambia el cursor a default para indicar que no es interactivo */
+  opacity: 0.8; /* Ligeramente más opaco para dar la sensación de deshabilitado */
+}
+
 
 .availability-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  /* Este div existía para el input, ahora contiene el span. */
+  /* Lo ajustamos para que el span se vea como un botón */
+  display: flex; /* Para centrar el span si es necesario */
+  justify-content: flex-start; /* Alinea a la izquierda por defecto */
+  align-items: center;
 }
 
-.dots {
-    display: flex;
-    gap: 4px;
+.time-display {
+  background-color: #24c065;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: bold; /* Para que el texto se vea más claro */
+  /* Nuevo: estilos para que se vea como texto no editable */
+  cursor: default; /* Cambia el cursor a default */
 }
 
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: gray;
-}
-
-.dot.green {
-    background-color: #24c065;
-}
 
 .price-contact {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Precio a la izquierda, botón a la derecha */
+  margin-top: 20px;
 }
 
 .price {
-    font-size: 24px;
-    font-weight: bold;
-    background-color: #e0e0e0;
-    /* gris claro */
-    padding: 8px 16px;
-    border-radius: 8px;
+  font-size: 2.8em; /* Tamaño de fuente del precio en desktop */
+  font-weight: bold;
+  background-color: transparent; /* Sin fondo */
+  padding: 0;
+  border-radius: 0;
+  color: #333;
 }
 
 .button-wrapper {
-    flex: 1;
-    margin-left: 20px;
+  /* Permitimos que el botón sea controlado por fullWidth si se pasa,
+      o por las media queries. No establecemos un flex: 1; o width: auto aquí
+      para que el fullWidth del Boton pueda aplicarse. */
+  flex-shrink: 0; /* Evita que el botón se encoja */
 }
 
-.bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #24c065;
-    padding: 12px 0;
+/* Si tu ButtonComponent tiene fullWidth={true}, esto se encargará de que ocupe todo el ancho
+    de su contenedor (button-wrapper) hasta su max-width si lo tiene.
+    En este caso, el button-wrapper no necesita width, ya que el botón se encargará.
+*/
+
+
+/* Ocultar los iconos de navegación si no se usan y el Navbar está presente */
+.footer-icons {
+  display: none;
 }
 
-.bottom-nav img {
-    width: 26px;
-    height: 26px;
-    filter: invert(100%);
-}
+/* Media Query para pantallas medianas (tabletas, hasta 1024px) */
+@media (max-width: 1024px) {
+  .main-content {
+    flex-direction: column; /* Apila imagen y contenido en tabletas */
+    padding: 20px; /* Padding más ajustado para tabletas */
+    gap: 20px; /* Menos espacio entre imagen y info */
+    margin-top: 0; /* Elimina el margen superior de desktop */
+  }
 
-.meat-tag {
-    padding: 8px 12px;
-    border-radius: 9999px;
+  .product-image {
+    width: 100%; /* Imagen a 100% del ancho del main-content */
+    height: 350px; /* Altura un poco más pequeña */
+    border-radius: 0; /* Sin bordes redondeados arriba */
+  }
+
+  .product-info {
+    padding: 20px; /* Padding para la caja de info */
+    margin-top: -30px; /* Solapamiento de la caja blanca sobre la imagen */
     background-color: white;
-    border: 1px solid #19c464;
-    margin-right: 8px;
-    cursor: pointer;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    position: relative;
+    z-index: 5;
+    box-sizing: border-box;
+    max-width: 100%; /* Asegura que la info no exceda el ancho */
+  }
+
+  .product-header h2 {
+    font-size: 2em; /* Tamaño de título ajustado */
+  }
+
+  .product-description {
+    font-size: 0.95em;
+  }
+
+  .availability-days {
+    gap: 8px; /* Espacio entre botones de día */
+  }
+
+  .day-button {
+    width: 38px;
+    height: 38px;
+    font-size: 0.9em;
+  }
+
+  .time-display {
+    padding: 6px 10px;
+    font-size: 0.9em;
+  }
+
+  .price-contact {
+    flex-direction: column; /* Apila precio y botón en tabletas */
+    align-items: center; /* Centra los elementos */
+    gap: 15px;
+  }
+
+  .price {
+    font-size: 2.2em; /* Precio ajustado */
+    background-color: transparent; /* Asegura que no tenga fondo */
+    padding: 0;
+  }
+
+  .button-wrapper .button {
+    width: 100%; /* Botón ocupa el 100% de su wrapper */
+    max-width: 300px; /* Pero con un máximo de 300px */
+    margin: 0 auto; /* Centra el botón si no ocupa el 100% */
+  }
 }
 
-.meat-tag.selected {
-    background-color: #19c464;
-    color: white;
+/* Media Query para pantallas pequeñas (móviles, hasta 600px) */
+@media (max-width: 600px) {
+  .main-content {
+    padding: 0; /* Sin padding en el main-content para que la imagen ocupe todo el ancho */
+    gap: 0;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 250px; /* Altura de imagen más pequeña para móviles */
+  }
+
+  .product-info {
+    padding: 15px; /* Padding más ajustado para la info en móviles */
+    margin-top: -30px; /* Mantiene el solapamiento */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .product-header h2 {
+    font-size: 1.8em; /* Título más pequeño */
+  }
+
+  .heart-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .product-description {
+    font-size: 0.9em; /* Descripción más pequeña */
+  }
+
+  .availability-box {
+    padding: 10px; /* Padding reducido para la caja de disponibilidad */
+  }
+
+  .availability-days {
+    gap: 6px; /* Menos espacio entre los botones de día */
+  }
+
+  .day-button {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8em;
+  }
+
+  .time-display {
+    padding: 5px 8px;
+    font-size: 0.8em;
+  }
+
+  .price-contact {
+    flex-direction: column; /* Asegura que siga en columna */
+    align-items: start;
+    gap: 10px;
+  }
+
+  .price {
+    font-size: 2em; /* Precio ajustado para móviles */
+  }
+
+  .button-wrapper .boton {
+    width: 100%; /* Botón ocupa el 100% de su wrapper en móvil */
+    /* */
+  }
 }
 
-.time-input {
-    background-color: #19c464;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
+/* Media Query para pantallas pequeñas (móviles, hasta 600px) */
+@media (max-width: 600px) {
+  /* ... */
+  .button-wrapper .boton { /* <-- Aquí el selector es '.boton' */
+    width: 100%; /* Botón ocupa el 100% de su wrapper en móvil */
+    /* */
+  }
 }
