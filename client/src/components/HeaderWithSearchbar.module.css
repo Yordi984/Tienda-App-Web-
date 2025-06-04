@@ -11,6 +11,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 0 0 16px 16px;
+  padding: 0;
 }
 
 .header__title {
@@ -26,4 +27,33 @@
   display: flex;
   align-items: center;
   gap: 24px;
+}
+
+.header__buttons {
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    display: block;
+  }
+
+  .header__green {
+    padding-block: 16px;
+  }
+
+  .header__other {
+    display: block;
+  }
+
+  .header__buttons {
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
+  }
+
+  .header__buttons div {
+    width: 100%;
+  }
 }

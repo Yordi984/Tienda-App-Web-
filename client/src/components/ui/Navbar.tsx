@@ -4,16 +4,10 @@ import styles from './NavBar.module.css';
 const NavBar: React.FC = () => {
   return (
     <nav className={styles.navBar}>
-      {/* Lista no ordenada para los elementos de navegación */}
       <ul className={styles.navList}>
-        {/* Elemento de navegación para el icono de inicio */}
+        {/* Icono de inicio */}
         <li className={styles.navItem}>
-          {/* Enlace que lleva a la página de inicio */}
-          <a
-            href='/'
-            className={styles.navLink}
-          >
-            {/* Imagen del icono de casa. La ruta es relativa a la carpeta 'public'. */}
+          <a href='/productos' className={styles.navLink}>
             <img
               src='/icons/house.svg'
               alt='Inicio'
@@ -21,14 +15,10 @@ const NavBar: React.FC = () => {
             />
           </a>
         </li>
-        {/* Elemento de navegación para el icono de búsqueda */}
+
+        {/* Icono de búsqueda */}
         <li className={styles.navItem}>
-          {/* Enlace que lleva a la página de búsqueda */}
-          <a
-            href='/productos'
-            className={styles.navLink}
-          >
-            {/* Imagen del icono de búsqueda. La ruta es relativa a la carpeta 'public'. */}
+          <a href='/productos' className={styles.navLink}>
             <img
               src='/icons/search.svg'
               alt='Búsqueda'
@@ -36,14 +26,10 @@ const NavBar: React.FC = () => {
             />
           </a>
         </li>
-        {/* Elemento de navegación para el icono de favoritos */}
+
+        {/* Icono de favoritos */}
         <li className={styles.navItem}>
-          {/* Enlace que lleva a la página de favoritos */}
-          <a
-            href='/favoritos'
-            className={styles.navLink}
-          >
-            {/* Imagen del icono de corazón. La ruta es relativa a la carpeta 'public'. */}
+          <a href='/favoritos' className={styles.navLink}>
             <img
               src='/icons/heart.svg'
               alt='Favoritos'
@@ -51,14 +37,21 @@ const NavBar: React.FC = () => {
             />
           </a>
         </li>
-        {/* Elemento de navegación para el icono de perfil de usuario */}
+
+        {/* Icono de mis productos */}
         <li className={styles.navItem}>
-          {/* Enlace que lleva a la página de perfil */}
-          <a
-            href='/perfil'
-            className={styles.navLink}
-          >
-            {/* Imagen del icono de usuario. La ruta es relativa a la carpeta 'public'. */}
+          <a href='/mis_productos' className={styles.navLink}>
+            <img
+              src='https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/store.svg'
+              alt='Mis Productos'
+              className={styles.navIcon}
+            />
+          </a>
+        </li>
+
+        {/* Icono de perfil */}
+        <li className={styles.navItem}>
+          <a href='/perfil' className={styles.navLink}>
             <img
               src='/icons/user-round.svg'
               alt='Perfil'

@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from "react"
-import Header from "../../components/ui/HeaderComponent"
-import Input from "../../components/ui/InputComponent"
-import Boton from "../../components/ui/ButtonComponent"
-import NavBar from "../../components/ui/Navbar"
-import "./CrearProductos.css"
+import React, { useState, useEffect } from "react";
+import Header from "../../components/ui/HeaderComponent";
+import Input from "../../components/ui/InputComponent";
+import Boton from "../../components/ui/ButtonComponent";
+import NavBar from "../../components/ui/Navbar";
+import "./CrearProductos.css";
+
+
+const categorias = [
+  "comida",
+  "ropa",
+  "tecnologia",
+  "accesorios",
+  "otros",
+];
 
 export default function CrearProductos() {
-  const [diasActivos, setDiasActivos] = useState<string[]>([])
+  const [diasActivos, setDiasActivos] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
@@ -15,70 +24,72 @@ export default function CrearProductos() {
     precio: "",
     whatsapp: "",
     vendedorId: "", // Se llenará desde el token
-  })
-  const [imagen, setImagen] = useState<File | null>(null)
+    categoria: "otros", // Agregado categoría con valor por defecto
+  });
+  const [imagen, setImagen] = useState<File | null>(null);
 
-  const dias = ["L", "M", "X", "J", "V"]
+  const dias = ["L", "M", "X", "J", "V"];
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     if (token) {
       try {
-        const payload = JSON.parse(atob(token.split(".")[1]))
+        const payload = JSON.parse(atob(token.split(".")[1]));
         if (payload.tipo === "vendedor") {
           setFormData((prev) => ({
             ...prev,
             vendedorId: payload.id,
-          }))
+          }));
         } else {
-          alert("Solo los vendedores pueden crear productos.")
+          alert("Solo los vendedores pueden crear productos.");
         }
       } catch (error) {
-        console.error("Error al decodificar token:", error)
+        console.error("Error al decodificar token:", error);
       }
     } else {
-      alert("No estás autenticado.")
-      window.location.href = "/Login"
+      alert("No estás autenticado.");
+      window.location.href = "/Login";
     }
-  }, [])
+  }, []);
 
   const toggleDia = (dia: string) => {
     setDiasActivos((prev) =>
       prev.includes(dia) ? prev.filter((d) => d !== dia) : [...prev, dia]
-    )
-  }
+    );
+  };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setImagen(e.target.files[0])
+      setImagen(e.target.files[0]);
     }
-  }
+  };
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     if (!token) {
-      alert("No estás autenticado.")
-      return
+      alert("No estás autenticado.");
+      return;
     }
 
-    const data = new FormData()
-    data.append("nombre", formData.nombre)
-    data.append("descripcion", formData.descripcion)
-    data.append("opciones", formData.opciones)
-    data.append("horario", formData.horario)
-    data.append("disponibilidad", diasActivos.join(","))
-    data.append("precio", formData.precio)
-    data.append("whatsapp", formData.whatsapp)
-    data.append("vendedorId", formData.vendedorId)
+    const data = new FormData();
+    data.append("nombre", formData.nombre);
+    data.append("descripcion", formData.descripcion);
+    data.append("opciones", formData.opciones);
+    data.append("horario", formData.horario);
+    data.append("disponibilidad", diasActivos.join(","));
+    data.append("precio", formData.precio);
+    data.append("whatsapp", formData.whatsapp);
+    data.append("vendedorId", formData.vendedorId);
+    data.append("categoria", formData.categoria); // Agregamos la categoría
     if (imagen) {
-      data.append("imagen", imagen)
+      data.append("imagen", imagen);
     }
 
     try {
@@ -86,22 +97,24 @@ export default function CrearProductos() {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
+          // NO pones Content-Type con multipart/form-data porque fetch lo asigna solo
         },
         body: data,
-      })
+      });
 
-      const responseBody = await res.json()
+      const responseBody = await res.json();
 
       if (res.ok) {
-        alert("✅ Producto creado correctamente")
+        alert("✅ Producto creado correctamente");
+        window.location.href = "/mis_productos"
       } else {
-        alert("❌ Error: " + (responseBody.message || "No se pudo crear el producto"))
+        alert("❌ Error: " + (responseBody.message || "No se pudo crear el producto"));
       }
     } catch (err) {
-      console.error("Error al enviar el producto:", err)
-      alert("Error de red o del servidor")
+      console.error("Error al enviar el producto:", err);
+      alert("Error de red o del servidor");
     }
-  }
+  };
 
   return (
     <div className="crear-productos-container">
@@ -127,6 +140,19 @@ export default function CrearProductos() {
               onChange={handleChange}
               value={formData.opciones}
             />
+            {/* Selector de Categoría */}
+            <select
+              name="categoria"
+              value={formData.categoria}
+              onChange={handleChange}
+              style={{ marginTop: "10px", padding: "8px", borderRadius: "4px" }}
+            >
+              {categorias.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="dias-disponibles">
@@ -175,5 +201,5 @@ export default function CrearProductos() {
       </div>
       <NavBar />
     </div>
-  )
+  );
 }

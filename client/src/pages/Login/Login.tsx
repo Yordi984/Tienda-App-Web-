@@ -25,13 +25,13 @@ export default function Login() {
       alert('Inicio de sesión exitoso');
       localStorage.setItem('token', data.token);
 
-      // Guardar vendedorId si existe en la respuesta
-      if (data.vendedorId) {
-        localStorage.setItem('vendedorId', data.vendedorId.toString());
+      if (data.usuario && data.usuario.id) {
+        localStorage.setItem('vendedorId', data.usuario.id.toString());
       } else {
         console.warn('No se recibió vendedorId del servidor.');
       }
-        window.location.href = '/productos';
+
+      window.location.href = '/productos';
     } else {
       alert('Error: ' + (data.message || 'Credenciales incorrectas'));
     }

@@ -45,6 +45,9 @@ export class Producto {
     enum: categoria, 
     default: categoria.otros,})
   categoria: categoria;
+
+  @Column({nullable: true, default:false})
+  favoritos?:boolean;
   
 
   @ManyToOne(() => Vendedor, (vendedor) => vendedor.productos)

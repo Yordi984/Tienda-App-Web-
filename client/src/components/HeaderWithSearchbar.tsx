@@ -1,16 +1,20 @@
+import FilterComponent from './FilterComponent';
 import styles from './HeaderWithSearchbar.module.css';
-import Pill from './Pill';
 import ButtonComponent from './ui/ButtonComponent';
 import SearchBar from './ui/SearchBar';
 
 interface HeaderWithSearchbarProps {
   title: string;
+  categories: { label: string; value: string }[];
   onSearch?: (searchTerm: string) => void;
+  onFilter?: (filter: string) => void;
 }
 
 export default function HeaderWithSearchbar({
   title,
+  categories,
   onSearch,
+  onFilter,
 }: HeaderWithSearchbarProps) {
   return (
     <header className={styles.header}>
@@ -19,20 +23,25 @@ export default function HeaderWithSearchbar({
       </div>
 
       <div className={styles.header__other}>
-        <Pill />
-
-        <ButtonComponent
-          onClick={() => {
-            window.location.href = '/CrearProductos';
-          }}
-          text='Vender'
-          color='green'
+        <FilterComponent
+          label='Categorías'
+          categories={categories}
+          onFilter={(filter) => onFilter?.(filter)}
         />
 
-        <SearchBar
-          placeholder='Buscar'
-          onSearch={(searchTerm) => onSearch?.(searchTerm)}
-        />
+        <div className={styles.header__buttons}>
+          <ButtonComponent
+            onClick={() => {
+              window.location.href = '/CrearProductos';
+            }}
+            text='Vender'
+            color='green'
+          />
+          <SearchBar
+            placeholder='Buscar'
+            onSearch={(searchTerm) => onSearch?.(searchTerm)}
+          />
+        </div>
       </div>
     </header>
   );

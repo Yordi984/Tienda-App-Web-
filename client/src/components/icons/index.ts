@@ -1,1 +1,1 @@
-export * from './Heart';
+export * from './HeartIcon';

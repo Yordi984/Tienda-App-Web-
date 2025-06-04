@@ -20,8 +20,8 @@ type Producto = {
   descripcion: string;
   imagen: string;
   precio: number;
-  disponibilidad: string; // Ej: "L,M,V" (días)
-  horario: string; // Nuevo campo para el horario, ej: "08:30 - 16:00"
+  disponibilidad: string; // Ej: "M,L"
+  categoria: string;
   whatsapp: string;
 };
 
@@ -59,8 +59,8 @@ export default function Torta() {
         }
 
         // Establecer el horario desde el backend si está disponible
-        if (data.horario) {
-          setTimeRange(data.horario);
+        if (data.disponibilidad) {
+          setTimeRange(data.disponibilidad);
         }
       } catch (err) {
         console.error('Error al cargar producto:', err);
@@ -141,6 +141,7 @@ export default function Torta() {
               </span>
             </div>
           </div>
+          
 
           <div className='price-contact'>
             <span className='price'>${producto?.precio ?? '...'}</span>

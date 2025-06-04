@@ -1,10 +1,21 @@
-import { Request, Response } from 'express';
-import { AppDataSource } from '../db';
-import { Vendedor } from '../entities/vendedor.entity';
-import { Producto } from '../entities/producto.entity';
+import { Request, Response } from "express";
+import { AppDataSource } from "../db";
+import { Producto } from "../entities/producto.entity";
+import { Vendedor } from "../entities/vendedor.entity";
 
-export async function marcarFavorito(req: Request, res: Response) {
-  const { vendedorId, productoId } = req.body;
+export async function Favorito(req: Request, res: Response): Promise<void> {
+  const productoId = Number(req.params.productoId);
+
+  // Aquí debes obtener el vendedorId del usuario autenticado.
+  // Si no tienes autenticación, puedes recibirlo por body o params temporalmente:
+  // const vendedorId = Number(req.body.vendedorId);
+  // Pero lo ideal es: const vendedorId = (req.user as { id: number })?.id;
+  const vendedorId = Number(req.body.vendedorId);
+
+  if (!vendedorId) {
+    res.status(401).json({ message: "No autenticado" });
+    return;
+  }
 
   try {
     const vendedorRepo = AppDataSource.getRepository(Vendedor);
@@ -12,56 +23,34 @@ export async function marcarFavorito(req: Request, res: Response) {
 
     const vendedor = await vendedorRepo.findOne({
       where: { id: vendedorId },
-      relations: ['favoritos'],
+      relations: ["favoritos"],
     });
 
     const producto = await productoRepo.findOneBy({ id: productoId });
 
     if (!vendedor || !producto) {
-      return res.status(404).json({ message: 'Vendedor o producto no encontrado' });
+      res.status(404).json({ message: "Producto o vendedor no encontrado" });
+      return;
     }
 
-    // Evitar duplicados
-    const yaEsFavorito = vendedor.favoritos.some((p) => p.id === productoId);
+    const yaEsFavorito = vendedor.favoritos.some((p) => p.id === producto.id);
+
     if (yaEsFavorito) {
-      return res.status(400).json({ message: 'El producto ya está en favoritos' });
+      vendedor.favoritos = vendedor.favoritos.filter((p) => p.id !== producto.id);
+    } else {
+      vendedor.favoritos.push(producto);
     }
 
-    vendedor.favoritos.push(producto);
     await vendedorRepo.save(vendedor);
 
-    res.status(200).json({ message: 'Producto marcado como favorito' });
-  } catch (error) {
-    console.error('Error al marcar favorito:', error);
-    res.status(500).json({ message: 'Error al marcar favorito' });
-  }
-}
-
-export async function obtenerFavoritos(req: Request, res: Response) {
-  const vendedorId = parseInt(req.params.vendedorId, 10);
-
-  try {
-    const vendedorRepo = AppDataSource.getRepository(Vendedor);
-
-    const vendedor = await vendedorRepo.findOne({
-      where: { id: vendedorId },
-      relations: ['favoritos'],
+    res.status(200).json({
+      message: yaEsFavorito
+        ? "Producto eliminado de favoritos"
+        : "Producto agregado a favoritos",
+      favorito: !yaEsFavorito,
     });
-
-    if (!vendedor) {
-      return res.status(404).json({ message: 'Vendedor no encontrado' });
-    }
-
-    const productos = vendedor.favoritos.map((producto) => {
-      if (producto.imagen) {
-        producto.imagen = `${process.env.API_URL}uploads/${producto.imagen.replace(/^\/+/, '')}`;
-      }
-      return producto;
-    });
-
-    res.status(200).json(productos);
   } catch (error) {
-    console.error('Error al obtener favoritos:', error);
-    res.status(500).json({ message: 'Error al obtener favoritos' });
+    console.error("Error al modificar favoritos:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
   }
 }
