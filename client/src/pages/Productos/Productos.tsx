@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import HeaderWithSearchbar from '../../components/HeaderWithSearchbar';
 import ProductCard from '../../components/ProductCard';
 import NavBar from '../../components/ui/Navbar';
-import { getProducts } from '../../services/api/products';
+import { changeFavorite, getProducts } from '../../services/api/products';
 import type { Product } from '../../types';
 import styles from './Productos.module.css';
 
@@ -47,27 +47,9 @@ export default function Productos() {
   };
 
   const handleFavorite = (product: Product) => {
-    console.log(`Favoriting product: ${product.id}`);
-
-    fetch(`http://localhost:3000/favorito/${product.id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({ vendedorId: product.vendedor.id }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log(`Product ${product.id} favorited successfully.`);
-          window.location.reload();
-        } else {
-          console.error(`Failed to favorite product ${product.id}.`);
-        }
-      })
-      .catch((error) => {
-        console.error('Error favoriting product:', error);
-      });
+    changeFavorite(product, () => {
+      window.location.reload();
+    });
   };
 
   return (

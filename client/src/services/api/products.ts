@@ -1,3 +1,5 @@
+import type { Product } from '../../types';
+
 export const getProducts = async (options?: {
   searchTerm?: string;
   category?: string;
@@ -42,4 +44,28 @@ export const getProducts = async (options?: {
   } finally {
     console.log('-'.repeat(10), 'End fetching products', '-'.repeat(10));
   }
+};
+
+export const changeFavorite = (product: Product, cb?: () => void) => {
+  console.log(`Favoriting product: ${product.id}`);
+
+  fetch(`http://localhost:3000/favorito/${product.id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({ vendedorId: product.vendedor.id }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log(`Product ${product.id} favorited successfully.`);
+        cb?.();
+      } else {
+        console.error(`Failed to favorite product ${product.id}.`);
+      }
+    })
+    .catch((error) => {
+      console.error('Error favoriting product:', error);
+    });
 };
