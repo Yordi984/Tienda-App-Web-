@@ -1,16 +1,16 @@
+// ProductCard.tsx
 import React from 'react';
 import styles from './ProductCard.module.css';
-import ProductInfoBar from './ProductInfoBar'; // Importa el componente de la barra de información del producto
+import ProductInfoBar from './ProductInfoBar';
 
 interface ProductCardProps {
-  imageUrl: string; // URL de la imagen del producto
-  altText: string; // Texto alternativo para la imagen
-  productName: string; // Nombre del producto (pasado a ProductInfoBar)
-  productPrice: number; // Precio del producto (pasado a ProductInfoBar)
-  isFavoriteInitially?: boolean; // Estado inicial del favorito (pasado a ProductInfoBar)
-  // Opcional: Función para cuando el usuario alterna el favorito (pasado a ProductInfoBar)
-  onToggleFavorite?: (name: string, isNowFavorite: boolean) => void;
-  onClick?: () => void; // Opcional: Función para cuando se hace clic en toda la tarjeta
+  imageUrl: string;
+  altText: string;
+  productName: string;
+  productPrice: number;
+  isFavoriteInitially?: boolean;
+  productoId: number; // 👈 Necesitamos el ID del producto
+  onClick?: () => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -19,29 +19,49 @@ const ProductCard: React.FC<ProductCardProps> = ({
   productName,
   productPrice,
   isFavoriteInitially,
-  onToggleFavorite,
+  productoId,
   onClick,
 }) => {
+  const handleToggleFavorite = async () => {
+    const vendedorId = localStorage.getItem('vendedorId');
+
+    if (!vendedorId) {
+      alert('Debes iniciar sesión para marcar favoritos.');
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:3000/favorito/${productoId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ vendedorId: Number(vendedorId) }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Error al actualizar favorito');
+      }
+
+      console.log(data.message);
+    } catch (error) {
+      console.error('Error al marcar como favorito:', error);
+    }
+  };
+
   return (
-    <div
-      className={styles.productCard}
-      onClick={onClick}
-    >
-      {/* Contenedor de la imagen */}
+    <div className={styles.productCard} onClick={onClick}>
       <div className={styles.imageContainer}>
-        <img
-          src={imageUrl}
-          alt={altText}
-          className={styles.productImage}
-        />
+        <img src={imageUrl} alt={altText} className={styles.productImage} />
       </div>
 
-      {/* Componente ProductInfoBar reutilizado */}
       <ProductInfoBar
         name={productName}
         price={productPrice}
         isFavoriteInitially={isFavoriteInitially}
-        onToggleFavorite={onToggleFavorite}
+        onToggleFavorite={handleToggleFavorite}
       />
     </div>
   );

@@ -19,6 +19,7 @@ type Producto = {
   imagen: string;
   precio: number;
   disponibilidad: string; // Ej: "M,L"
+  categoria: string;
   whatsapp: string;
 };
 
@@ -134,6 +135,7 @@ export default function Torta() {
               />
             </div>
           </div>
+          
 
           <div className='price-contact'>
             <span className='price'>${producto?.precio ?? '...'}</span>
