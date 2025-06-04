@@ -51,9 +51,11 @@ export default function Productos() {
   };
 
   const handleFavorite = (product: Product) => {
-    changeFavorite(product, () => {
-      window.location.reload();
-    });
+    if (vendedorId) {
+      changeFavorite(parseInt(vendedorId, 10), product.id, () => {
+        window.location.reload();
+      });
+    }
   };
 
   return (
