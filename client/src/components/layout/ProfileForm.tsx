@@ -48,7 +48,7 @@ const ProfileForm: React.FC = () => {
   // Función para guardar los cambios
   const handleSave = () => {
     console.log("Guardar cambios:", { name, email, phone, password });
-    // Aquí integrarías la lógica real para enviar estos datos a tu backend o API
+    // la lógica real para enviar estos datos a tu backend o API
     // Por ejemplo, una llamada a fetch o axios
 
     // Simulación de éxito o error
