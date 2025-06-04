@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './HeaderProductDetail.module.css';
-import ButtonComponent from './ButtonComponent';  // Asegúrate de la ruta correcta
-import SearchBar from './SearchBar';              // Asegúrate de la ruta correcta
+import ButtonComponent from './ButtonComponent';  
+// import SearchBar from './SearchBar';  
+
+
+
 
 const HeaderProductDetail: React.FC = () => {
   return (
@@ -14,7 +17,7 @@ const HeaderProductDetail: React.FC = () => {
             window.location.href = '/CrearProductos';
           }} text={'Vender'} color={'green' }/>
 
-        <SearchBar onSearch={() => { /* TODO: implement search functionality */ }} />
+        {/* <SearchBar onSearch={() => { }} /> */}
       </div>
     </header>
   );

@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
         </li>
 
         {/* Icono de búsqueda */}
-        <li className={styles.navItem}>
+        {/* <li className={styles.navItem}>
           <a href='/productos' className={styles.navLink}>
             <img
               src='/icons/search.svg'
@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
               className={styles.navIcon}
             />
           </a>
-        </li>
+        </li> */}
 
         {/* Icono de favoritos */}
         <li className={styles.navItem}>
