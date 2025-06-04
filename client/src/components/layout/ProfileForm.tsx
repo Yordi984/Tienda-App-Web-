@@ -66,14 +66,23 @@ const ProfileForm: React.FC = () => {
   };
 
   // Función para cerrar sesión
-  const handleLogout = () => {
-    console.log("Cerrar sesión");
-    //  integrar la lógica real para cerrar la sesión del usuario
-    // Por ejemplo, limpiar tokens de autenticación, redirigir a la página de login
-    showNotification("¡Sesión cerrada correctamente!", "success");
-    // En una aplicación real, aquí harías una redirección:
-    window.location.href = '/login';
-  };
+const handleLogout = () => {
+  console.log("Cerrar sesión");
+
+  
+  localStorage.removeItem("authToken"); 
+  sessionStorage.removeItem("authToken"); 
+
+  
+
+  showNotification("¡Sesión cerrada correctamente!", "success");
+
+  // Esperar un poco para mostrar la notificación antes de redirigir
+  setTimeout(() => {
+    window.location.href = "/login";
+  }, 1000); // 1 segundo
+};
+
 
   return (
     <div className={styles.formContainer}>
