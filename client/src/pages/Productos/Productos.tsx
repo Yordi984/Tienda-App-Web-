@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import HeaderWithSearchbar from '../../components/HeaderWithSearchbar';
 import ProductCard from '../../components/ProductCard';
 import NavBar from '../../components/ui/Navbar';
-import { getProducts, type Product } from '../../services/api/products';
+import { getProducts } from '../../services/api/products';
+import type { Product } from '../../types';
 import styles from './Productos.module.css';
 
 export default function Productos() {
@@ -20,18 +21,11 @@ export default function Productos() {
   ];
 
   useEffect(() => {
-    console.log('Fetching products with:', {
-      searchTerm: searchTerm ?? 'none',
-      selectedCategory: selectedCategory ?? 'none',
-    });
-
     getProducts({
       searchTerm: searchTerm ?? undefined,
       category: selectedCategory ?? undefined,
     })
       .then((data) => {
-        console.log('Products fetched:', data);
-
         setProducts(data);
       })
       .catch((error) => {
@@ -48,6 +42,30 @@ export default function Productos() {
   const handleFilter = (category: string) => {
     setSelectedCategory(category);
     console.log(`Category selected: ${category}`);
+  };
+
+  const handleFavorite = (product: Product) => {
+    console.log(`Favoriting product: ${product.id}`);
+
+    fetch(`http://localhost:3000/favorito/${product.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({ vendedorId: product.vendedor.id }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log(`Product ${product.id} favorited successfully.`);
+          window.location.reload();
+        } else {
+          console.error(`Failed to favorite product ${product.id}.`);
+        }
+      })
+      .catch((error) => {
+        console.error('Error favoriting product:', error);
+      });
   };
 
   return (
@@ -73,9 +91,7 @@ export default function Productos() {
             <ProductCard.InfoWithLikeIcon
               product={product}
               isFavorite={product.id === 3}
-              onFavorite={() => {
-                console.log(`Favorited product: ${product.id}`);
-              }}
+              onFavorite={() => handleFavorite(product)}
             />
           </ProductCard>
         ))}

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import placeholderImage from '../assets/images/placeholder.jpg';
-import type { Product } from '../services/api/products';
+import type { Product } from '../types';
 import { formatPrice } from '../utils/product';
 import styles from './ProductCard.module.css';
 import { HeartIcon } from './icons';
