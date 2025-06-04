@@ -54,3 +54,30 @@ export async function Favorito(req: Request, res: Response): Promise<void> {
     res.status(500).json({ message: "Error interno del servidor" });
   }
 }
+
+export async function obtenerMisFavoritos(req: Request, res: Response): Promise<void> {
+  const vendedorId = Number(req.params.vendedorId); // Solo desde params
+
+  if (!vendedorId) {
+    res.status(400).json({ message: "Falta el vendedorId" });
+    return;
+  }
+
+  try {
+    const vendedorRepo = AppDataSource.getRepository(Vendedor);
+    const vendedor = await vendedorRepo.findOne({
+      where: { id: vendedorId },
+      relations: ["favoritos"],
+    });
+
+    if (!vendedor) {
+      res.status(404).json({ message: "Vendedor no encontrado" });
+      return;
+    }
+
+    res.status(200).json({ favoritos: vendedor.favoritos });
+  } catch (error) {
+    console.error("Error al obtener favoritos:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
+}
