@@ -17,6 +17,9 @@ export default function ElegirCuenta() {
           <button className="boton" onClick={() => navigate("/crear_vendedor")}>
             Crear cuenta como Vendedor
           </button>
+          <button className="botonl" onClick={() => navigate("/login")}>
+            Iniciar sesión
+          </button>
         </div>
       </div>
     </>

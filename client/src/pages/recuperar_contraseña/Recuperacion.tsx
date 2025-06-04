@@ -4,9 +4,11 @@ import Header from '../../components/ui/HeaderComponent';
 import Boton from '../../components/ui/ButtonComponent';
 import '/logo.png';
 import './Recuperacion.css'; // Asegúrate de tener un archivo CSS para estilos específicos
+import { useNavigate } from 'react-router-dom';
 
 export default function Recuperacion() {
   const [correo, setCorreo] = useState('');
+  const navigate = useNavigate();
 
   const manejarEnvio = async () => {
     try {
@@ -46,8 +48,19 @@ export default function Recuperacion() {
         />
         <p>Se enviará un correo para poder recuperar tu cuenta</p>
         <div className="boton-container">
-        <Boton text="Enviar" color="green" onClick={manejarEnvio} /> </div>
-        <p>Política de privacidad</p>
+        <Boton  text="Enviar" color="green"  style={{ width: '400px' }} onClick={manejarEnvio} /> </div>
+
+        <div className="boton-container" >
+
+        </div>
+         <Boton
+              text="Volver"
+              color="green"
+              style={{ width: '400px' }}
+              onClick={() => navigate('/Login')}
+            />
+            
+       
       </div>
     </>
   );

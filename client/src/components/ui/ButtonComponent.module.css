@@ -1,6 +1,5 @@
 .button {
   /* Estilos base para todos los botones */
-  /* padding: 1rem 20px; Espacio interno del botón */
   padding: 8px 16px; /* Espacio interno del botón */
   border: none; /* Sin borde por defecto */
   border-radius: 8px; /* Bordes redondeados */
@@ -8,48 +7,62 @@
   cursor: pointer; /* Cambia el cursor al pasar por encima */
   transition:
     background-color 0.3s ease,
-    color 0.3s ease; /* Transición suave para cambios de color */
-  text-align: center; /* Centra el texto dentro del botón */
+    color 0.3s ease,
+    border 0.3s ease; /* Añade 'border' a la transición */
+  /* text-align: center; */ /* REMOVE or comment out this line as flexbox will handle horizontal centering */
 
-  /* --- CAMBIOS CRUCIALES PARA EL ANCHO --- */
-  width: auto; /* Permite que el botón ocupe el 100% del ancho de su contenedor */
-  white-space: normal; /* <-- CAMBIADO: Permite que el texto se envuelva si es necesario */
-  /* Esto es clave para que el 'width: 100%' funcione correctamente */
-  margin: 0; /* <-- CAMBIADO: Elimina los márgenes horizontales fijos del botón mismo.
-                         El espaciado entre botones debe ser manejado por su contenedor (flex gap, etc.)
-                         y los márgenes laterales del botón deben venir del padre. */
-  /* --- FIN CAMBIOS CRUCIALES --- */
+  width: auto;
+  white-space: normal;
+  margin: 0;
+
+
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+
 }
 
-/* Colores de fondo de los botones */
+
 .green {
   background-color: rgba(25, 196, 100, 1);
-  color: white; /* Texto blanco para el botón verde */
+  color: white;
 }
 
 .lightGray {
-  background-color: rgba(241, 243, 242, 1);
-  color: #333; /* Texto oscuro para el botón gris claro */
+  background-color: rgb(255, 255, 255);
+  color: #333;
 }
 
 .red {
   background-color: rgba(255, 48, 2, 1);
-  color: white; /* Texto blanco para el botón rojo */
+  color: red;
 }
 
 .yellow {
   background-color: rgba(255, 237, 41, 1);
-  color: #333; /* Texto oscuro para el botón amarillo */
+  color: #333;
 }
 
-/* Estilo para el botón activo (ej. 'Todo' en la imagen) */
-/* .active {
+/* ¡NUEVA CLASE para el borde verde! */
+.greenBorder {
+  border: 2px solid rgba(25, 196, 100, 1);
+  /* Si el botón ya tiene un color de fondo, el borde se superpondrá.
+     Si quieres un fondo transparente con solo el borde, tendrías que ajustar el background-color
+     de la clase específica del color cuando `hasGreenBorder` es true,
+     o definir un nuevo `color` tipo para esto.
+     Por ejemplo, si `hasGreenBorder` se usa con un botón gris claro, el fondo seguirá siendo gris claro.
+     Si se usa con un botón verde, se verá un borde verde un poco más oscuro o resaltado dependiendo del diseño final deseado.
+     Considerando tu imagen, el botón "Vender" parece tener un fondo verde con un borde de un verde diferente (más oscuro o simplemente la sombra/borde del propio botón).
+     Si quieres que el botón "Vender" de la imagen tenga este borde, la clase `.greenBorder` es adecuada.
+     Si quieres que el botón "Vender" tenga un fondo blanco y un borde verde, tendrías que hacer el `background-color: white;`
+     o crear un nuevo tipo de color para `ButtonColor` como `outlinedGreen`
+  */
+}
 
-} */
 
 /* Efectos al pasar el ratón por encima (hover) */
 .button:hover {
-  opacity: 0.9; /* Ligera opacidad para un efecto de hover */
+  opacity: 0.9;
 }
 
 /* Deshabilitar el cursor cuando el botón está deshabilitado */
