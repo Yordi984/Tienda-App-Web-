@@ -1,22 +1,15 @@
 // src/pages/Productos.tsx
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import placeholderImage from '../../assets/images/placeholder.jpg';
 import HeaderWithSearchbar from '../../components/HeaderWithSearchbar';
-import { HeartIcon } from '../../components/icons';
+import ProductCard from '../../components/ProductCard';
 import NavBar from '../../components/ui/Navbar';
 import { getProducts, type Product } from '../../services/api/products';
-import { formatPrice } from '../../utils/product';
 import styles from './Productos.module.css';
-
-type FormattedProduct = Omit<Product, 'precio'> & {
-  precio: string;
-};
 
 export default function Productos() {
   const [searchTerm, setSearchTerm] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [products, setProducts] = useState<FormattedProduct[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   const categories = [
     { label: 'Comida', value: 'comida' },
@@ -39,13 +32,7 @@ export default function Productos() {
       .then((data) => {
         console.log('Products fetched:', data);
 
-        const formattedData = data.map((product: Product) => ({
-          ...product,
-          precio: formatPrice(product.precio),
-        }));
-        console.log('Formatted products:', formattedData);
-
-        setProducts(formattedData);
+        setProducts(data);
       })
       .catch((error) => {
         console.error('Error fetching products:', error);
@@ -74,32 +61,23 @@ export default function Productos() {
 
       <div className={styles.productGrid}>
         {products.map((product) => (
-          <div
-            className={styles.productCardContainer}
+          <ProductCard
             key={product.id}
+            product={product}
           >
-            <Link
-              to={`/producto/${product.id}`}
-              className={styles.productCard}
-            >
-              <img
-                className={styles.productImage}
-                src={product.imagen || placeholderImage}
-                onError={(e) => {
-                  e.currentTarget.src = placeholderImage;
-                }}
-                alt={product.nombre}
-              />
-            </Link>
-
-            <div className={styles.productInfo}>
-              <span className={styles.productName}>{product.nombre}</span>
-              <div className={styles.priceLike}>
-                <HeartIcon />
-                <span className={styles.price}>{product.precio}</span>
-              </div>
-            </div>
-          </div>
+            <ProductCard.Image
+              product={product}
+              src={product.imagen}
+              alt={product.nombre}
+            />
+            <ProductCard.InfoWithLikeIcon
+              product={product}
+              isFavorite={product.id === 3}
+              onFavorite={() => {
+                console.log(`Favorited product: ${product.id}`);
+              }}
+            />
+          </ProductCard>
         ))}
       </div>
 
