@@ -1,17 +1,10 @@
-export interface Product {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  disponibilidad: string;
-  precio: number;
-  whatsapp: number;
-  imagen?: string;
-}
-
 export const getProducts = async (options?: {
   searchTerm?: string;
   category?: string;
 }) => {
+  console.log('-'.repeat(10), 'Fetching products', '-'.repeat(10));
+  console.log('Fetching products with options:', options);
+
   const baseUrl = 'http://localhost:3000/productos';
   const url = new URL(baseUrl);
 
@@ -39,9 +32,14 @@ export const getProducts = async (options?: {
     }
 
     const data = await response.json();
+
+    console.log('Products fetched successfully:', data);
+
     return data;
   } catch (error) {
     console.error('Error fetching products:', error);
     return [];
+  } finally {
+    console.log('-'.repeat(10), 'End fetching products', '-'.repeat(10));
   }
 };
