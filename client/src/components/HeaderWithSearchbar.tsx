@@ -29,18 +29,19 @@ export default function HeaderWithSearchbar({
           onFilter={(filter) => onFilter?.(filter)}
         />
 
-        <ButtonComponent
-          onClick={() => {
-            window.location.href = '/CrearProductos';
-          }}
-          text='Vender'
-          color='green'
-        />
-
-        <SearchBar
-          placeholder='Buscar'
-          onSearch={(searchTerm) => onSearch?.(searchTerm)}
-        />
+        <div className={styles.header__buttons}>
+          <ButtonComponent
+            onClick={() => {
+              window.location.href = '/CrearProductos';
+            }}
+            text='Vender'
+            color='green'
+          />
+          <SearchBar
+            placeholder='Buscar'
+            onSearch={(searchTerm) => onSearch?.(searchTerm)}
+          />
+        </div>
       </div>
     </header>
   );
