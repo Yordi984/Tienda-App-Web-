@@ -6,13 +6,19 @@ interface ChipProps extends React.HTMLAttributes<HTMLSpanElement> {
   active?: boolean;
 }
 
-export default function Chip({ label, active, ...props }: ChipProps) {
+export default function Chip({
+  label,
+  active,
+  className,
+  children,
+  ...props
+}: ChipProps) {
   return (
     <span
-      className={cn(styles.chip, active ? styles.chipActive : '')}
+      className={cn(styles.chip, active ? styles.chipActive : '', className)}
       {...props}
     >
-      {props.children || label}
+      {children || label}
     </span>
   );
 }
