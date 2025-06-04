@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../db';
+import { Producto } from '../entities';
 
 export function crearVendedor(req: Request, res: Response) {
   const repositorio = AppDataSource.getRepository('vendedor');
@@ -56,7 +57,13 @@ export function obtenerMisFavoritosVendedor(req: Request, res: Response) {
         return res.status(404).json({ message: 'Vendedor no encontrado' });
       }
 
-      res.status(200).json(vendedor.favoritos);
+      const parsedProducts = vendedor.favoritos.map((producto: Producto) => {
+        producto.imagen = `${process.env.API_URL}uploads/${producto.imagen?.replace(/^\/+/, '')}`;
+
+        return producto;
+      });
+
+      res.status(200).json(parsedProducts);
     })
     .catch((error) => {
       console.error('Error al obtener los favoritos:', error);
