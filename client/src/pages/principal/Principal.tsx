@@ -16,12 +16,12 @@ export default function Home() {
             forma parte de una comunidad que impulsa oportunidades.
           </p>
           <div className='home-buttons'>
-            <button
+            {/* <button
               className='home-btn'
               onClick={() => navigate('/crear_vendedor')}
             >
               Comenzar ahora
-            </button>
+            </button> */}
             <button
               className='home-btn login'
               onClick={() => navigate('/Login')}

@@ -3,10 +3,12 @@ import Header from '../../components/ui/HeaderComponent';
 import Boton from '../../components/ui/ButtonComponent';
 
 import './Login.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [correo, setCorreo] = useState('');
   const [contrasena, setContrasena] = useState('');
+  const navigate = useNavigate();
 
   async function solicitud() {
   try {
@@ -64,18 +66,30 @@ export default function Login() {
           value={contrasena}
           onChange={(e) => setContrasena(e.target.value)}
         />
-        
+        <div className='boton-container'>
           <Boton 
-            style={{  width: '25%', margin: '20px auto', padding: '1rem' }}
+            // style={{  width: '25%', margin: '20px auto', padding: '1rem' }}
             text='Iniciar sesión'
             color='green'
             onClick={solicitud}
           />
+
+          <Boton
+            // style={{  width: '25%', margin: '20px auto', padding: '1rem'  }}
+            text='¿No tienes cuenta? Regístrate'
+            color='lightGray'
+            hasGreenBorder={true}
+            onClick={() => navigate("/crear_vendedor")}
+          />
+        </div>
+        
+          
+          
        
       </div>
       <div className='links'>
         <a href='/Recuperacion'>Olvidé mi Contraseña</a>
-        <a href='/elegir_cuenta'>Crear cuenta</a>
+        {/* <a href='/elegir_cuenta'>Crear cuenta</a> */}
       </div>
     </>
   );

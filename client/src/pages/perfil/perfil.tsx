@@ -7,7 +7,9 @@ const perfil = () => {
   return (
     <div>
     <HeaderComponent text={"Editar perfil"}/>    
-      <ProfileForm/>
+    <div style={{ padding: "20px" }}>
+      <ProfileForm />
+    </div>
     <NavBar/>
     </div>
   )

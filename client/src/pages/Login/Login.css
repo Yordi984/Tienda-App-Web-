@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -3rem;
+  margin-top: -5rem;
 }
 
 .formulario {
@@ -34,7 +34,7 @@ input {
 .links {
   display: flex;
   flex-direction: block; 
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 1rem; /* espacio entre los links */
   margin-top: 0; /* ya no necesitas margen grande arriba */
@@ -71,4 +71,41 @@ input {
   .links a {
     font-size: 1rem;
   }
+
+  .formulario button {
+    width: 100%; /* El botón tomará el 50% del ancho de .formulario */
+   
+  }
+
 }
+
+
+.boton-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Estilo base para todos los botones dentro de .boton-container */
+.boton-container button {
+  width: 27%;        /* Pantallas grandes */
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+  .boton-container button {
+    width: 90%;
+  }
+}
+
+
+
+
+
+
+
+
+
