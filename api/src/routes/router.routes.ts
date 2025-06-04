@@ -5,7 +5,7 @@ import multer from "multer";
 
 import {
   crearVendedor,
-  obtenerMisProductos
+
  
 } from "../controllers/vendedor.controller";
 
@@ -14,7 +14,8 @@ import {
   obtenerProductos,
   editarProducto,
   eliminarProducto,
- obtenerProductoPorId
+ obtenerProductoPorId,
+ obtenerMisProductos
 } from "../controllers/producto.controller";
 
 import {
@@ -33,7 +34,7 @@ import { upload } from '../middlewares/upload'; // ruta según tu estructura
 const router = Router();
 //login para los 2 tipos de usuarios
 router.post("/login", iniciarSesion);
-router.post("/login", iniciarSesion);
+
 
 //comprador routes
 router.post("/comprador", crearComprador);
@@ -41,7 +42,7 @@ router.post("/comprador", crearComprador);
 
 //vendedor routes
 router.post("/vendedor", crearVendedor);
-router.get("/mis-productos", obtenerMisProductos);
+
 
 
 
@@ -50,8 +51,9 @@ router.post("/producto", upload.single('imagen'), crearProducto);
 
 router.get("/productos", obtenerProductos);
 router.get("/producto/:id", obtenerProductoPorId);
-router.put("/producto/:id", editarProducto);
+router.put("/producto/:id",upload.single('imagen'), editarProducto);
 router.delete("/producto/:id", eliminarProducto);
+router.get("/mis-productos/:vendedorId", obtenerMisProductos);
 
 //passpot local
 

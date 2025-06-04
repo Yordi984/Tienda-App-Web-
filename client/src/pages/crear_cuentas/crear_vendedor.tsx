@@ -39,7 +39,7 @@ export default function Crear_vendedor() {
 
   return (
     <div>
-      <Header text= "Crear cuenta de Vendedor"/>
+      <Header text= "Crear cuenta "/>
       <CreateAccountForm
         nombre={formData.nombre}
         correo={formData.correo}
