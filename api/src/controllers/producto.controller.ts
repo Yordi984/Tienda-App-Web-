@@ -11,7 +11,7 @@ export async function crearProducto(req: Request, res: Response) {
       precio,
       vendedorId,
       whatsapp,
-      categoria
+      categoria,
     } = req.body;
 
     const imagen = req.file?.filename; // nombre del archivo guardado
@@ -59,6 +59,8 @@ export function obtenerProductos(req: Request, res: Response) {
 
   productoRepository
     .createQueryBuilder('producto')
+    .leftJoinAndSelect('producto.vendedor', 'vendedor')
+    .leftJoinAndSelect('producto.vendedoresFavoritos', 'vendedoresFavoritos')
     .where(
       '(producto.nombre ILIKE :search OR producto.descripcion ILIKE :search) AND (producto.vendedorId = :vendedorId OR :vendedorId IS NULL) AND (producto.categoria = :category OR :category IS NULL)',
     )
@@ -100,8 +102,6 @@ export function eliminarProducto(req: Request, res: Response) {
     });
 }
 
-
-
 export async function editarProducto(req: Request, res: Response) {
   const { id } = req.params;
   const {
@@ -125,8 +125,8 @@ export async function editarProducto(req: Request, res: Response) {
     });
 
     if (!producto) {
-      res.status(404).json({ message: "Producto no encontrado" });
-      return;  // Termina función sin retornar res directamente
+      res.status(404).json({ message: 'Producto no encontrado' });
+      return; // Termina función sin retornar res directamente
     }
 
     if (nombre !== undefined) producto.nombre = nombre;
@@ -140,12 +140,12 @@ export async function editarProducto(req: Request, res: Response) {
 
     await productoRepository.save(producto);
 
-    res.status(200).json({ message: "Producto actualizado exitosamente" });
-    return;  // Termina función sin retornar res directamente
+    res.status(200).json({ message: 'Producto actualizado exitosamente' });
+    return; // Termina función sin retornar res directamente
   } catch (error) {
-    console.error("Error actualizando producto:", error);
-    res.status(500).json({ message: "Error al actualizar producto" });
-    return;  // Termina función sin retornar res directamente
+    console.error('Error actualizando producto:', error);
+    res.status(500).json({ message: 'Error al actualizar producto' });
+    return; // Termina función sin retornar res directamente
   }
 }
 

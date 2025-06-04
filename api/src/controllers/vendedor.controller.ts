@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import { AppDataSource } from '../db';
-import { Vendedor } from '../entities';
 
 export function crearVendedor(req: Request, res: Response) {
   const repositorio = AppDataSource.getRepository('vendedor');
@@ -23,7 +21,6 @@ export function crearVendedor(req: Request, res: Response) {
     });
 }
 
-
 export function obtenerMisProductos(req: Request, res: Response) {
   const repositorio = AppDataSource.getRepository('vendedor');
   const vendedorId = req.params.id;
@@ -31,7 +28,7 @@ export function obtenerMisProductos(req: Request, res: Response) {
   repositorio
     .findOne({
       where: { id: vendedorId },
-      relations: ['productos'],  // trae también productos relacionados
+      relations: ['productos'], // trae también productos relacionados
     })
     .then((vendedor) => {
       if (!vendedor) {
@@ -41,6 +38,28 @@ export function obtenerMisProductos(req: Request, res: Response) {
     })
     .catch((error) => {
       console.error('Error al obtener los productos:', error);
+      res.status(500).json({ message: 'Error al obtener los productos' });
+    });
+}
+
+export function obtenerMisFavoritosVendedor(req: Request, res: Response) {
+  const vendorRepository = AppDataSource.getRepository('vendedor');
+  const vendedorId = req.params.vendedorId;
+
+  vendorRepository
+    .findOne({
+      where: { id: vendedorId },
+      relations: { favoritos: true },
+    })
+    .then((vendedor) => {
+      if (!vendedor) {
+        return res.status(404).json({ message: 'Vendedor no encontrado' });
+      }
+
+      res.status(200).json(vendedor.favoritos);
+    })
+    .catch((error) => {
+      console.error('Error al obtener los favoritos:', error);
       res.status(500).json({ message: 'Error al obtener los productos' });
     });
 }
